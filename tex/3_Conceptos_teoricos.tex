@@ -1,15 +1,110 @@
 \capitulo{3}{Conceptos teóricos}
 
+Green In House es un proyecto que combina diversas tecnologías para facilitar el cuidado de las plantas, por lo que es necesario tener claro tanto los conceptos teóricos referentes a los factores que influyen en el crecimiento de las plantas, como los conceptos de las diferentes tecnologías involucradas en el sistema.
+
+\section{Factores que influyen en el crecimiento de una planta}
+
+Es esencial mantener un control adecuado de la temperatura, la humedad y la luminosidad para fomentar un desarrollo correcto de una planta.
+
+\begin{itemize}
+
+    \item La temperatura es un factor crítico en el crecimiento de las plantas. Las plantas, al igual que los humanos, tienen una gama de temperaturas en las que pueden sobrevivir y prosperar. Si la temperatura es demasiado baja, una planta puede entrar en un estado de latencia, donde el crecimiento se ralentiza o incluso se detiene. Por el contrario, si la temperatura es demasiado alta, puede dañar las estructuras celulares de la planta y causar estrés, lo que puede resultar en un crecimiento pobre o la muerte de la planta. Por lo tanto, mantener la temperatura dentro del rango óptimo es crucial para garantizar un crecimiento saludable.
+    
+    \item La humedad también juega un papel vital en la salud de las plantas. La humedad afecta a la tasa de transpiración, que es el proceso mediante el cual el agua se evapora de las hojas de las plantas. Este proceso es esencial para el transporte de nutrientes a través de la planta, pero si la humedad es demasiado baja, la planta puede perder agua más rápidamente de lo que puede absorberla, lo que puede llevar a la deshidratación. Por otro lado, demasiada humedad puede promover el crecimiento de hongos y otras enfermedades. Por lo tanto, mantener el equilibrio correcto es crucial.
+    
+    \item La luminosidad es fundamental para la fotosíntesis, que es el proceso mediante el cual las plantas convierten la luz solar en energía. Sin suficiente luz, una planta no puede producir la energía que necesita para crecer. Pero de nuevo, demasiada luz, especialmente la luz solar directa y fuerte, puede ser perjudicial y causar quemaduras en las hojas de la planta. Por eso es esencial garantizar que nuestras plantas reciban la cantidad adecuada de luz.
+
+\end{itemize}
+
+Además de estos tres factores en los que se centra Green In House, existen muchos más factores que influyen en el crecimiento de las plantas como por ejemplo la calidad del suelo, la cantidad de nutrientes que tiene la tierra, el abono que se utiliza, el espacio que dispone la planta para crecer, la necesidad de podar las ramas, etc. En esta memoria no se incide más sobre ellos ya que no serán controlados por Green In Houe, pero es relevante destacar la existencia de los mismos.
+
+
+\section{Bash: Un Lenguaje de Programación de Shell para Linux}
+
+Bash \citep{wiki:bash}, cuyo nombre es un acrónimo de Bourne Again SHell, es un intérprete de comandos de Unix. Se trata de una evolución del shell Bourne, que fue uno de los primeros intérpretes de comandos del sistema operativo Unix. Bash fue creado por Brian Fox y lanzado por primera vez en 1989. 
+
+Bash es el shell por defecto en la mayoría de las distribuciones de Linux y también se puede utilizar en otros sistemas operativos, como Windows y Mac, a través de software como Cygwin o Terminal. Bash se utiliza tanto para ejecutar comandos directamente en la terminal como para crear scripts de shell, que son programas que ejecutan una serie de comandos.
+
+\begin{itemize}
+
+    \item \textbf{Comandos Interactivos:} Bash es muy conocido por su interfaz interactiva. Los usuarios pueden escribir comandos, que Bash interpreta y ejecuta. Esto permite a los usuarios interactuar directamente con el sistema operativo y realizar tareas como gestionar archivos, iniciar y detener programas, y configurar el entorno del sistema.
+    
+    \item \textbf{Scripts de Shell:} Bash también es un lenguaje de programación, lo que significa que los usuarios pueden escribir programas (o scripts) que ejecutan una serie de comandos. Estos scripts son especialmente útiles para automatizar tareas repetitivas. Un script de Bash puede incluir funciones, bucles, condicionales, y otras estructuras de control de flujo comunes en los lenguajes de programación.
+    
+\end{itemize}
+
+En resumen, Bash es una poderosa herramienta que permite a los usuarios y programadores interactuar con el sistema operativo, ejecutar comandos y programas, y automatizar tareas. 
+
+Green In House cuenta con varios scripts bash desarrollados para facilitar numerosas tareas: de instalación de la aplicación
+
+\begin{itemize}
+
+    \item Instalación de la aplicación. Tanto la parte de backend como de frontend.
+
+    \item Generación de entornos virtuales de python con la instalación de sus correspondientes dependencias para que el programa pueda ejecutarse.
+
+    \item Configuración de una ip estática en la Raspberry Pi para que el servidor Api-Rest se lance siempre en la misma dirección y pueda ser encontrado por la aplicación multiplataforma.
+
+    \item Despliegue de cambios en el código de la aplicación.
+
+    \item Lectura cíclica de los sensores activos en el sistema y su correspondiente generación de lineas en la base de datos
+
+    \item Despliegue del servidor Api-Rest para poder interactuar desde sistemas externos con los datos almacenados en la base de datos
+
+    \item Lanzamiento automático de la aplicación completa al arrancar el sistema operativo de la Raspberry Pi mediante el uso de crontab.
+
+    \item Parada y arranque de los diferentes procesos en ejecución que controlan el funcionamiento de Green In House.
+
+\end{itemize}
+
+\section{Python: Lenguaje de Programación de Alto Nivel para desarrollo de aplicaciones de carácter general}
+
+Python \citep{wiki:python} es un lenguaje de programación interpretado, de alto nivel y de propósito general. Creado por Guido van Rossum y lanzado por primera vez en 1991, Python se diseñó con la filosofía de que la legibilidad del código es importante y, por lo tanto, tiene una sintaxis que permite a los programadores expresar conceptos en menos líneas de código de las que permitirían otros lenguajes como C++ o Java.
+
+Python proporciona una construcción técnica destinada a permitir la escritura de programas claros, tanto a pequeña como a gran escala. Python es un lenguaje de programación dinámico y de tipado fuerte, muy versátil, lo que lo hace apropiado para una amplia gama de tareas, desde el desarrollo de scripts simples, pasando por el desarrollo web, hasta el análisis de datos y la inteligencia artificial.
+
+\begin{itemize}
+
+    \item \textbf{Legibilidad y Sintaxis Clara:} Python fue diseñado con una gran énfasis en la legibilidad y la simplicidad, lo que facilita el aprendizaje del lenguaje. Las estructuras de control de Python, como las funciones, los bucles y las sentencias condicionales, están diseñadas para ser fácilmente comprensibles.
+    
+    \item \textbf{Interpretado:} Python es un lenguaje interpretado, lo que significa que el código Python se ejecuta línea por línea, lo que facilita la depuración de los programas y la experimentación interactiva en la terminal de Python o en entornos como Jupyter Notebook.
+    
+    \item \textbf{Multiparadigma:} Python admite varios paradigmas de programación, incluyendo programación orientada a objetos, programación imperativa y programación funcional, lo que le da una gran flexibilidad para resolver problemas de diferentes maneras.
+    
+    \item \textbf{Ecosistema de Bibliotecas:} Python tiene un ecosistema de bibliotecas de terceros extremadamente rico, que lo hacen adecuado para una amplia gama de tareas. Bibliotecas como NumPy y SciPy para la computación científica, Django y Flask para el desarrollo web, y TensorFlow y PyTorch para el aprendizaje profundo, hacen de Python una opción popular en muchos campos de la informática y la ciencia de datos.
+    
+\end{itemize}
+
+En resumen, Python es un lenguaje de programación extremadamente versátil que combina una sintaxis clara, una semántica simple y un ecosistema de bibliotecas de terceros amplio y robusto. Estas características han llevado a Python a ser uno de los lenguajes de programación más populares en el mundo y una herramienta esencial para cualquier profesional de la informática. Además, debido a estas características, es uno de los lenguajes más utilizados para realizar prototipados y dearrollo ágil de proyectos.
+
+Todo el código funcional de Green In House está desarrollado en python, apoyandose en el uso de librerías de terceros para la gestión de los diferentes servicios y tecnologías que utiliza e implementa.
+
+\section{VEnv: Sistema de entornos virtuales de Pythonl}
+
+
+
+\section{SQLAlchemy: Base de datos implementada en Pythonl}
+
+
+
+\section{Adafruit: Librería para interactuación con sensores y actuadores implementada en Pythonl}
+
+
+
+\section{Open-Api: Api-Rest implementada en Pythonl}
+
+
+
+\section{TKinter: GUI implementada en Pythonl}
+
+
+
+\section{Flutter: Lenguaje de Programación de Alto Nivel para desarrollo de aplicaciones multiplataforma}
 
 
 
 
-
-
-
-¿que necesita una persona para entender este proyecto? Conceptos básicos de botánica
-
-
+\section{Seccion}
 
 En aquellos proyectos que necesiten para su comprensión y desarrollo de unos conceptos teóricos de una determinada materia o de un determinado dominio de conocimiento, debe existir un apartado que sintetice dichos conceptos.
 
