@@ -1,105 +1,81 @@
 \capitulo{3}{Conceptos teóricos}
 
-Green In House es un proyecto que combina diversas tecnologías para facilitar el cuidado de las plantas, por lo que es necesario tener claro tanto los conceptos teóricos referentes a los factores que influyen en el crecimiento de las plantas, como los conceptos de las diferentes tecnologías involucradas en el sistema.
+Green In House es un proyecto que combina diversas tecnologías para facilitar el cuidado de las plantas, por lo que es necesario tener claro tanto los conceptos teóricos referentes a los factores que influyen en el crecimiento de las plantas, como los conceptos teóricos de las diferentes tecnologías involucradas en el sistema.
 
 \section{Factores que influyen en el crecimiento de una planta}
-
 Es esencial mantener un control adecuado de la temperatura, la humedad y la luminosidad para fomentar un desarrollo correcto de una planta.
-
 \begin{itemize}
-
-    \item La temperatura es un factor crítico en el crecimiento de las plantas. Las plantas, al igual que los humanos, tienen una gama de temperaturas en las que pueden sobrevivir y prosperar. Si la temperatura es demasiado baja, una planta puede entrar en un estado de latencia, donde el crecimiento se ralentiza o incluso se detiene. Por el contrario, si la temperatura es demasiado alta, puede dañar las estructuras celulares de la planta y causar estrés, lo que puede resultar en un crecimiento pobre o la muerte de la planta. Por lo tanto, mantener la temperatura dentro del rango óptimo es crucial para garantizar un crecimiento saludable.
-    
-    \item La humedad también juega un papel vital en la salud de las plantas. La humedad afecta a la tasa de transpiración, que es el proceso mediante el cual el agua se evapora de las hojas de las plantas. Este proceso es esencial para el transporte de nutrientes a través de la planta, pero si la humedad es demasiado baja, la planta puede perder agua más rápidamente de lo que puede absorberla, lo que puede llevar a la deshidratación. Por otro lado, demasiada humedad puede promover el crecimiento de hongos y otras enfermedades. Por lo tanto, mantener el equilibrio correcto es crucial.
-    
-    \item La luminosidad es fundamental para la fotosíntesis, que es el proceso mediante el cual las plantas convierten la luz solar en energía. Sin suficiente luz, una planta no puede producir la energía que necesita para crecer. Pero de nuevo, demasiada luz, especialmente la luz solar directa y fuerte, puede ser perjudicial y causar quemaduras en las hojas de la planta. Por eso es esencial garantizar que nuestras plantas reciban la cantidad adecuada de luz.
-
+    \item \textbf{La temperatura} es un factor crítico en el crecimiento de las plantas. Las plantas, al igual que los humanos, tienen un rango de temperaturas máximas y mínimas en las que pueden sobrevivir y prosperar. Si la temperatura es demasiado baja, una planta puede entrar en un estado de latencia, en el cual el crecimiento se ralentiza o incluso se detiene, llegan a marchitar la planta. Por el contrario, si la temperatura es demasiado alta, puede dañar la estructura celular de la planta y causar estrés, lo cual puede resultar en un crecimiento pobre o en la marchitación de la planta. Por lo tanto, mantener la temperatura dentro del rango óptimo es crucial para garantizar un crecimiento saludable.
+    \item \textbf{La humedad} juega un papel vital en la salud de las plantas. La humedad ambiental afecta a la tasa de transpiración. Este es el proceso mediante el cual el agua se evapora de las hojas de las plantas. Este proceso es esencial para el transporte de nutrientes a través de la planta, pero si la humedad es demasiado baja, la planta puede perder agua más rápidamente de lo que puede absorberla, llevándola a la deshidratación. Por otro lado, demasiada humedad puede promover el crecimiento de hongos y otras enfermedades. Por lo tanto, mantener el equilibrio correcto es crucial.  
+    \item \textbf{La luminosidad} es fundamental para la fotosíntesis. Este es el proceso a través del cual las plantas convierten la luz solar en energía. Sin suficiente luz, una planta no puede producir la energía que necesita para crecer. Pero de nuevo, demasiada luz (especialmente la luz solar directa y fuerte), puede ser perjudicial y causar quemaduras en las hojas de la planta. Por eso es esencial garantizar que la planta reciba la cantidad adecuada de luz.
 \end{itemize}
-
 Además de estos tres factores en los que se centra Green In House, existen muchos más factores que influyen en el crecimiento de las plantas como por ejemplo la calidad del suelo, la cantidad de nutrientes que tiene la tierra, el abono que se utiliza, el espacio que dispone la planta para crecer, la necesidad de podar las ramas, etc. En esta memoria no se incide más sobre ellos ya que no serán controlados por Green In Houe, pero es relevante destacar la existencia de los mismos.
 
+\section{Raspberry Pi: Microcomputador con entradas y salidas GPIO}
+Raspberry Pi es una serie de computadoras de placa única, con  bajo coste y del tamaño de una tarjeta de crédito, la cual fue desarrollada en el Reino Unido por la Raspberry Pi Foundation, con el objetivo de promover la enseñanza de informática básica en las escuelas. Sin embargo, debido a su gran versatilidad y potencia de cómputo, se ha vuelto increíblemente popular en una variedad de aplicaciones, desde servidores web caseros hasta prototipos de productos electrónicos.
+
+La Raspberry Pi ofrece varias ventajas frente a computadores y microcontroladores convencionales, al hacer una fusión de lo mejor de ambos mundos en una única placa. Algunas de las características que hacen destacar a esta placa son las siguientes:
+\begin{itemize}
+    \item \textbf{Interfaz de Entrada/Salida General (GPIO):} Uno de los aspectos más atractivos de la Raspberry Pi es su conjunto de pines de Entrada/Salida General (GPIO). Estos pines permiten la interacción con una amplia variedad de componentes electrónicos, como sensores y actuadores. Los pines GPIO de la Raspberry Pi son muy flexibles y pueden configurarse para leer o escribir datos digitales, utilizar buses de comunicación y en algunos modelos para leer y generar señales analógicas, lo que la convierte en una plataforma ideal para proyectos de automatización caseros.
+    \item \textbf{Rendimiento y Almacenamiento:} A pesar de su pequeño tamaño, la Raspberry Pi es una computadora completamente funcional, la cual cuenta con procesadores de varios núcleos, permitiendo realizan tareas paralelas, y una tarjeta gráfica que permite desplegar un entorno gráfico y utilizarla como si de un ordenador convencional se tratase. Puede ejecutar varios sistemas operativos de carácter general como Windows y Linux, aunque dispone de su propia distribución Linux optimizada para su hardware, conocida como Raspbian. Esta es la distribución de sistema operativo que se ha elegido para Green In House. Además, dispone de un slot de tarjeta SD, el cual funciona como un disco duro, lo que permite tener un almacenamiento de datos local de gran tamaño, lo cual permite a Green In House no tener porblemas de espacio de almacenamiento de sus base de datos.
+    \item \textbf{Red y Servidor:} La Raspberry Pi puede conectarse a las red a través de Ethernet o Wi-Fi (en los modelos que cuentan con esta característica). Esto permite a Green In House proporcionar y recoger datos a través de una API-REST. El modelo utilizado para el proyecto no dispone de conexión WiFi, por lo que ha sido necesario instalar un dongle WiFi y sus correspondientes controladores.
+    \item \textbf{Costo y Comunidad:} La Raspberry Pi es una opción atractiva debido a su bajo costo (aunque actualmente debido a los problemas en la obtención de semiconductores y la inflacción, su precio se ha visto muy incrementado respecto a cuando salieron al mercado). A pesar de su potencia y flexibilidad, es significativamente más barata que la mayoría de las computadoras o microcontroladores especializados. Además, cuenta con una comunidad de usuarios activa y entusiasta que puede ser una excelente fuente de ayuda y recursos, al ser de caracter Open Source.
+\end{itemize}
+
+    \subsection{Raspbian: Sistema operativo de Raspberry Pi}
+    Como se ha comentado anteriormente, existen diferentes versiones de sistema operativo soportados por la Raspberry Pi, o más bien dicho, modificados para poder funcionar en ella. 
+    Para la realización de Green In House se ha optado por el uso de su distribución oficial Raspbian, en su versión 6.21, ya que está completamente diseñada para sacar el máximo partido a las características de la Raspberry Pi. Aunque existan otros SO optimizados que prometan dar mayor rendimiento, he decidido utilizar Raspbian en su versión estable, para evitar posibles problemas derivados de inconsistencias internas del sistema operartivo.
 
 \section{Bash: Un Lenguaje de Programación de Shell para Linux}
+Bash \citep{wiki:bash} es un intérprete de comandos de Unix y es el acrónimo de Bourne Again SHell. Se trata de una evolución del shell Bourne, que fue uno de los primeros intérpretes de comandos del sistema operativo Unix. Bash fue creado por Brian Fox y lanzado por primera vez en 1989. 
 
-Bash \citep{wiki:bash}, cuyo nombre es un acrónimo de Bourne Again SHell, es un intérprete de comandos de Unix. Se trata de una evolución del shell Bourne, que fue uno de los primeros intérpretes de comandos del sistema operativo Unix. Bash fue creado por Brian Fox y lanzado por primera vez en 1989. 
-
-Bash es el shell por defecto en la mayoría de las distribuciones de Linux y también se puede utilizar en otros sistemas operativos, como Windows y Mac, a través de software como Cygwin o Terminal. Bash se utiliza tanto para ejecutar comandos directamente en la terminal como para crear scripts de shell, que son programas que ejecutan una serie de comandos.
-
-\begin{itemize}
-
-    \item \textbf{Comandos Interactivos:} Bash es muy conocido por su interfaz interactiva. Los usuarios pueden escribir comandos, que Bash interpreta y ejecuta. Esto permite a los usuarios interactuar directamente con el sistema operativo y realizar tareas como gestionar archivos, iniciar y detener programas, y configurar el entorno del sistema.
-    
-    \item \textbf{Scripts de Shell:} Bash también es un lenguaje de programación, lo que significa que los usuarios pueden escribir programas (o scripts) que ejecutan una serie de comandos. Estos scripts son especialmente útiles para automatizar tareas repetitivas. Un script de Bash puede incluir funciones, bucles, condicionales, y otras estructuras de control de flujo comunes en los lenguajes de programación.
-    
-\end{itemize}
-
-En resumen, Bash es una poderosa herramienta que permite a los usuarios y programadores interactuar con el sistema operativo, ejecutar comandos y programas, y automatizar tareas. 
-
-Green In House cuenta con varios scripts bash desarrollados para facilitar numerosas tareas: de instalación de la aplicación
+Bash es el shell por defecto en la mayoría de las distribuciones de Linux actuales y también se puede utilizar en otros sistemas operativos, como Windows y Mac, a través de software como CMD y Terminal. Bash se utiliza tanto para ejecutar comandos directamente en la terminal, como para crear scripts de shell, los cuales son programas que ejecutan una serie de comandos.
 
 \begin{itemize}
-
-    \item Instalación de la aplicación. Tanto la parte de backend como de frontend.
-
-    \item Generación de entornos virtuales de python con la instalación de sus correspondientes dependencias para que el programa pueda ejecutarse.
-
-    \item Configuración de una ip estática en la Raspberry Pi para que el servidor Api-Rest se lance siempre en la misma dirección y pueda ser encontrado por la aplicación multiplataforma.
-
-    \item Despliegue de cambios en el código de la aplicación.
-
-    \item Lectura cíclica de los sensores activos en el sistema y su correspondiente generación de lineas en la base de datos
-
-    \item Despliegue del servidor Api-Rest para poder interactuar desde sistemas externos con los datos almacenados en la base de datos
-
-    \item Lanzamiento automático de la aplicación completa al arrancar el sistema operativo de la Raspberry Pi mediante el uso de crontab.
-
-    \item Parada y arranque de los diferentes procesos en ejecución que controlan el funcionamiento de Green In House.
-
+    \item \textbf{Comandos:} Bash es un intérprete de comando, lo que significa que los usuarios pueden escribir comandos, los cuales Bash interpreta y ejecuta. Esto permite a los usuarios interactuar directamente con el sistema operativo y realizar tareas como gestionar archivos, iniciar y detener programas, configurar el entorno del sistema,...  
+    \item \textbf{Scripts de Shell:} Bash también es un lenguaje de programación, lo que significa que los usuarios pueden escribir programas (denominado scripts) que ejecutan una serie de comandos. Estos scripts son especialmente útiles para automatizar tareas repetitivas. Un script de Bash puede incluir funciones, bucles, condicionales, y otras estructuras de control de flujo comunes de los lenguajes de programación.   
 \end{itemize}
+\subsection{Utilización de Bash en Green In House}
+Green In House cuenta con varios scripts Bash desarrollados para facilitar las tareas de instalación, despliegue, ejecución y parada de la aplicación.
 
 \section{Python: Lenguaje de Programación de Alto Nivel para desarrollo de aplicaciones de carácter general}
-
-Python \citep{wiki:python} es un lenguaje de programación interpretado, de alto nivel y de propósito general. Creado por Guido van Rossum y lanzado por primera vez en 1991, Python se diseñó con la filosofía de que la legibilidad del código es importante y, por lo tanto, tiene una sintaxis que permite a los programadores expresar conceptos en menos líneas de código de las que permitirían otros lenguajes como C++ o Java.
-
-Python proporciona una construcción técnica destinada a permitir la escritura de programas claros, tanto a pequeña como a gran escala. Python es un lenguaje de programación dinámico y de tipado fuerte, muy versátil, lo que lo hace apropiado para una amplia gama de tareas, desde el desarrollo de scripts simples, pasando por el desarrollo web, hasta el análisis de datos y la inteligencia artificial.
-
+Python \citep{wiki:python} es un lenguaje de programación interpretado, de alto nivel y de propósito general. Fue creado por Guido van Rossum y lanzado por primera vez en 1991. Algunas de sus características principales son:
 \begin{itemize}
-
-    \item \textbf{Legibilidad y Sintaxis Clara:} Python fue diseñado con una gran énfasis en la legibilidad y la simplicidad, lo que facilita el aprendizaje del lenguaje. Las estructuras de control de Python, como las funciones, los bucles y las sentencias condicionales, están diseñadas para ser fácilmente comprensibles.
-    
-    \item \textbf{Interpretado:} Python es un lenguaje interpretado, lo que significa que el código Python se ejecuta línea por línea, lo que facilita la depuración de los programas y la experimentación interactiva en la terminal de Python o en entornos como Jupyter Notebook.
-    
-    \item \textbf{Multiparadigma:} Python admite varios paradigmas de programación, incluyendo programación orientada a objetos, programación imperativa y programación funcional, lo que le da una gran flexibilidad para resolver problemas de diferentes maneras.
-    
-    \item \textbf{Ecosistema de Bibliotecas:} Python tiene un ecosistema de bibliotecas de terceros extremadamente rico, que lo hacen adecuado para una amplia gama de tareas. Bibliotecas como NumPy y SciPy para la computación científica, Django y Flask para el desarrollo web, y TensorFlow y PyTorch para el aprendizaje profundo, hacen de Python una opción popular en muchos campos de la informática y la ciencia de datos.
-    
+    \item \textbf{Legibilidad y Sintaxis Clara:} Python fue diseñado con una gran énfasis en la legibilidad y la simplicidad, lo que facilita el aprendizaje del lenguaje. Las estructuras de control de Python, las funciones, los bucles y las sentencias condicionales, están diseñadas para ser fácilmente comprensibles.  
+    \item \textbf{Interpretado:} Python es un lenguaje interpretado, lo que significa que el código Python se ejecuta línea por línea. Esto facilita la depuración de los programas y la experimentación interactiva en la terminal de Python o en entornos como Jupyter Notebook.   
+    \item \textbf{Multiparadigma:} Python admite varios paradigmas de programación, incluyendo programación orientada a objetos, programación imperativa y programación funcional, lo que le da una gran flexibilidad para resolver problemas de diferentes maneras.  
+    \item \textbf{Ecosistema de Bibliotecas:} Python tiene un ecosistema de bibliotecas de terceros extremadamente rico, que lo hacen adecuado para una amplia gama de tareas. Bibliotecas como NumPy y SciPy para la computación científica, Django y Flask para el desarrollo web, y TensorFlow y PyTorch para el aprendizaje profundo, SQLalchemy para la gestión de base de datos, Open-API para el desarrollos de servidores Api-Rest, TKinter para el desarrollo de interfaces gráficas, ADAFruit para el uso de sensores electrónicos,... hacen de Python una opción popular en muchos campos de la informática y la ciencia de datos.
 \end{itemize}
-
-En resumen, Python es un lenguaje de programación extremadamente versátil que combina una sintaxis clara, una semántica simple y un ecosistema de bibliotecas de terceros amplio y robusto. Estas características han llevado a Python a ser uno de los lenguajes de programación más populares en el mundo y una herramienta esencial para cualquier profesional de la informática. Además, debido a estas características, es uno de los lenguajes más utilizados para realizar prototipados y dearrollo ágil de proyectos.
-
-Todo el código funcional de Green In House está desarrollado en python, apoyandose en el uso de librerías de terceros para la gestión de los diferentes servicios y tecnologías que utiliza e implementa.
-
-\section{VEnv: Sistema de entornos virtuales de Pythonl}
-
-
-
-\section{SQLAlchemy: Base de datos implementada en Pythonl}
-
-
-
-\section{Adafruit: Librería para interactuación con sensores y actuadores implementada en Pythonl}
-
-
-
-\section{Open-Api: Api-Rest implementada en Pythonl}
-
-
-
-\section{TKinter: GUI implementada en Pythonl}
-
-
+Tal y como se describe en los puntos anteriores, Python es un lenguaje de programación dinámico y fuertemente tipado, que combina una sintaxis clara, una semántica simple y un ecosistema de bibliotecas de terceros amplio y robusto. Estas características han llevado a Python a ser uno de los lenguajes de programación más populares en el mundo. Además, debido a estas características, es uno de los lenguajes más utilizados para realizar prototipados y desarrollo ágil de proyectos, al permitir a los programadores realizar programas utilizando un número menor de líneas de código de las que se necesitarían escribir en otros lenguajes como C++ o Java. Debido a su extremada versatilidad, es muy apropiado para una amplia gama de tareas, desde el desarrollo de progragarmas simples, pasando por el desarrollo web, hasta el análisis de datos y la inteligencia artificial.
+Todo el código funcional de Green In House está desarrollado en Python, apoyándose en el uso de librerías de terceros para la gestión de los diferentes servicios y tecnologías que utiliza e implementa.
 
 \section{Flutter: Lenguaje de Programación de Alto Nivel para desarrollo de aplicaciones multiplataforma}
+Flutter es un framework de desarrollo de software multiplataforma de código abierto creado por Google. Alagunas de sus carcterística más importantes son:
+\begin{itemize}
+    \item \textbf{Hot Reload:} Uno de los aspectos más útiles de Flutter es su capacidad de recarga en caliente. Esta característica permite a los desarrolladores experimentar, construir interfaces de usuario, agregar características y corregir errores más rápido. Los cambios en el código se reflejan en tiempo real sin necesidad de reiniciar la aplicación. 
+    \item \textbf{Diseño Material y Cupertino:} Flutter está estrechamente integrado con el diseño Material de Google y el diseño Cupertino de Apple, permitiendo a los desarrolladores crear interfaces de usuario que siguen las directrices de diseño de cada plataforma.   
+    \item \textbf{Rendimiento:} Flutter utiliza el lenguaje de programación Dart, que se compila en código nativo, lo que significa que las aplicaciones Flutter tienen un rendimiento cercano al nativo en todas las plataformas.    
+    \item \textbf{Widgets:} Flutter utiliza un sistema de widgets para crear la interfaz de usuario. Los widgets son bloques de construcción modulares que incluyen elementos como botones, textos, barras de desplazamiento, conmutadores, etc.  
+    \item \textbf{Soporte multiplataforma:} Flutter está diseñado para permitir a los desarrolladores crear aplicaciones de alto rendimiento y alta fidelidad para múltiples sistemas como iOS, Android y web, todo desde un mismo código
+    \item \textbf{Integración de código nativo:} Flutter permite la integración de código nativo de los distintos sistemas que soporta, en caso de que se necesitase realizar alguna funcionalidad específica o crítica que requiera de desarrollo nativo. 
+\end{itemize}
+    \subsection{Dart: El lenguaje de programación de Flutter}
+    El lenguaje de programación utilizado en Flutter es Dart, el cual también ha sido desarrollado por Google. Dart es un lenguaje orientado a objetos que se compila "Just in Time" (JIT) para el desarrollo y "Ahead of Time" (AOT) para la producción. Esto significa que durante el desarrollo, el código se puede compilar y cambiar sobre la marcha (JIT), lo que permite la recarga en caliente. Para la producción, el código se compila antes de tiempo (AOT) en código nativo, lo que resulta en un rendimiento muy eficiente.
+    Dart es un lenguaje fuertemente tipapado, lo que significa que una vez que se ha creado una variable de un tipo, no es posible cambiarlo. Esto tiene sus desventajas, pero a la vez ayuda a evitar errores comunes en tiempo de ejecución, los cuales podrían hacer caer la aplicación. A pesar de su seguridad de tipos, Dart sigue siendo un lenguaje fácil de aprender y usar, especialmente para aquellos que ya están familiarizados con otros lenguajes de programación orientados a objetos, como Java, C++ o Python.
+    \subsection{Utilización de Flutter en Green In House}
+    Flutter ha sido utilizado para desarrollar una aplicón mobil capaz de utilizar los endpoints de la Api Rest integrada en Green In House para recoger los datos de la base de datos alojada en la Raspberry y poder trabajar con ellos y graficarles, para mostrar al usuario información de manera intuitiva.
+
+\section{Git: Sistema de control de versiones}
+Git es un sistema de control de versiones distribuido de código abierto que permite gestionar y ver los cambios que se han ido realizando un proyecto a lo largo del tiempo. Está diseñado para manejar todo tipo de proyectos (ya sean pequeños o muy grandes), con una gran velocidad y eficiencia.Algunas de las características más destacadas de Git son:
+\begin{itemize}
+    \item \textbf{Sistema distribuido:} La característica más importante de Git es que es un sistema de control de versiones distribuido. Esto significa que cada desarrollador tiene una copia completa del historial de cambios del proyecto en su máquina local. Esta característica permite trabajar de manera descentralizada y autónoma, sin tener que estar constantemente sincronizado con un servidor central.
+    \item \textbf{Integridad de los datos:} Git está diseñado con un fuerte énfasis en la integridad de los datos. Cada cambio o "commit" en Git tiene una suma de comprobación asociada que se utiliza para verificar la integridad de los datos. Esto permite a los desarrolladores asegurarse de que, una vez que se ha registrado un cambio en Git, los archivos no se alterarán sin su conocimiento.
+    \item \textbf{Ramas:} Git ofrece un soporte robusto y flexible para la ramificación y fusión de código. Esta característica permite a los desarrolladores trabajar en características y experimentos de manera aislada, sin afectar el código principal del proyecto. Una vez que una característica está lista, Git proporciona herramientas para fusionar ese trabajo con la rama principal.
+    \item \textbf{Desempeño:} Git ha sido diseñado con un fuerte enfoque en el rendimiento. A pesar de que maneja historiales de cambios complejos y grandes cantidades de archivos y cambios, las operaciones en Git son generalmente muy rápidas. Esta es una característica de gran valor ya que permite realizar un desarrollo ágil y eficiente.
+    \item \textbf{Plataforma de colaboración:} Combinado con plataformas de alojamiento de código como GitHub, Git se convierte en una poderosa plataforma de colaboración, permitiendo a los equipos de desarrolladores revisar y discutir cambios, gestionar tareas e integrar de manera continua el código. Este sistema de colaboración es esencial para mantener la calidad del código y coordinar el trabajo en equipo.
+\end{itemize}
+    \subsection{Utilización de Git en Green In House}
+    Git ha sido utilizado en el desarrollo de Green In House junto con la plataforma GitHub para realizar el seguimiento de cambios, garantizar la integridad del código, detección de problemas tras la realización de cambios y poder mantener en la nube una copia de seguridad del proyecto actualizada continuamente en caso de que se estropease el entorno de desarrollo, evitando la pérdida del código del proyecto.
 
 
 

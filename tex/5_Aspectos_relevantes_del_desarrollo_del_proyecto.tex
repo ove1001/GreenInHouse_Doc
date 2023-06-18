@@ -1,5 +1,108 @@
 \capitulo{5}{Aspectos relevantes del desarrollo del proyecto}
 
+
+
+\section{Decisiones del método de trabajo}
+
+    \subsection{Utilización de IDE Geany incorporado en Raspbian o utilización de SSH para programación y despliegue en remoto desde un ordenador con el IDE VSCode}
+
+
+    \subsection{Utilización de un sistema de ficheros o implementación de una  base de datos y su correspondiente gestor}
+    
+    \subsection{Utilización de repositorio GitHub para mantener un control de versiones en la nube}
+    Al ser el único desarrollador no se han creado ramas paralelas, aunque este suele ser el mejor sistema de trabajo dentro de un equipo de desarrollo para no afectar con tus cambios al resto.
+
+
+\section{Decisiones de diseño de Green In House}
+
+    \subsection{Decisión de microcomputador o microcontrolador (Arduino o Raspberry) a utilizar}    
+
+    \subsection{Instalación del sistema operativo Raspbian}
+    La instalación de Raspbian en la raspberry pi es un proceso muy sencillo. Solamente hay que seguir los siguiente pasos:    
+    \begin{itemize}
+        \item Descargar de su página web oficial https://www.raspberrypi.com/software/ el software Raspberry Pi Manager.
+        \item Instalar el softeware Raspberry Pi Manager en un ordenador.
+        \item Ejecutar el software Raspberry Pi Manager.
+        \item Elegir la versión de sistema operativo que deseamos instalar. En mi caso he elegido Raspbian.
+        \item Elegir el dispositivo de almacenamiento en el que instalarlo. En mi caso una tarjeta micro SD de 32 Gb.
+        \item Una vez terminado el proceso de instalación, se introduce la tarjeta micro SD en la Raspberry, se le proporciona alimentación y la Raspberry comenzará a funcionar.      
+    \end{itemize}
+
+    \subsection{Instalación de adaptador WiFi USB: 8812BU}  
+    
+
+    
+    \subsection{Búsqueda de soluciones para que el usuario pueda ingresar en Green In House su red wifi y su contraseña}
+    
+        \subsubsection{Utilización de bluetooth desde App en Flutter}
+        (Limitación del usuo de bluetoth en Flutter Flow como monitor serie.)
+        
+        \subsubsection{Utilización de una pantalla táctil con una App con interfaz gráfica.}
+
+    
+    \subsection{Diseño de los datos}
+    
+        \subsubsection{Tablas de la base de datos e interrelación entre ellas}
+
+            \subsubsubsection{Permitir generación dinámica de nuevos sensores de los modelos permitidos, de nuevas plantas y de nuevos consejos}
+        
+            \subsubsubsection{Utilización de un sistema de fechas para dar de alta y de baja sensores y plantas}
+            Al no poder borrar las instancias de la base de datos, porque se eliminarían o corromperían los registros asociados a ellos.
+        
+        \subsubsection{Intermediario para trabajar con los datos de la base de datos mediante un sistema orientado a objetos y viceversa}
+        resultset : convertir instancias de la base de datos a objetos con los que trabajar cómodamente en Pyhton.
+
+            \subsubsubsection{Definición de una clase intermedia para cada tabla de la base de datos}
+        
+        \subsubsection{Definición de servicios de alto nivel para interactuar con la base de datos mediante objetos, manejando internamente las sesiones de acceso a la base de datos}
+        
+    \subsection{Diseño de comunicación externa de los datos}
+
+        \subsubsection{Utilización de API-REST para leer y generar datos en la aplicación de Green In House mediante archivos JSON}
+
+    \subsection{Diseño de aplicación multiplataforma para poder interactuar cómodamente con Green In House desde dispositivos móviles}
+
+        \subsubsection{Utilización de Flutter para desarrollo de App multiplataforma}
+        
+
+        \subsubsection{Utilización de Flutter Flow para desarrollo de App multiplataforma basado en interactuación gráfica en lugar de escritura de código}
+
+
+\section{Problemas encontrados}
+
+    
+    \subsection{Necesidad de incorporar un módulo ADC (conversor analógico digital) al no tenerlo incorporado el modelo de placa seleccionado}
+    
+    
+    
+    \subsection{Problemas durante la instalación del dongle WiFi al no tenerlo incorporado el modelo de placa seleccionado}
+    Modelo seleccionado: 8812BU
+    
+    
+    \subsection{Problemas por permisos al manipular desde la aplicación de Green In House ficheros del sistema}
+    (Los que controlan la red a la que está conectado (WPAConf))
+    
+    
+    
+    \subsection{Problemas al actualizar el firmware de la Raspbery Pi}
+    (Perdida de headers y necesidad de resolverlo a mano)
+    (Perdida de drivers de comunicación wifi y necesidad de resolverlo de nuevo)
+    
+    
+    
+    \subsection{Problemas por la actualización de dependencias internas de las librerías utilizadas}
+    (Solucionado especificando la instalación de dicha librería durante la isntalación de Green In House junto con el número de versión con el que funciona correctamente)
+    
+    
+    \subsection{Necesidad de establecer una dirección IP estática por problemas en la resolución de nombres de host en Android para poder realizar las Api-Call}
+    
+    
+    \subsection{Limitaciones en las gráficas ofrecidas por Flutter Flow}
+    
+
+
+
+
 Problemas gordos que han atascado y como los he resulto.
 Cosas que vendría bien saber al principio
 

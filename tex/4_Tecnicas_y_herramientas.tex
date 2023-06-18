@@ -1,8 +1,165 @@
 \capitulo{4}{Técnicas y herramientas}
 
-MVC (Modelos vista controlador)
+\section{Herraientas}
 
-Patrones de diseño (Adaptador, factoria, ...)
+    \subsection{Configuración del sistema operativo Raspbian editando archivos de sistema}
+    Para poder desplegar la aplicación de Green In House de manera automática al encender las Raspberry y poder configurar los parámetros del adaptadr WiFi, ha sido necesario modificar los siguiente ficheros de sistema: 
+    \begin{itemize}
+        \item \textbf{Cron y Crontab : } Estos archivos se encargan de la ejecución periódica de tareas por parte del sistema operativos. Se ha utilizado esta funcionalidad para desplegar la aplicación al completo durante el arranque de Raspbian.       
+        \item \textbf{/etc/network/interfaces : } En este archivo se almacena la configuración de las interfaces de red habilitadas en la Raspberry Pi. En mi caso, la interfaz WiFi está etiquetada como Wlan0.
+        \item \textbf{/etc/dhcpcd.conf : } Almacenamiento del DHCP o de la IP estática definida para cada interfaz de red. En mi caso, he definido la IP stática 192.168.1.240 para la interfaz Wlan0.
+        \item \textbf{/etc/wpa\_supplicant/wpa\_supplicant.conf : } Almacenamiento de los datos de las redes WiFi conocidas. En este archivo se almacenarán con un formato determinado los datos del SSID y clave de la red WiFi que introduzca el usuario.  
+    \end{itemize}
+    La modificación de cualquiera de estos archivos requiere que se reinicie el sistema para que tengan efecto.
+
+    \subsection{Definición de scripts en bash para realizar la instalación y despliegue automático de todo lo necesario para hacer funcionar Green In House}
+    Green In House cuenta con varios scripts Bash desarrollados para facilitar las tareas de instalación, despliegue, ejecución y parada de la aplicación.
+    \begin{itemize}    
+        \item Instalación de la aplicación. Tanto la parte de backend como de frontend. Estos scripts son necesarios ejecutarlos como superusuario, ya que necesitan generar y modificar archivos dentro de los directorios del sistema.    
+        \item Generación de entornos virtuales de Python con la instalación de sus correspondientes dependencias para que el programa pueda ejecutarse.    
+        \item Configuración de una IP estática en la Raspberry Pi para que el servidor Api-Rest se lance siempre en la misma dirección y pueda ser encontrado por la aplicación multiplataforma.    
+        \item Despliegue de cambios en el código de la aplicación.    
+        \item Lectura cíclica de los sensores activos en el sistema y su correspondiente generación de lineas en la base de datos    
+        \item Despliegue del servidor Api-Rest para poder interactuar desde sistemas externos con los datos almacenados en la base de datos    
+        \item Lanzamiento automático de la aplicación completa al arrancar el sistema operativo de la Raspberry Pi mediante el uso de crontab.    
+        \item Parada y arranque de los diferentes procesos en ejecución que controlan el funcionamiento de Green In House.    
+    \end{itemize} 
+    Estos scrips están alojados en el directorio scrips del código de Green In House.
+
+    \subsection{Venv: Entornos Virtuales en Python}
+    Uno de los aspectos más críticos al desarrollar proyectos en Python es la gestión de dependencias. Con frecuencia, diferentes proyectos requieren diferentes versiones de las mismas bibliotecas. La instalación global de dichas bibliotecas se hace inviable, ya que puede generar conflictos, debido a que determinadas versiones pueden integra métodos que otras no, o requerir otra sintaxis, etc. Debido a esto, los entornos virtuales de Python, o `venv`, desempeñan un papel crucial.
+    El módulo `venv` de Python proporciona un soporte para crear entornos virtuales ligeros con sus propios directorios de sitio, aislados del intérprete Python global del sistema. Cada entorno virtual tiene su propio intérprete de Python, lo que permite instalar y gestionar paquetes de Python independientes para cada proyecto.
+        \subsubsection{Utilización de Venv en Green In House}
+        Green In House cuenta con 3 venvs diferentes, de los cuales 2 están destinados al backend y 1 al frontend. 
+        \begin{itemize}
+            \item \textbf{venv de backend para lectura de sensores:} Este entorno virtual está destinado principalmente a gestionar el uso de la librería ADAFruit para leer los sensores electrónicos y la librería SQLAlchemy para almacenar los datos de los registros en la base de datos.
+            \item \textbf{venv de backend para Api-Rest:} Este entorno virtual está destinado principalmente a gestionar el uso de la librería Open-Api, desplegando un servidor Api-Rest, el cual gestiona las peticiones de datos externas e interactúa con la base de datos almacenando y recogiendo información mediante el uso de la librería SQLAlchemy.
+            \item \textbf{venv de frontend para App gráfica de pantalla táctil:} Este entorno virtual está destinado principalmente a gestionar el uso de la librería TKinter, la cual se utiliza para desplegar una aplicación gráfica que permite al usuario interactuar con la Raspberry Pi e introducir los datos de la red WiFi de su hogar, para conectar el servidor Green In House a su red. También permite apagar y reiniciar el sistema.
+        \end{itemize}
+
+    \subsection{SQLAlchemy: Librería para implementación de Base de datos en Python y uso mediante objetos (ORM)}
+    SQLAlchemy es una biblioteca de Python que facilita la comunicación entre programas desarrollados en Python y las bases de datos SQL. Proporciona un conjunto completo de operaciones de persistencia de datos de alto nivel, así como un marco de abstracción de base de datos de SQL completo para aportar una mayor flexibilidad. 
+    \begin{itemize}
+        \item \textbf{ORM (Object Relational Mapper):} Una de las características más poderosas de SQLAlchemy es su ORM (Object-Relational Mapping). Un ORM es una técnica de programación que facilita la conversión de datos entre sistemas incompatibles (en este caso, entre objetos Python y tablas SQL). En otras palabras, un ORM nos permite trabajar con bases de datos SQL en un lenguaje orientado a objetos, como Python. Esto significa que con el ORM de SQLAlchemy, se pueden crear clases en Python que se correspondan directamente con las tablas de la base de datos. Cada instancia de una clase representa una fila en la tabla correspondiente. Esta correspondencia entre objetos Python y tablas SQL nos permite interactuar con los datos de la base de datos de una manera más intuitiva y similar a como normalmente lo hace python.
+        \item \textbf{Abstracción de Base de Datos:} Además del ORM, SQLAlchemy también proporciona un nivel de abstracción que nos permite cambiar entre diferentes sistemas de bases de datos SQL con pocos o ningún cambio en el código. Esto es útil si en un futuro decidiese cambiar la base de datos subyacente de Green In Hosue o si quisiese hacer que el código sea más general para que funcione con diferentes sistemas de bases de datos.
+    \end{itemize}
+        \subsubsection{Utilización de SQLAlchemy en Green In House}
+        En el caso concreto de Green In House se utiliza SQLAlchemy para interactuar con una base de datos SQLite3 definida en un archivo alojado en la raiz del sistema. Concretamente en la ruta /GreenInHouse/db/GreenInHouseBackend.sqlite3.db
+        En este archivo están alojadas las tablas con las que trabaja Green In House, las cuales son:
+        \begin{itemize}
+            \item Sensores
+            \item Registros Sensores
+            \item Plantas
+            \item Tipos Plantas
+            \item Sensores Plantas
+            \item Consejos Plantas
+            \item Consejos Tipo Plantas
+        \end{itemize}
+        Estas tablas están definidas dentro del código fuente de la aplicación en el directorio components/backend/backen/data/db/result
+        Cada una de estas tablas tiene implementada una clase intermediaria propia que se encarga de construir el objeto python con los datos de las filas de su tabla correspondiente, y de almacenar los datos en las tabals correspondientes de los objetos python creados por la aplicación. Estos intermediarios están definidas dentro del código fuente de la aplicación en el directorio components/backend/backen/data/db/resultset
+
+    \subsection{Open-Api: Librería para implementación de Api-Rest en Python}
+    Open-Api, anteriormente conocido como Swagger, es una especificación para archivos de definición de APIs REST. Estos archivos de definición pueden estar escritos en YAML o JSON y describen los detalles de la API REST, entre los cuales por ejemplo se encuentran:
+    \begin{itemize}
+        \item Endpoints disponibles
+        \item Métodos HTTP soportados
+        \item Parámetros de las solicitudes
+        \item Respuestas esperadas 
+        \item Modelos de los datos a comunicar 
+    \end{itemize}
+    La especificación OpenAPI se utiliza para documentar y describir APIs REST de forma estandarizada y fácil de entender tanto para las personas como para las máquinas. Esto facilita el desarrollo, la prueba, y la integración de servicios basados en APIs. Un beneficio adicional de la especificación OpenAPI es que puede generar automáticamente una interfaz de usuario interactiva, permitiendo a los usuarios o desarrolladores explorar y probar la API de manera intuitiva.
+        \subsubsection{Microframework Connexion}
+        Green In House utiliza el Microframework Connexion, el cual mapea el
+        API especificado en el archivo spec.yml con OpenAPI en Python, facilitando la creación de los endpoints para que otras aplicaciones puedan conectar con el servicio, el cual es lanzado en el puerto 5000. Para poder acceder a estos endpoints hay que hacerlo utilizando de base la siguiente url: http://192.168.1.240:5000/api/v1/
+        \subsubsection{JSON: Archivos con formato específico para almacenar y compartir datos}
+        JSON, que significa JavaScript Object Notation, es un formato ligero de intercambio de datos. JSON es un formato de texto que es completamente independiente del lenguaje pero utiliza convenciones que son familiares para los programadores de diversos lenguajes como C, C++, C\#, Java, JavaScript, Perl, Python, y muchos otros.
+            \subsubsubsection{Formato de JSON}
+            Un objeto JSON es un conjunto de pares clave-valor rodeado por llaves \{\}. Las claves son cadenas de caracteres y los valores pueden ser:
+            \begin{itemize}
+                \item Números
+                \item Cadenas de caracteres
+                \item Booleanos (true o false)
+                \item Otros objetos JSON
+                \item Arrays de cualquiera de las opciones anteriormente mencionadas. Un array JSON es una lista de valores rodeada por corchetes [].
+            \end{itemize}
+        \subsubsection{Utilización de OpenAPI en Green In House}
+        En el caso concreto de Green In House la epecificación OpenApi se realiza el en el archivo components/backend/backend/openapi/spec.yml. Se utiliza OpenAPI para definir los endpoints que permiten crear y leer los datos de las siguientes clases mediante objetos JSON:
+        \begin{itemize}
+            \item Sensores
+            \item Registros Sensores
+            \item Plantas
+            \item Tipos Plantas
+            \item Sensores Plantas
+            \item Consejos Plantas
+            \item Consejos Tipo Plantas
+        \end{itemize}
+        Las clases que manejan estos endpoints están definidas en la ruta components/backend/backend/presentacion/rest
+
+    \subsection{TKinter:  Librería para implementación de interfaces gráficas en Python}
+    Tkinter es una biblioteca de Python utilizada para el desarrollo de interfaces gráficas de usuario (GUI). Es la interfaz estándar de Python para el kit de herramientas Tk, y es tanto simple como eficaz para la creación de una variedad de programas. Tkinter proporciona un poderoso conjunto de widgets de interfaz de usuario:
+    \begin{itemize}
+        \item Botones
+        \item Cajetines de texto
+        \item Listas
+        \item Barras de desplazamiento
+        \item Etiquetas
+        \item Menús 
+        \item Ventanas emergentes
+        \item Frames
+    \end{itemize}
+    Todo esto permite crear interfaces de usuario altamente personalizables y funcionales.    
+        \subsubsection{Utilización de Tkinter en Green In House}
+        En el caso concreto de Green In House la librería TKinter se utiliza para definir una aplicación gráfica multiventana que permite introducir en el sistema el nombre de la red wifi del usuario y la contraseña de dicha red wifi, así como reiniciar y apagar la maceta.
+        El código de esta aplicación está definido en la ruta components/frontend/forntend/app/rpi
+
+    \subsection{Adafruit: Librería para interactuación con sensores y actuadores eletrónicos implementada en Python}
+    
+       \subsubsection{MCP3008: Conversor de 8 señales analógicas a digital (ADC)}
+    
+    
+        \subsubsection{DHT11: Sensor de humedad y temperatura ambiente}
+    
+    
+        \subsubsection{FC28: Sensor de humedad de tierra de la maceta}
+    
+    
+        \subsubsection{LDR: Sensor de luminosidad ambiente}
+        Un LDR, o fotoresistor es un dispositivo que varía su resistencia en función de la cantidad de luz que incide sobre él. Sin embargo, es importante tener en cuenta que un LDR no mide directamente los lúmenes, la cual es una unidad de flujo luminoso. Un LDR mide la intensidad de luz de una manera no lineal y no opera en una frecuencia en particular.
+        
+        Para obtener una estimación de la luz en términos de lúmenes, se ha seguido el siguiente proceso:    
+        \begin{enumerate}    
+            \item \textbf{Configuración del circuito:} Conexión de un LDR y una resistencia fija en un circuito divisor de voltaje. Ambos extremos del LDR y la resistencia se conectan a una fuente de alimentación (en este caso a los 5V de la Raspberry Pi), y el otro extremo del LDR se conecta al otro extremo de la resistencia y a tierra (GND). De esta forma, el voltaje entre el LDR y la resistencia se puede medir y estará relacionado con la resistencia del LDR.        
+            \item \textbf{Medición del voltaje:} Este voltaje se mide con un ADC (Convertidor Analógico a Digital) en la Raspberry Pi. El modelo de Raspberry Pi utilizado o dispone de un ADC incorporado, por lo que se utiliza el ADC externo MCP3008, explicado anteriormente.        
+            \item \textbf{Conversión del voltaje a resistencia:} Conociendo el voltaje de la fuente de alimentación (V), el voltaje medido (Vout) y la resistencia seleccionada (R), se calcula la resistencia del LDR (Rldr) utilizando la fórmula: Rldr = R * ((V / Vout) - 1).        
+            \item \textbf{Calibración del sensor:} Para convertir la resistencia del LDR a lúmenes, hay que calibrar el sensor. Para ello, es necesario utilizar una fuente de luz con una salida conocida en lúmenes y medir la resistencia del LDR a diferentes niveles de luz. De esta forma, se puede crear una tabla de correspondencia entre la resistencia del LDR y los lúmenes.        
+            \item \textbf{Conversión de resistencia a lúmenes:} Con la tabla de correspondencia, se puede convertir las medidas de resistencia del LDR a lúmenes, aunque la fiabilidad de la medida depende mucho de lo bien que se haya realizado el proceso de calibración.
+        \end{enumerate}        
+        En lo que respecta a los valores de las resistencias en ohmios, lo mejor es seleccionar un valor que esté en el mismo orden de magnitud que la resistencia del LDR en las condiciones de luz en las que normalmente va a estar la planta.
+        Es importante tener en cuenta que este método proporciona una medida aproximada y tiene sus limitaciones. Los LDR son sensibles a diferentes longitudes de onda de luz de diferentes maneras, por lo que diferentes tipos de luz (como la luz del sol, la luz fluorescente, etc.) darán diferentes lecturas.
+    
+        \subsubsection{BH1750: Sensor de luminosidad ambiente.}  
+
+
+
+    \subsection{GitHub: Plataforma opensource de repositorios con el sistema de control de versiones Git.}
+    
+    \subsection{VSCode: IDE de programación para diferentes lenguajes.}
+    
+    \subsection{Conexión SSH: Para programación en remoto}
+    
+    \subsection{FlutterFlow: IDE de programación para Flutter mediante un framework de entorno gráfico.}
+
+
+\section{Técnicas y metodologías}
+
+    \subsection{MVC (Modelos vista controlador)}
+    
+    \subsection{Patrones de diseño (Adaptador, factoria, ...)}
+    
+    \subsection{SCRUM: Metodología de gestión ágil}
+
+
+
 
 
 
