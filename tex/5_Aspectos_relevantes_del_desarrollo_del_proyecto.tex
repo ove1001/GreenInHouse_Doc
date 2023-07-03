@@ -1,113 +1,95 @@
 \capitulo{5}{Aspectos relevantes del desarrollo del proyecto}
-
-
-
-\section{Decisiones del método de trabajo}
-
-    \subsection{Utilización de IDE Geany incorporado en Raspbian o utilización de SSH para programación y despliegue en remoto desde un ordenador con el IDE VSCode}
-
-
-    \subsection{Utilización de un sistema de ficheros o implementación de una  base de datos y su correspondiente gestor}
-    
-    \subsection{Utilización de repositorio GitHub para mantener un control de versiones en la nube}
-    Al ser el único desarrollador no se han creado ramas paralelas, aunque este suele ser el mejor sistema de trabajo dentro de un equipo de desarrollo para no afectar con tus cambios al resto.
-
+Para poder desarrollar Green In House a sido necesario tomar una serie de decisiones de diseño que permitieran realizar todas las funcionales que se pretendían incluir en el proyecto. Durante el desarrollo del mismo, me he ido encontrando con varios problemas relevantes, los cuales no estaban previstos inicialmente. A continuación se exponen estos apartados de manera detallada.
 
 \section{Decisiones de diseño de Green In House}
+En las siguientes páginas se detallan las principales decisiones de diseño que tuve que tomar antes de poder comenzar con el desarrollo de la aplicación de Green In House. Gracias a esta toma inicial de decisiones, pude encauzar correctamente el desarrollo de la aplicación sin tener que ir implementando y desechando funcionalidades. Para la realización de la estructura inicial de Green In House separando las funcionalidades en diferentes capas y servicios, reutilicé la estructura básica de la práctica final de la asignatura "Diseño y mantenimiento del software". De esta práctica reutilicé algunos archivos de código fuente originalmente desarrollados por Jesús Alonso Abad, para definir los servicios básicos de configuración de directorios de la base de datos y de la API REST, así como la instalación de dependencias declaradas para cada entorno virtual, adaptándolos al código y estructura de Green In House.
 
-    \subsection{Decisión de microcomputador o microcontrolador (Arduino o Raspberry) a utilizar}    
-
-    \subsection{Instalación del sistema operativo Raspbian}
-    La instalación de Raspbian en la raspberry pi es un proceso muy sencillo. Solamente hay que seguir los siguiente pasos:    
+    \subsection{Decisión de utilizar microcomputador o microcontrolador} 
+    Todos los programas que hemos desarrollado durante el Grado han corrido siempre internamente en un ordenador, sin necesidad de comunicarse con sensórica real. Sin embargo, Green In House cuenta con sensores electrónicos con los que ha de comunicarse, por lo que necesitaba contar con interfaces de comunicación dedicas a interactuar con sensores electrónicos. Para realizar esta tarea lo mejor era optar por un microcontrolador Arduino o un microcomputador Raspberry, los cuales ambos cuentan con estas interfaces para comunicación con sensórica real, pero presentan grandes diferencias.
     \begin{itemize}
-        \item Descargar de su página web oficial https://www.raspberrypi.com/software/ el software Raspberry Pi Manager.
-        \item Instalar el softeware Raspberry Pi Manager en un ordenador.
-        \item Ejecutar el software Raspberry Pi Manager.
-        \item Elegir la versión de sistema operativo que deseamos instalar. En mi caso he elegido Raspbian.
-        \item Elegir el dispositivo de almacenamiento en el que instalarlo. En mi caso una tarjeta micro SD de 32 Gb.
-        \item Una vez terminado el proceso de instalación, se introduce la tarjeta micro SD en la Raspberry, se le proporciona alimentación y la Raspberry comenzará a funcionar.      
+        \item Arduino es un microcontrolador, lo que quiere decir que internamente no ejecuta ningún sistema operativo, sino un único programa de manera cíclica. Por esa razón, no necesita tener grandes capacidades de núcleos de procesamiento, ni demasiada memoria, ya que está diseñado para el control específico de hardware electrónico mediante un programa optimizado para la tarea que tiene que realizar. Cuenta con una gran cantidad de pines digitales, analógicos y PWM, los cuales se utilizan para leer sensores y comandar actuadores. Además cuenta con múltiples sistemas de comunicación digital mediante varios protocolos como puerto serie, I2C y SPI, muy util para poder comunicarse con otras placas Arduino u otros sistemas. Es una placa de bajo coste y muy fácil de programar, por lo que es ideal en proyectos de robótica. Mediante interrupciones de sistema se puede romper el flujo estándar del programa para ejecutar otras funciones en un determinado momento, pero en ningún momento podrá ejecutar tareas de manera simultanea. Además, tiene ciertas limitaciones en determinados áreas, como por ejemplo en el manejo de grandes cantidades de datos persistentes, ya que no está pensado para albergar una base de datos junto con su sistema gestor. Es una herramienta pensada para el control de hardware en tiempo real.
+        \item Raspberry es un microcomputador y ejecuta un sistema operativo completo, por lo que necesita contar con una cantidad considerable de recursos para poder ejecutar dicho sistema operativo y sobre él ejecutar otros programas. Al tener un sistema operativo, permite ejecutar acciones de alto nivel de manera mucho más cómoda que en Arduino, al delegar la ejecución de dichas funciones en el sistema operativo. Otro punto importante, es que es capaz de albergar y manejar una base de datos y su sistema gestor, además de permitir utilizar intermediarios ORM. Además, al tener múltiples núcleos, es capaz de ejecutar tareas de manera paralela, delegando el control de estos hilos en el programador de tareas del sistema operativo. Esto lo hace más eficiente que Arduino a la hora de querer montar varios servidores y ejecutar tareas de manera paralela en una misma placa. Esto es importante en Green In House, ya que se necesita ejecutar simultáneamente una tarea cíclica de lectura de sensores y almacenamiento de registros en la base de datos, un servidor API REST con conexión a la base de datos para lectura y escritura de registros y una pantalla de control. Otra gran ventaja que tiene es que soporta diversos lenguajes de programación como Python, C y C++, por lo que ofrece alternativas si se quiere ejecutar código interpretado (más simple de programar) o código compilado (con mayor eficiencia de recursos). También cuenta con pines de conexión digital para leer sensores y comandar actuadores, además de múltiples interfaces de comunicación para diversos protocolos como puerto serie, I2c y SPI. Esta placa está diseñada para ejecutar tareas en tiempo diferido, donde no es tan extremadamente importante el tiempo de respuesta como en los sistemas de tiempo real, aunque optimizando el código y dando gran prioridad a los procesos, se pueden ejecutar tareas en tiempo real.
     \end{itemize}
+    Debido a las ventajas que aporta Raspberri Pi sobre Arduino para las características que requiere Green In House, he optado por utilizar una Raspberry Pi, ya que el tiempo de lectura de los sensores no es crítico, pero si me es indispensable contar con todas las funciones anteriormente mencionadas. Si el tiempo de control sobre la lectura de sensores fuera crítico, una buena opción sería crear un sistema híbrido, en el que un Arduino se comunicase en tiempo real con los sensores, recogiera sus datos en memoria, y se los enviase cada cierto tiempo a la Raspberry para que lo almacenase en su base de datos. De esta manera podría aprovechar lo mejor de ambas placas, pero no ha sido necesario para la realización del proyecto.
 
-    \subsection{Instalación de adaptador WiFi USB: 8812BU}  
-    
+    \subsection{IDE a utilizar}
+    Para poder desarrollar el código de Green In House de manera eficiente y cómoda, una de las principales decisiones que tuve que tomar fuee la del IDE a utilizar. Entre las diferentes posibilidades valoré la utilización del IDE Geany (al venir incorporado en Raspbian), pero tenían un control muy pobre sobre la estructura de directorios del programa y no tenía integración con GitHub, por lo que lo finalmente lo descarté. La siguiente opción que valoré fue la utilización del IDE VSCode, el cual me permite tener control sobre la estructura de directorios del programa, cuenta con herramientas de refactorización de código, tiene integración con GitHub para poder tener mi código sincronizado con un repositorio con control de versiones y cuenta con un cliente SSH. Este cliente SSH me permite programar desde mi ordenador utilizando VSCode pero actuando de manera remota sobre los archivos almacenados en mi Raspberry, permitiéndome hacer un despliegue de los cambios en mi aplicación remotamente, y controlar la Raspberry por línea de comandos. Por estas razones elegí VSCode como IDE a utilizar para desarrollar Green In House
 
-    
-    \subsection{Búsqueda de soluciones para que el usuario pueda ingresar en Green In House su red wifi y su contraseña}
-    
-        \subsubsection{Utilización de bluetooth desde App en Flutter}
-        (Limitación del usuo de bluetoth en Flutter Flow como monitor serie.)
-        
-        \subsubsection{Utilización de una pantalla táctil con una App con interfaz gráfica.}
+    \subsection{Respaldo en la nube con control de versiones}
+    A la hora de desarrollar Green In House, una prioridad que tenía en mente era poder tener un respaldo en la nube del código de mi proyecto, por si por alguna razón perdía algún archivo o el proyecto completo. 
+    Además quería poder realizar un seguimiento de los cambios que iba realizando en cada \textit{sprint}, por lo que necesitaba utilizar un repositorio que integrase un control de versiones como Git. Me decanté por utilizar GitHub ya que es el que he utilizado siempre y no he tenido nunca problemas o limitaciones con él. Habría sido buena idea aprovechar el sistema de control de ramas que tiene GitHub, pero al ser el único desarrollador del proyecto no lo consideré necesario, ya que no iba a haber otras personas trabajando simultáneamente, con las que pudiera colapasar mi trabajo desarrollado, ni había ninguna release realizada acorde a alguna versión de commit. Una vez desarrollada la primera release, sería mejor empezar a trabajar en ramas paralelas e ir realizando nuevas \textit{releases} a medida que se fueran realizando las fusiones de las ramas.
 
-    
-    \subsection{Diseño de los datos}
-    
-        \subsubsection{Tablas de la base de datos e interrelación entre ellas}
+    \subsection{Almacenar datos en ficheros o en base de datos}
+    Para poder almacenar de manera persistente los datos que se van generando en la aplicación (registros de sensores, sensores del sistema, plantas, etc) tenía dos opciones, utilizar un sistema de ficheros o una base de datos. 
+    Utilizar un sistema de ficheros propio parecía tener una mayor facilidad de uso, pero a la vez presentaba varios problemas como por ejemplo:
+    \begin{itemize}
+        \item Posible corrupción de archivos sin sistema de solvencia de problemas.
+        \item Necesidad de leer completamente los archivos para realizar las búsquedas de datos, por lo que cuando creciera mucho la cantidad de registros presentaría problemas de eficiencia.
+        \item Complejidad a la hora de realizar cambios en los registros existentes para añadir nuevos campos.
+        \item Imposible manejar múltiples consultas simultáneamente al mismo archivo al encontrarse bloqueado.
+        \item Controlar que no se puedan generar registros duplicados.
+    \end{itemize}    
+    Todos estos problemas anteriormente mencionados, ya están solventados de manera eficiente y cómoda por los actuales gestores de bases de datos, por lo que la mejor opción era implementar una base datos con su correspondiente gestor. A pesar de las mejoras que ofrece esta alternativa, también presenta algunos problemas como por ejemplo:
+    \begin{itemize}
+        \item Dificultad añadida de tener que manejar el gestor de la base de datos mediante un \textit{framework} que permita implementación ORM para poder utilizar los registros como objetos de manera cómoda en el código Python.
+        \item Necesidad de programar las transacciones de manera correcta haciendo uso de las herramientas proporcionadas por el \textit{framework}.
+        \item Necesidad de definir las estructuras de las tablas y su interrelación entre ellas.
+    \end{itemize}
+    Al querer desarrollar una aplicación bastante grande y con posibilidades de crecer continuamente, las ventajas de utilizar una base de datos superaban con creces a sus inconvenientes, por lo que decidí utilizar este sistema para Green In House. La base de datos utilizada es SQLite3, y es manejada mediante el \textit{framework} SQLAlchemy, el cual tiene implementado un modelo ORM que permite manejar los registros de las tablas como si fueran objetos dentro de Python. Este ORM se encarga tanto de generar el objeto en base al registro, como de generar el registro de la tabla en base a los datos del objeto, y lo hace de manera transparente al usuario. Además, SQLAlchemy permite realizar consultas SQL mediante un sistema de orientación a objetos, para hacer más consistente todo el código, sin necesidad de generar consultas SQL, ya que el mismo \textit{framework} se encarga de convertir los métodos utilizados del objeto \textit{query} en una consulta SQL.  
 
-            \subsubsubsection{Permitir generación dinámica de nuevos sensores de los modelos permitidos, de nuevas plantas y de nuevos consejos}
-        
-            \subsubsubsection{Utilización de un sistema de fechas para dar de alta y de baja sensores y plantas}
-            Al no poder borrar las instancias de la base de datos, porque se eliminarían o corromperían los registros asociados a ellos.
-        
-        \subsubsection{Intermediario para trabajar con los datos de la base de datos mediante un sistema orientado a objetos y viceversa}
-        resultset : convertir instancias de la base de datos a objetos con los que trabajar cómodamente en Pyhton.
-
-            \subsubsubsection{Definición de una clase intermedia para cada tabla de la base de datos}
-        
-        \subsubsection{Definición de servicios de alto nivel para interactuar con la base de datos mediante objetos, manejando internamente las sesiones de acceso a la base de datos}
-        
-    \subsection{Diseño de comunicación externa de los datos}
-
-        \subsubsection{Utilización de API-REST para leer y generar datos en la aplicación de Green In House mediante archivos JSON}
-
-    \subsection{Diseño de aplicación multiplataforma para poder interactuar cómodamente con Green In House desde dispositivos móviles}
-
-        \subsubsection{Utilización de Flutter para desarrollo de App multiplataforma}
-        
-
-        \subsubsection{Utilización de Flutter Flow para desarrollo de App multiplataforma basado en interactuación gráfica en lugar de escritura de código}
-
+    \subsection{Comunicación de datos con sistemas externos}
+    Para poder comunicar con sistemas externos los datos recogidos por los sensores de Green In House y almacenados en su base de datos, he recurrido a la utilización de un servidor API REST a través de consultas realizadas mediante HTML. 
+    Este es uno de los sistemas más comúnmente utilizados para comunicar datos entre diferente sistemas, ya que no requiere conocer como trabaja internamente dicho sistema. Simplemente se hace una petición de los datos que se quieren recoger haciendo una llamada a un \textit{endpoint}, el cual puede estar configurado para recibir determinados parámetros de entrada. Con los datos de la llamada, la API REST procesa internamente los datos que tiene que devoler y los encapsula en un archivo JSON, el cual es enviado como respuesta de la petición junto con un código de respuesta HTML, que indica si la petición se pudo resolver correctamente o si hubo algún problema durante el procesamiento. 
+    Las operaciones estándar permitidas por este sistema mediante \textit{endpoints} don las siguientes:
+    \begin{itemize}
+        \item \textbf{POST}: Creación de un recurso nuevo.
+        \item \textbf{PUT}: Modificación de un recurso existente.
+        \item \textbf{GET}: Consulta la información de un recurso.
+        \item \textbf{DELETE}: Eliminación un recurso existente.
+    \end{itemize}
+    En el caso de Green In House, la operación \textit{DELETE} no borra como tal el recurso de la tabla, sino que le asigna la fecha actual como fecha de eliminación. Esto he decidido realizarlo así para mantener la integridad de la base de datos, permitiendo almacenar datos históricos de sensores y plantas que hayan sido eliminados del sistema. Si no, al borrar dicho elemento, habría que borrar en cascada todos los elementos que hagan referencia al elemento borrado.
 
 \section{Problemas encontrados}
+Durante el desarrollo de Green In House me fui encontrando problemas que inicialmente no había valorado, por lo que tuve que hacerles frente a medida que iban apareciendo. A continuación detallo una lista de los problemas más importantes que tuve que ir solucionando.
 
+    \subsection{Necesidad de instalar un adaptador WiFi USB}  
+    El modelo de Raspberry que utilicé para desarrollar Green In House es una Raspberry Pi 2b, el cual no cuenta con conexión WiFi, por lo que fue necesario utilizar un adaptador WiFi conectado por USB. Este problema no existen en el nuevo modelo Raspberry Pi 4, pero utilicé el modelo 2B debido a que ya disponía de dicha placa, por lo que consideré innecesario comprar una nueva placa. La explicación de su instalación se detalla en el apartado de anexos.
     
-    \subsection{Necesidad de incorporar un módulo ADC (conversor analógico digital) al no tenerlo incorporado el modelo de placa seleccionado}
+    \subsection{Necesidad de ingresar las credenciales de la red WiFi}
+    Una de las principales características de Green In House es que dispone de un servidor API REST utilizado para enviar y recibir datos mediante comunicación HTTP, por lo que es necesario tener acceso a una red LAN o WLAN. Como se quiere que la maceta sea portátil y se pueda transportar fácilmente, la mejor opción es utilizar una red WLAN y conectarse a ella mediante WiFi, pero para ello se necesita contar con las credenciales dicha red. Para permitir al usuario ingresar los datos de dicha red valoré dos opciones:
+    \begin{itemize}
+        \item Utilización de bluetooth desde la App en Flutter: al tener que desarrollar una App para dispositivos móviles para poder ver los registros e interactuar con Green In House, la primera opción que valoré fue incluir una ventana de configuración de red en la aplicación y utilizar comunicación Bluetooth para enviar esta información desde el móvil a la Raspberry Pi. Esta idea finalmente fue descartada debido al uso de Flutter Flow para desarrollar la aplicación multiplataforma, ya que debido a limitaciones del entorno de desarrollo, no permite realizar la comunicación serie con dispositivos Bluetooth.
+        \item Utilización de una pantalla táctil con una App con interfaz gráfica: al no poder utilizar Bluetooth para comunicarme con la Raspberry Pi desde la App móvil, decidí buscar una forma de controlar la Raspberry Pi directamente, y la solución por la que opté fue incluir una pantalla táctil en el sistema y desplegar una App que me permitiese configurar los datos de la red WiFi. Además, esta pantalla táctil se puede utilizar en lineas futuras para desarrollar un visualizador en tiempo real de los valores de los sensores de Green In House.
+    \end{itemize}
     
+    \subsection{Necesidad de incorporar un módulo ADC \textit{(analogic digital converter)} externo}
+    Hasta el momento había trabajado con Arduino en varias ocasiones, pero nunca con Raspberry Pi, por lo que suponía que tenía las mismas posibilidades de lectura de sensores que Arduino. Sin embargo, al intentar leer el sensor analógico FC28 y los LDR \textit{(Light Dependent Resistor)}, me di cuenta de que no podía hacerlo, ya que la Raspberry Pi no contaba con un ADC incorporado, por lo que no podía leer sensores analógicos. Debido a ello, tuve que buscar alternativas para poder leer dicho sensor, y valoré las siguientes opciones:
+    \begin{itemize}
+        \item Sustitución de estos sensores de lectura analógica por otros sensores que me permitiera realizar una lectura digital de ellos, por ejemplo a través de una interfaz I2C \textit{(inter integrated circuits)}.
+        \item Incorporación de un ADC externo para leer sensores analógicos. Para ello, una opción era incoporar un módulo MCP3008, el cual a través de comunicación SPI me permitía leer un total de 8 sensores analógicos. Este módulo ADC está incluido en la librería CircuitPython de Adafruit, la cual ya estaba utilizando para leer el sensor DHT11, por lo que presentaba una manera muy simple de controlarlo.
+    \end{itemize}
+    Finalmente me decanté por la utilización del módulo MCP3008, ya que me permitía incluir 8 sensores analógicos en el sistema y necesitaba por lo menos utilizar un FC28 y varios LDR.
     
+    \subsection{Problemas de permisos de ficheros}
+    Al declarar la raíz del sistema como ruta de instalación de Green In House, es necesario proporcionar permisos de superusuario durante la instalación. Además, es necesario modificar archivos de sistema para poder declarar una dirección IP \textit{(Internet Protocol)} estática para la red WiFi y para poder definir como tareas de arranque de sistema el lanzamiento de la App gráfica de la pantalla táctil, la lectura cíclica de sensores y el despliegue del servidor API REST.
+    Otro problema añadido a esto, es que el archivo WPAConf (el cual guarda las contraseñas de las redes WiFi almacenadas en el sistema), requería permisos de superusuario para modificarlo. La aplicación de la pantalla táctil se lanza con permisos de usuario normal, por lo que fue necesario dar acceso a dicho archivo a todos los usuarios del sistema. Esto presenta un problema de seguridad, pero es tolerable ya que en este archivo únicamente se guardan las credenciales de la red WiFi a la que está conectada Green In House. Si alguien externo ha sido capaz de conseguir acceso a Green In House, lo ha hecho a través de la red WiFi, por lo que ya dispone de dichas credenciales.
+
+    \subsection{Problemas al actualizar el \textit{firmware} de la Raspbery Pi}
+    Un problema con el que me tuve que enfrentar en dos ocasiones fue la actualización del firmware de la Raspberry Pi. Esto fue un problema porque en ambas ocasiones el programa de Green In House dejó de funcionar y de compilar, debido a que necesitaba actualizar las librerías y dependencias para que funcionasen correctamente en la nueva versión.
+    \begin{itemize}
+        \item     La primera vez que me ocurrió este problema fue al actualizar el \textit{firmware} de la versión 5.14 a la 6.21. Esta actualización me obligó a reinstalar todos los entornos virtuales y las dependencias de cada entorno, así como los drivers del adaptador WiFi USB que había instalado anteriormente en el sistema. Como tenía desarrollado un script para la instalación de los entornos virtuales, esta parte no me dio mayor problema. Sin embargo, reinstalar los drivers del adaptador WiFi fue algo más problemático ya que tuve que buscar una versión compatible con la versión 6 de Raspbian y tuve que probar varios drivers en versión beta hasta que encontré uno que me funcionó.
+        \item La segunda vez que me ocurrió este problema fue al actualizar el firmware de la versión 6.21 a la 6.27 y en este caso, fue más complicado resolverlo, ya que el \textit{script} de instalación que tenía desarrollado daba error de \textit{headers}, y esto impedía que pudiera instalar nuevos módulos o actualizar los actuales. Tras intentar borrarlas y reinstalarlas sin éxito un montón de veces y de maneras diferentes, tal y como sugerían en varios foros de internet, el error seguía persistiendo. Finalmente investigando por mi cuenta en los archivos de sistema, descubrí que los archivos de \textit{headers} se almacenaban en la ruta \texttt{/usr/src/} y la versión que tenían estos archivos era 6.21 y no 6.27. Aunque borrase los archivos de \textit{headers} y volviera a reinstalarlas utilizando los comandos de sistema correctos, seguían descargándose la versión 6.21 y el fallo de instalación de los módulos por las \textit{headers} seguía persistiendo. El problema era que al buscar el archivo de \texttt{headers}, intentaba encontrar la versión 6.27 (la cual no existía en el sistema). Debido a eso se me ocurrió probar a hacer una copia a mano de estos archivos de \textit{headers} y cambiar en el nombre de los archivos de 6.21 a 6.27. Finalmente esta solución por fin funcionó y me dejó reinstalar los entornos virtuales y las dependencias necesarias para que el código volviese a funcionar correctamente.
+    \end{itemize}
     
-    \subsection{Problemas durante la instalación del dongle WiFi al no tenerlo incorporado el modelo de placa seleccionado}
-    Modelo seleccionado: 8812BU
+    \subsection{Problemas por la actualización de dependencias internas de  librerías utilizadas}
+    Durante la realización del código otro problema que sufrí fue debido a la actualización de una de las librerías que utilizaba internamente otra librería de mi programa. 
+    En concreto, la librería que me empezó a dar problemas era \textit{connexion}, la cual utilizo en Green In House para al gestión del servidor API REST. Al intentar reinstalar el entorno virtual, me saltaba un error de que no podía regenerar las dependencias de la librería \textit{cryptography} ya que no tenía instalado \textit{rust}. Intenté instalar \textit{rust} pero me decía que ya le tenía instalado en su última versión, por lo que no me dejaba actualizar el paquete, ni terminar de instalar el entorno virtual de Green In House. Como no podía actualizar \textit{rust}, comencé a invertigar el changelog de \textit{cryptography} y descubrí que habían sacado una nueva versión 41 que obligaba a tener instalada la versión 1.5.6 de \textit{rust}. 
+    Creo que el problema de que no pudiera actualizar \textit{rust} puede venir derivado del problema anterior que tuve con las \textit{headers} que no me dejaba actualizarla a la nueva versión del sistema operativo. Finalmente conseguí resolver el problema de dependencias forzando la instalación de la librería \textit{cryptography} en su versión 39.0.0. Tras esto, conseguir realizar la instalación de dependencias en los entornos virtuales y Green In House volvió a funcioanr correctamente.    
     
-    
-    \subsection{Problemas por permisos al manipular desde la aplicación de Green In House ficheros del sistema}
-    (Los que controlan la red a la que está conectado (WPAConf))
-    
-    
-    
-    \subsection{Problemas al actualizar el firmware de la Raspbery Pi}
-    (Perdida de headers y necesidad de resolverlo a mano)
-    (Perdida de drivers de comunicación wifi y necesidad de resolverlo de nuevo)
-    
-    
-    
-    \subsection{Problemas por la actualización de dependencias internas de las librerías utilizadas}
-    (Solucionado especificando la instalación de dicha librería durante la isntalación de Green In House junto con el número de versión con el que funciona correctamente)
-    
-    
-    \subsection{Necesidad de establecer una dirección IP estática por problemas en la resolución de nombres de host en Android para poder realizar las Api-Call}
-    
-    
+    \subsection{Necesidad de establecer una dirección IP estática}
+    Durante las primeras pruebas que realicé tras desplegar el servidor API REST en la Raspberry Pi, accedía a dicho servidor a través de su \textit{hostname}, lo cual me parecía mucho más útil que hacerlo a través de su dirección IP. De esta manera me podía asegurar que cuando el usuario registrase Green In House en su red WiFi, se iba a poder hacer las peticiones a los \textit{endpoint} por nombre de \textit{hostname} y no iba a haber problemas de que se pudiera solapar la IP de Green In House con la de otro dispositivo ya conectado a la red. 
+    Esta solución funcionaba perfectamente desde mi ordenador Windows y desde mi máquina virtual Linux. El problema vino al comenzar a desarrollar la App en Flutter Flow y configurar la realización de las \textit{API calls} a mi servidor API REST utilizando el \textit{hostname} como base de la URL \textit{(Uniform Resource Locator)} de las consultas. La comunicación no funcionaba. Intente realizar una consulta desde el navegador del teléfono para ver si recuperaba el objeto JSON, pero Android no era capaz de resolver las peticiones mediante el hostname. Probé a realizar la misma petición utilizado de base de la consulta la dirección IP asignada a la Raspberry Pi y la consulta se resolvió sin problemas. 
+    Debido a esto, tuve que configurar una IP estática para la red WiFi y desarrollar un nuevo \textit{script} que se encargase de realizar dicha configuración automáticamente durante la instalación de Green In House, para asegurar su correcto funcionamiento. La dirección IP que establecí para Green In House es 192.168.1.240, ya que está dentro del rango por defecto de direcciones privadas de redes de clase C (utilizada comúnmente para los routers de hogares). Elegí utilizar la dirección 240 ya que es una dirección bastante alta que normalmente suele estar fuera del rango de direcciones asignables de los servidores DHCP \textit{(Dynamic Host Configuration Protocol)} incluidos en los routers.
+
     \subsection{Limitaciones en las gráficas ofrecidas por Flutter Flow}
-    
-
-
-
-
-Problemas gordos que han atascado y como los he resulto.
-Cosas que vendría bien saber al principio
-
-Este apartado pretende recoger los aspectos más interesantes del desarrollo del proyecto, comentados por los autores del mismo.
-Debe incluir desde la exposición del ciclo de vida utilizado, hasta los detalles de mayor relevancia de las fases de análisis, diseño e implementación.
-Se busca que no sea una mera operación de copiar y pegar diagramas y extractos del código fuente, sino que realmente se justifiquen los caminos de solución que se han tomado, especialmente aquellos que no sean triviales.
-Puede ser el lugar más adecuado para documentar los aspectos más interesantes del diseño y de la implementación, con un mayor hincapié en aspectos tales como el tipo de arquitectura elegido, los índices de las tablas de la base de datos, normalización y desnormalización, distribución en ficheros3, reglas de negocio dentro de las bases de datos (EDVHV GH GDWRV DFWLYDV), aspectos de desarrollo relacionados con el WWW...
-Este apartado, debe convertirse en el resumen de la experiencia práctica del proyecto, y por sí mismo justifica que la memoria se convierta en un documento útil, fuente de referencia para los autores, los tutores y futuros alumnos.
+    A la hora de realizar la aplicación multiplataforma en Flutter Flow me encontré con que su representación de gráficos es muy limitada. Únicamente me permitía representar valores enteros en el eje Y, si intentaba representar valores decimales, aunque especificase el formato correctamente, el gráfico no se visualizaba. Otra limitación que me encontré es que en el eje X no me permitía utilizar utilizar un formato de fecha corto, ni me permitía representar las fechas para dar una idea aproximada de cuando se había realizado la muestra visualizada. Debido a esto tuve que adaptar los datos que enviaba desde el servidor API REST, enviando únicamente valores enteros para el eje Y, y formatos de fecha larga para el eje X, para que los registros quedasen ordenados por la conversión a formato \textit{datetime} que parece realizar internamente.

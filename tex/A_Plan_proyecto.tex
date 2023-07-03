@@ -1,31 +1,185 @@
 \apendice{Plan de Proyecto Software}
-
+A continuación se procede a especificar detalladamente como se ha realizado el plan de desarrollo software de Green In House.
 \section{Introducción}
-
-
+La planificación es una etapa fundamental en el desarrollo de cualquier proyecto software. A continuación, se expone por qué es importante realizar una planificación adecuada:
+\begin{itemize}
+    \item \textbf{Organización y estructura:} La planificación permite establecer una estructura clara y organizada para el proyecto. Define los objetivos, los recursos necesarios, los plazos de entrega y las tareas específicas que se deben realizar para llevar a cabo el proyecto. Esto ayuda a evitar confusiones y asegura que todos los miembros del equipo estén alineados en cuanto a las metas y el enfoque del proyecto.
+    \item \textbf{Estimación de recursos y tiempos:} La planificación ayuda a determinar los recursos necesarios para llevar a cabo el proyecto, en términos de personal, de software y de presupuesto. Además, permite estimar los tiempos de ejecución de cada tarea y establecer un cronograma realista. Esto es esencial para gestionar eficientemente los recursos y evitar retrasos y sobrecostes.  
+    \item \textbf{Identificación de riesgos y mitigación:} Durante la planificación, se pueden identificar posibles riesgos y obstáculos que podrían surgir durante el desarrollo del proyecto. Esto permite tomar medidas preventivas y establecer estrategias para minimizar su impacto en el cronograma y en la calidad del proyecto. Al anticipar y abordar los riesgos de manera proactiva, se reducen las posibilidades de enfrentar problemas imprevistos en un futuro.  
+    \item \textbf{Asignación de tareas y responsabilidades:} La planificación ayuda a definir claramente las tareas específicas que deben ser realizadas y asignar responsabilidades a los miembros del equipo. Esto promueve la colaboración y la eficiencia, ya que cada persona conoce cuál es su rol en el proyecto y qué se espera de ella. Además, facilita la coordinación entre los miembros del equipo y permite realizar un seguimiento más preciso del progreso de cada tarea.
+    \item \textbf{Control y seguimiento del progreso:} Una vez que el proyecto se ha iniciado, contar con una planificación adecuada facilita el control y seguimiento del progreso. Esto permite comparar el avance real con el planificado, identificar desviaciones y tomar medidas correctivas cuando sea necesario. Esto ayuda a garantizar que se cumplan los objetivos establecidos.
+\end{itemize}
 
 \section{Planificación temporal}
+PLANIFICACION POR SPRINTS
+%TODO
 
 \section{Estudio de viabilidad}
-
-\subsection{Viabilidad económica}
-
-\subsection{Viabilidad legal}
-
-\subsection{potenciales clientes}
-
-Green In House principalmente está diseñado y pensado para niños, pero también puede ser útil para los adultos y hay varias segmentaciones de clientes que podrían encontrar este producto interesante:
-
-\textbf{Jardineros aficionados}: Los adultos que disfrutan del jardín y quieren aprender más sobre el cuidado de las plantas podrían beneficiarse de las características interactivas y educativas de Green In House.
-
-\textbf{Amantes de la tecnología}: Aquellos que están interesados en la tecnología, especialmente la tecnología que se integra con la vida cotidiana de formas nuevas e interesantes, pueden ver el valor en un producto como Green In House.
-
-\textbf{Profesores y educadores}: Los profesores podrían utilizar Green In House como una herramienta educativa en las aulas para enseñar sobre ciencias naturales, ecología y biología, o para fomentar la responsabilidad y el cuidado del medio ambiente.
-
-\textbf{Padres}: Los padres que quieren proporcionar experiencias educativas prácticas para sus hijos en casa podrían estar interesados en Green In House.
-
-\textbf{Personas que viven en espacios reducidos}: Para aquellos que viven en apartamentos o casas sin jardín, Green In House ofrece una forma de tener y cuidar plantas en espacios interiores.
-
-\textbf{Empresas de bienestar en el trabajo}: Las empresas que buscan mejorar el bienestar de sus empleados pueden estar interesadas en utilizar Green In House para animar a los empleados a tomar descansos activos, cuidar una planta y desconectar de su trabajo por un tiempo.
-
-\textbf{Asistentes de terapia ocupacional y psicólogos}: Green In House podría ser utilizado como una herramienta en la terapia ocupacional o en el tratamiento de trastornos de atención, enseñando a los pacientes a concentrarse en tareas, a ser conscientes del momento presente y a cuidar de algo más.
+Para poder determinar si fabricar a gran escala Green In House podría ser rentable, o no, es necesario realizar correctamente un estudio de viabilidad.
+    \subsection{Viabilidad económica}
+    El estudio de viabilidad económica es una etapa fundamental para determinar la rentabilidad y viabilidad financiera del proyecto Green In House. Este estudio permitirá evaluar los costos y beneficios asociados al desarrollo y funcionamiento de Green In House.
+    Para llevar a cabo el análisis económico, es necesario considerar diferentes aspectos:
+        \subsubsection{Costes}
+        Se deben estimar los costes asociados al desarrollo del software, la adquisición del hardware (ordenador, dispositivo movil, impresoras 3D, Raspberry Pi, sensores y componentes electrónicos), así como los gastos de diseño y construcción de la maceta. Además, se deben incluir los costos de personal (un desarrollador), los costes de alquiler de oficina, los costes de servicios como luz, gas e internet y ver como amortizar dichos gastos en el precio de las macetas educativas.
+            \subsubsubsection{Costes de personal}
+            El proyecto lo realizará un desarrollador, a tiempo completo durante 12 meses, teniendo en cuenta el siguiente salario estimado:
+            \begin{table}[H]
+                \centering
+                \caption{Costes de personal}
+                \begin{tabular}{|l|c|}
+                    \hline
+                    Concepto & Coste \\
+                    \hline
+                    Salario mensual neto & 1220€ \\
+                    Retención IRPF (15\%) & 330€ \\
+                    Seguridad Social (29.9\%) & 650€ \\
+                    \hline
+                    Salario mensual bruto & 2200€ \\
+                    \hline
+                    Total 12 meses & 26400€ \\
+                    \hline
+                \end{tabular}
+            \end{table}
+            En el apartado de seguridad social se han sumado los costes en contingencias comunes ,desempleo, garantía salarial y la formación profesional.
+            \subsubsubsection{Costes de hardware}
+            En este apartado pondremos los costes que han sido necesarios, para desarrollar el dispositivo hardware que hemos necesitado para este proyecto. Considerando que se amortiza en 4 años con una venta de 1000 macetas educativas al año.
+            \begin{table}[H]
+                \centering
+                \caption{Costes de hardware}
+                \begin{tabular}{|l|c|c|c|c|}
+                    \hline
+                    Concepto & Coste & Cantidad & Coste total & Coste amortizado anual \\
+                    \hline
+                    Dispositivo móvil & 400€ & 1 & 400€ & 0.1€ \\
+                    Ordenador & 2000€ & 1 & 2000€ & 0.5€ \\
+                    Impresora 3D & 1000€ & 5 & 5000€ & 1.25€ \\
+                    \hline
+                    Total & & & 6600€ & 1.85€ \\
+                    \hline
+                \end{tabular}
+            \end{table}
+            \subsubsubsection{Costes de software}
+            En este apartado se definen los costes de las licencias de software que no son gratuitos. Consideraremos una amortización  de 4 años.
+            \begin{table}[H]
+                \centering
+                \caption{Costes de software}
+                \begin{tabular}{|l|c|c|}
+                    \hline
+                    Concepto & Coste & Coste amortizado anual \\
+                    \hline
+                    Windows 10 Pro & 200€ & 50€ \\
+                    Flutter flow (suscripción) & 30€ al mes & 360€ \\
+                    \hline
+                    Total & 230€ & 410€ \\
+                    \hline
+                \end{tabular}
+            \end{table}
+            \subsubsubsection{Costes varios}
+            En este apartado se definen el resto de gastos del proyecto.
+            \begin{table}[H]
+                \centering
+                \caption{Costes varios}
+                \begin{tabular}{|l|c|c|c|}
+                    \hline
+                    Concepto & Coste & Cantidad & Coste total \\
+                    \hline
+                    Memoria impresa & 20€ & 1 & 20€ \\
+                    Alquiler de oficina & 300€ & 12 & 3600€ \\
+                    Internet & 40€ & 12 & 480€ \\
+                    Electricidad & 300€ & 12 & 3600€ \\
+                    Gas & 100€ & 12 & 1200€ \\
+                    \hline
+                    Total & & & 8900€ \\
+                    \hline
+                \end{tabular}
+            \end{table}
+            \subsubsubsection{Costes de producción por maceta}
+            En este apartado se definen los costes de producción de una maceta, sumando la amortización de gastos.
+            \begin{table}[H]
+                \centering
+                \caption{Costes de producción por maceta}
+                \begin{tabular}{|l|c|c|c|}
+                    \hline
+                    Concepto & Coste & Cantidad & Coste total \\
+                    \hline
+                    Raspberry Pi & 60€ & 1 & 60€ \\
+                    Tarjeta SD & 7€ & 1 & 7€ \\
+                    Batería & 4€ & 1 & 4€ \\
+                    Pantalla táctil & 12€ & 1 & 12€ \\
+                    Cable HDMI & 1,5€ & 1 & 1,5€ \\
+                    Cable USB & 0,5€ & 1 & 0,5€ \\
+                    Sensor FC28 & 3€ & 1 & 3€ \\
+                    Sensor DHT11 & 3€ & 1 & 3€ \\
+                    Sensor BH1750 & 2€ & 2 & 4€ \\
+                    Cableado & 0,3€ metro & 5 & 1,5€ \\
+                    Plástico maceta & 1€ kilo & 1 & 1€ \\
+                    Impresión maceta & 0,3€ KWh & 5 & 1,5€ \\
+                    \hline
+                    Total & & & 99,50€ \\
+                    \hline
+                    Amortización de hardware & 4€ & 1 & 1,85€ \\
+                    Amortización de software & 0,41€ & 1 & 0,41€ \\
+                    Amortización de personal & 26,4€ & 1 & 26,4€ \\
+                    Amortizaciones varias & 8,9€ & 1 & 8,9€ \\
+                    \hline
+                    Total con amortizaciones & & & 137,06€ \\
+                    \hline
+                \end{tabular}
+            \end{table}
+            \subsubsubsection{Costes totales}
+            En este apartado se realiza el sumatorio total de todos los gastos anuales estimando la producción y venta de 1000 macetas educativas a lo largo del año.
+            \begin{table}[H]
+                \centering
+                \caption{Costes totales}
+                \begin{tabular}{|l|r|}
+                    \hline
+                    Concepto & Coste \\
+                    \hline
+                    Personal & 26,400€ \\
+                    Hardware & 6,600€ \\
+                    Software & 410€ \\
+                    Varios & 8,900€ \\
+                    Producción 1000 macetas & 99,500€ \\
+                    \hline
+                    Total anual & 141,810€ \\
+                    \hline
+                \end{tabular}
+            \end{table}
+            \subsubsubsection{Conclusión de precio de la maceta educativa}
+            Amortizando los costes de personal, de hardware, de software y de varios, en cada una de las macetas, sale que el precio para no perder dinero vendiendo las 1000 macetas estimadas al año, tendría que ser 137,06€. El objetivo de producir estas macetas, es obtener más beneficios a parte del salario que se va a cobrar como desarrollador para poder reinvertirlo en mejorar la empresa, por lo que habría que venderlas a un mayor coste. En estos costes, no están incluidos los gastos de envío, ya que dependerán de la zona a la que halla que realizar el envío y se facturarán aparte. El precio estimado de Green In House sería de 180€. 
+            Gracias a su versatilidad de software se podrían construir modelos que contengan varias plantas en un mismo macetero con sensores independientes para cada una, sin elevar demasiado los costes, ya que los mayores costes vienen del precio de la Raspberry Pi, la cual puede leer muchísimos más sensores de los que se están utilizando. Además, el precio actual de la Raspberry Pi está muy alto debido a los actuales problemas con la distribución de semiconductores, ya que su precio original era de 30€.
+        \subsubsection{Beneficios}
+        Es necesario estimar los ingresos potenciales del proyecto. Esto puede incluir la venta de kits de invernadero a los usuarios, la generación de ingresos a través de la aplicación móvil (por ejemplo, mediante publicidad o suscripciones premium) o la prestación de servicios de consultoría en jardinería.
+        E l beneficio de la venta de  Green in House vendiéndola por 180€, descontando los 137,06€ que nos costaría fabricarla sería de 42,94€ unidad por 1000 que estimamos que se podría vender sería de 42940€anuales
+    
+        \subsubsection{Análisis de mercado}
+        Se debe realizar un estudio de mercado para evaluar la demanda potencial de este tipo de invernadero inteligente. Esto implica analizar el tamaño del mercado, identificar a los potenciales clientes y evaluar la competencia existente.
+            \subsubsubsection{Potenciales clientes}
+            Green In House principalmente está diseñado y pensado para niños, pero también puede ser útil para los adultos y hay varias segmentaciones de clientes que podrían encontrar este producto interesante:
+            \begin{itemize}      
+                \item \textbf{Jardineros aficionados}: Los adultos que disfrutan del jardín y quieren aprender más sobre el cuidado de las plantas podrían beneficiarse de las características interactivas y educativas de Green In House.
+                \item \textbf{Amantes de la tecnología}: Aquellos que están interesados en la tecnología, especialmente la tecnología que se integra con la vida cotidiana de formas nuevas e interesantes, pueden ver el valor en un producto como Green In House.
+                \item \textbf{Profesores y educadores}: Los profesores podrían utilizar Green In House como una herramienta educativa en las aulas para enseñar sobre ciencias naturales, ecología y biología, o para fomentar la responsabilidad y el cuidado del medio ambiente.
+                \item \textbf{Padres}: Los padres que quieren proporcionar experiencias educativas prácticas para sus hijos en casa podrían estar interesados en Green In House.
+                \item \textbf{Personas que viven en espacios reducidos}: Para aquellos que viven en apartamentos o casas sin jardín, Green In House ofrece una forma de tener y cuidar plantas en espacios interiores.
+                \item \textbf{Empresas de bienestar en el trabajo}: Las empresas que buscan mejorar el bienestar de sus empleados pueden estar interesadas en utilizar Green In House para animar a los empleados a tomar descansos activos, cuidar una planta y desconectar de su trabajo por un tiempo.
+                \item \textbf{Asistentes de terapia ocupacional y psicólogos}: Green In House podría ser utilizado como una herramienta en la terapia ocupacional o en el tratamiento de trastornos de atención, enseñando a los pacientes a concentrarse en tareas, a ser conscientes del momento presente y a cuidar de algo más.
+            \end{itemize}
+            \subsubsubsection{Competidores}
+            Actualmente en el mercado ya se ofrecen diversas alternativas a este producto, aunque todas tienen un enfoque más autónomo puramente dicho, lo cual en Green In House se ha eliminado esa parte de autosuficiencia, para involucrar lo máximo posible al usuario  en el desarrollo de su planta (en este caso el niño):
+            \begin{itemize}      
+                \item \textbf{Click and Grow :} es un jardín interior inteligente que permite cultivar plantas en casa. Viene con cápsulas de semillas que se insertan en el jardín inteligente para un crecimiento sin problemas. Los sensores y el sistema automatizado de riego aseguran que las plantas reciban la cantidad adecuada de agua, luz y nutrientes. Los precios varían desde alrededor de 100€ hasta 200€ dependiendo del tamaño del jardín inteligente.
+                \item \textbf{AeroGarden :} es otro sistema de jardín interior inteligente que permite cultivar plantas en interiores durante todo el año. También utiliza semillas en cápsulas y tiene un sistema de iluminación LED ajustable y un panel de control para recordar cuándo agregar agua y nutrientes. Los precios oscilan entre 100€ y 300€ dependiendo del modelo.
+                \item \textbf{Planty Square :} es un jardín modular inteligente que permite a los usuarios cultivar varias plantas a la vez. Cada módulo puede cultivar una planta y los módulos se pueden conectar entre sí para formar un jardín más grande. Cuenta con una aplicación que envía notificaciones para regar las plantas. El precio ronda los 100€ .
+                \item \textbf{SproutsIO :} otro sistema es un jardín interior de alta tecnología que permite cultivar plantas sin tierra. Utiliza la hidroponía y la aeroponía para cultivar plantas y tiene una aplicación que permite a los usuarios monitorear y controlar su jardín desde su teléfono. El precio es más elevado, alrededor de 800€.
+            \end{itemize}
+            Es importante aclarar que estos precios pueden variar por región debido a factores como los impuestos, los costos de envío y la tasa de cambio. Todos estos productos tienen en común la idea de utilizar la tecnología para facilitar el cultivo de plantas en interiores, pero cada uno tiene sus propias características únicas, al igual que Green In House. 
+    
+    
+    \subsection{Viabilidad legal}
+    %TODO
+    ESTUDIO DE LICENCIAS SOFTWARE
+    (LICENCIAS MIT / APACHE)
+    CC-by-nc
+    
+    

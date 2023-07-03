@@ -1,170 +1,168 @@
 \capitulo{4}{Técnicas y herramientas}
+A continuación se describen 
 
-\section{Herraientas}
+\section{Técnicas y metodologías}
+Para poder realizar de manera óptima y eficiente el diseño de Green In House, con un carácter iterativo y con posibilidades de ampliar sus funcionalidades continuamente en cada iteración, se ha recurrido a la utilización de patrones de diseño y a una metodología ágil. 
 
-    \subsection{Configuración del sistema operativo Raspbian editando archivos de sistema}
-    Para poder desplegar la aplicación de Green In House de manera automática al encender las Raspberry y poder configurar los parámetros del adaptadr WiFi, ha sido necesario modificar los siguiente ficheros de sistema: 
-    \begin{itemize}
-        \item \textbf{Cron y Crontab : } Estos archivos se encargan de la ejecución periódica de tareas por parte del sistema operativos. Se ha utilizado esta funcionalidad para desplegar la aplicación al completo durante el arranque de Raspbian.       
-        \item \textbf{/etc/network/interfaces : } En este archivo se almacena la configuración de las interfaces de red habilitadas en la Raspberry Pi. En mi caso, la interfaz WiFi está etiquetada como Wlan0.
-        \item \textbf{/etc/dhcpcd.conf : } Almacenamiento del DHCP o de la IP estática definida para cada interfaz de red. En mi caso, he definido la IP stática 192.168.1.240 para la interfaz Wlan0.
-        \item \textbf{/etc/wpa\_supplicant/wpa\_supplicant.conf : } Almacenamiento de los datos de las redes WiFi conocidas. En este archivo se almacenarán con un formato determinado los datos del SSID y clave de la red WiFi que introduzca el usuario.  
-    \end{itemize}
-    La modificación de cualquiera de estos archivos requiere que se reinicie el sistema para que tengan efecto.
-
-    \subsection{Definición de scripts en bash para realizar la instalación y despliegue automático de todo lo necesario para hacer funcionar Green In House}
-    Green In House cuenta con varios scripts Bash desarrollados para facilitar las tareas de instalación, despliegue, ejecución y parada de la aplicación.
-    \begin{itemize}    
-        \item Instalación de la aplicación. Tanto la parte de backend como de frontend. Estos scripts son necesarios ejecutarlos como superusuario, ya que necesitan generar y modificar archivos dentro de los directorios del sistema.    
-        \item Generación de entornos virtuales de Python con la instalación de sus correspondientes dependencias para que el programa pueda ejecutarse.    
-        \item Configuración de una IP estática en la Raspberry Pi para que el servidor Api-Rest se lance siempre en la misma dirección y pueda ser encontrado por la aplicación multiplataforma.    
-        \item Despliegue de cambios en el código de la aplicación.    
-        \item Lectura cíclica de los sensores activos en el sistema y su correspondiente generación de lineas en la base de datos    
-        \item Despliegue del servidor Api-Rest para poder interactuar desde sistemas externos con los datos almacenados en la base de datos    
-        \item Lanzamiento automático de la aplicación completa al arrancar el sistema operativo de la Raspberry Pi mediante el uso de crontab.    
-        \item Parada y arranque de los diferentes procesos en ejecución que controlan el funcionamiento de Green In House.    
+    \subsection{Patrones de Diseño}
+    Los patrones de diseño \cite{wiki:patrones_de_diseño} son soluciones probadas a problemas comunes que nos encontramos en el diseño de software. Son como plantillas que se pueden aplicar en diferentes situaciones, proporcionando un esquema que puede ayudar a resolver un problema en particular. Básicamente son una forma de reutilizar conocimientos y experiencias previas para hacer el código de una aplicación más eficiente, mantenible y comprensible.
+    En Green In House se ha hecho uso de los siguientes patrones de diseño, los cuales están más detallados en el apartado de anexos:
+    \begin{itemize}                
+        \item Patrón de diseño \textbf{MVC} (Modelo-Vista-Controlador)
+        \item Patrón de diseño \textbf{Adaptador}
+        \item Patrón de diseño \textbf{Factoría}
+        \item Patrón de diseño \textbf{Estrategia}
+        \item Patrón de diseño \textbf{Plantilla}
+        \item Patrón de diseño \textbf{Fachada}
+        \item Patrón de diseño \textbf{Singleton}
     \end{itemize} 
-    Estos scrips están alojados en el directorio scrips del código de Green In House.
+
+    \subsection{Scrum: Metodología de gestión ágil}
+    Scrum \cite{wiki:scrum} es un marco de trabajo de metodología ágil ampliamente utilizado en el desarrollo de software. Se basa en principios colaborativos, flexibilidad y entrega incremental. El objetivo principal de Scrum es permitir a los equipos de trabajo desarrollar productos de alta calidad de manera eficiente. Además permite realizar una entrega temprana y continua de valor al cliente, a la vez que se fomenta la mejora continua del proceso de desarrollo.
+    Scrum se basa en un enfoque iterativo e incremental, en el que el trabajo se divide en ciclos continuos de desarrollo llamados \textit{sprints}. Cada sprint tiene una duración fija, generalmente de 1 a 4 semanas, y al final de cada sprint se entrega un incremento funcional del producto. Esta metodología permite ajustar y cambiar los requisitos a medida que se realizan los incrementos y se obtiene retroalimentación del cliente.
+    Durante el \textit{sprint}, se llevan a cabo reuniones diarias llamadas \textit{Daily Scrum}, en las cuales el equipo comparte el progreso realizado, identifica posibles problemas y planifica las tareas para el día. También se realizan reuniones de planificación de \textit{sprint}, revisión de \textit{sprint} y retrospectivas, que ayudan al equipo a refinar y mejorar continuamente su trabajo.
+    El equipo de desarrollo de Scrum se organiza de manera autónoma y autoorganizada. No hay jerarquías rígidas, sino que se fomenta la colaboración y la toma de decisiones conjunta. El equipo se compone de roles claramente definidos:
+    \begin{itemize}
+      \item \textbf{Product Owner:} es el responsable de representar los intereses del cliente y definir los requisitos del producto. También se encarga de mantener el \textit{product backlog}, priorizar las tareas y asegurar que se cumplan las expectativas del cliente.
+      \item \textbf{Scrum Master:} es el facilitador del equipo Scrum. Su rol es asegurar que se sigan los principios y prácticas de Scrum, eliminar problemas y garantizar un ambiente de trabajo colaborativo y productivo.
+      \item \textbf{Equipo de Desarrollo:} está formado por profesionales que llevan a cabo el trabajo de desarrollo del producto. Son multidisciplinares y autorganizados, asumiendo la responsabilidad de entregar un incremento de software funcional al final de cada \textit{sprint}.
+    \end{itemize}
+    \imagen{scrum}{Resumen de funcionamiento de metodología Scrum}{.7}
+
+\section{Herramientas}
+Green In House no es una simple maceta, si no que es un proyecto que aglutina una gran cantidad de funcionalidades y tecnologías diferentes, las cuales han sido desarrolladas utilizando las siguientes herramientas.
 
     \subsection{Venv: Entornos Virtuales en Python}
-    Uno de los aspectos más críticos al desarrollar proyectos en Python es la gestión de dependencias. Con frecuencia, diferentes proyectos requieren diferentes versiones de las mismas bibliotecas. La instalación global de dichas bibliotecas se hace inviable, ya que puede generar conflictos, debido a que determinadas versiones pueden integra métodos que otras no, o requerir otra sintaxis, etc. Debido a esto, los entornos virtuales de Python, o `venv`, desempeñan un papel crucial.
-    El módulo `venv` de Python proporciona un soporte para crear entornos virtuales ligeros con sus propios directorios de sitio, aislados del intérprete Python global del sistema. Cada entorno virtual tiene su propio intérprete de Python, lo que permite instalar y gestionar paquetes de Python independientes para cada proyecto.
-        \subsubsection{Utilización de Venv en Green In House}
-        Green In House cuenta con 3 venvs diferentes, de los cuales 2 están destinados al backend y 1 al frontend. 
-        \begin{itemize}
-            \item \textbf{venv de backend para lectura de sensores:} Este entorno virtual está destinado principalmente a gestionar el uso de la librería ADAFruit para leer los sensores electrónicos y la librería SQLAlchemy para almacenar los datos de los registros en la base de datos.
-            \item \textbf{venv de backend para Api-Rest:} Este entorno virtual está destinado principalmente a gestionar el uso de la librería Open-Api, desplegando un servidor Api-Rest, el cual gestiona las peticiones de datos externas e interactúa con la base de datos almacenando y recogiendo información mediante el uso de la librería SQLAlchemy.
-            \item \textbf{venv de frontend para App gráfica de pantalla táctil:} Este entorno virtual está destinado principalmente a gestionar el uso de la librería TKinter, la cual se utiliza para desplegar una aplicación gráfica que permite al usuario interactuar con la Raspberry Pi e introducir los datos de la red WiFi de su hogar, para conectar el servidor Green In House a su red. También permite apagar y reiniciar el sistema.
-        \end{itemize}
+    Uno de los aspectos más críticos al desarrollar proyectos en Python es la gestión de dependencias. Con frecuencia, diferentes proyectos requieren diferentes versiones de las mismas librerías. La instalación global de dichas librerías se hace inviable, ya que puede generar conflictos, debido a que determinadas versiones pueden integrar métodos que otras no, o requerir otra sintaxis, etc. Debido a esto, los entornos virtuales de Python, o \textit{venv} desempeñan un papel crucial. \cite{wiki:venv}
+    El módulo \textit{venv} de Python proporciona un soporte para crear entornos virtuales ligeros con sus propios directorios de sitio, aislados del intérprete Python global del sistema. Cada entorno virtual tiene su propio intérprete de Python, lo que permite instalar y gestionar paquetes de Python independientes para cada proyecto.
 
-    \subsection{SQLAlchemy: Librería para implementación de Base de datos en Python y uso mediante objetos (ORM)}
-    SQLAlchemy es una biblioteca de Python que facilita la comunicación entre programas desarrollados en Python y las bases de datos SQL. Proporciona un conjunto completo de operaciones de persistencia de datos de alto nivel, así como un marco de abstracción de base de datos de SQL completo para aportar una mayor flexibilidad. 
+    \subsection{SQLAlchemy: librería de base de datos en Python}
+    SQLAlchemy \cite{wiki:sqlalchemy} es una librería de Python que facilita la comunicación entre programas desarrollados en Python y las bases de datos SQL. Proporciona un conjunto completo de operaciones de persistencia de datos de alto nivel, así como un marco de abstracción de base de datos de SQL completo para aportar una mayor flexibilidad. 
     \begin{itemize}
-        \item \textbf{ORM (Object Relational Mapper):} Una de las características más poderosas de SQLAlchemy es su ORM (Object-Relational Mapping). Un ORM es una técnica de programación que facilita la conversión de datos entre sistemas incompatibles (en este caso, entre objetos Python y tablas SQL). En otras palabras, un ORM nos permite trabajar con bases de datos SQL en un lenguaje orientado a objetos, como Python. Esto significa que con el ORM de SQLAlchemy, se pueden crear clases en Python que se correspondan directamente con las tablas de la base de datos. Cada instancia de una clase representa una fila en la tabla correspondiente. Esta correspondencia entre objetos Python y tablas SQL nos permite interactuar con los datos de la base de datos de una manera más intuitiva y similar a como normalmente lo hace python.
-        \item \textbf{Abstracción de Base de Datos:} Además del ORM, SQLAlchemy también proporciona un nivel de abstracción que nos permite cambiar entre diferentes sistemas de bases de datos SQL con pocos o ningún cambio en el código. Esto es útil si en un futuro decidiese cambiar la base de datos subyacente de Green In Hosue o si quisiese hacer que el código sea más general para que funcione con diferentes sistemas de bases de datos.
+        \item \textbf{ORM (Object Relational Mapper):} una de sus características más poderosas es su ORM (Object-Relational Mapping). Un ORM es una técnica de programación que facilita la conversión de datos entre sistemas incompatibles (en este caso, entre objetos Python y tablas SQL). En otras palabras, un ORM nos permite trabajar con bases de datos SQL en un lenguaje orientado a objetos, como Python. Esto significa que con el ORM de SQLAlchemy, se pueden crear clases en Python que se correspondan directamente con las tablas de la base de datos. Cada instancia de una clase representa una fila en la tabla correspondiente. Esta correspondencia entre objetos Python y tablas SQL nos permite interactuar con los datos de la base de datos de una manera más intuitiva y similar a como normalmente lo hace Python.
+        \item \textbf{Abstracción de base de datos:} además del ORM, también proporciona un nivel de abstracción que nos permite cambiar entre diferentes sistemas de bases de datos SQL con pocos o ningún cambio en el código. Esto es útil si en un futuro se decidiese cambiar la base de datos subyacente de Green In Hosue o quisiese hacer el código más general para que funcione con diferentes sistemas de bases de datos.
     \end{itemize}
-        \subsubsection{Utilización de SQLAlchemy en Green In House}
-        En el caso concreto de Green In House se utiliza SQLAlchemy para interactuar con una base de datos SQLite3 definida en un archivo alojado en la raiz del sistema. Concretamente en la ruta /GreenInHouse/db/GreenInHouseBackend.sqlite3.db
-        En este archivo están alojadas las tablas con las que trabaja Green In House, las cuales son:
-        \begin{itemize}
-            \item Sensores
-            \item Registros Sensores
-            \item Plantas
-            \item Tipos Plantas
-            \item Sensores Plantas
-            \item Consejos Plantas
-            \item Consejos Tipo Plantas
-        \end{itemize}
-        Estas tablas están definidas dentro del código fuente de la aplicación en el directorio components/backend/backen/data/db/result
-        Cada una de estas tablas tiene implementada una clase intermediaria propia que se encarga de construir el objeto python con los datos de las filas de su tabla correspondiente, y de almacenar los datos en las tabals correspondientes de los objetos python creados por la aplicación. Estos intermediarios están definidas dentro del código fuente de la aplicación en el directorio components/backend/backen/data/db/resultset
 
-    \subsection{Open-Api: Librería para implementación de Api-Rest en Python}
-    Open-Api, anteriormente conocido como Swagger, es una especificación para archivos de definición de APIs REST. Estos archivos de definición pueden estar escritos en YAML o JSON y describen los detalles de la API REST, entre los cuales por ejemplo se encuentran:
+    \subsection{OpenAPI: librería de API REST en Python}
+    OpenAPI \cite{wiki:openapi}, anteriormente conocido como Swagger, es una especificación para archivos de definición de API REST. Estos archivos de definición pueden estar escritos en YAML o JSON y describen los detalles de la API REST, entre los cuales por ejemplo se encuentran:
     \begin{itemize}
-        \item Endpoints disponibles
-        \item Métodos HTTP soportados
-        \item Parámetros de las solicitudes
-        \item Respuestas esperadas 
-        \item Modelos de los datos a comunicar 
+        \item Endpoints disponibles.
+        \item Métodos HTTP soportados.
+        \item Parámetros de las solicitudes.
+        \item Respuestas esperadas.
+        \item Modelos de los datos a comunicar.
     \end{itemize}
-    La especificación OpenAPI se utiliza para documentar y describir APIs REST de forma estandarizada y fácil de entender tanto para las personas como para las máquinas. Esto facilita el desarrollo, la prueba, y la integración de servicios basados en APIs. Un beneficio adicional de la especificación OpenAPI es que puede generar automáticamente una interfaz de usuario interactiva, permitiendo a los usuarios o desarrolladores explorar y probar la API de manera intuitiva.
+    La especificación OpenAPI se utiliza para documentar y describir APIs REST de forma estandarizada y fácil de entender, tanto para las personas, como para las máquinas. Esto facilita el desarrollo, la prueba, y la integración de servicios basados en APIs. Un beneficio adicional de la especificación OpenAPI es que puede generar automáticamente una interfaz de usuario interactiva, permitiendo a los usuarios o desarrolladores explorar y probar la API de manera intuitiva.
         \subsubsection{Microframework Connexion}
         Green In House utiliza el Microframework Connexion, el cual mapea el
-        API especificado en el archivo spec.yml con OpenAPI en Python, facilitando la creación de los endpoints para que otras aplicaciones puedan conectar con el servicio, el cual es lanzado en el puerto 5000. Para poder acceder a estos endpoints hay que hacerlo utilizando de base la siguiente url: http://192.168.1.240:5000/api/v1/
-        \subsubsection{JSON: Archivos con formato específico para almacenar y compartir datos}
-        JSON, que significa JavaScript Object Notation, es un formato ligero de intercambio de datos. JSON es un formato de texto que es completamente independiente del lenguaje pero utiliza convenciones que son familiares para los programadores de diversos lenguajes como C, C++, C\#, Java, JavaScript, Perl, Python, y muchos otros.
+        API especificado en el archivo \texttt{spec.yml} con OpenAPI en Python, facilitando la creación de los endpoints para que otras aplicaciones puedan conectar con el servicio, el cual por defecto es lanzado en el puerto 5000. Para poder acceder a estos endpoints hay que hacerlo utilizando de base la siguiente url: \texttt{http://192.168.1.240:5000/api/v1/}
+        \subsubsection{JSON: Archivos de datos con formato específicos}
+        JSON, que significa JavaScript Object Notation, es un formato ligero de intercambio de datos. JSON es un formato de texto que es completamente independiente del lenguaje pero utiliza convenciones que son familiares para los programadores de diversos lenguajes como C, C++, C\#, Java, JavaScript, Perl, Python, y muchos otros. Se utiliza como sistema de almacenaje y compartición de datos entre diferentes aplicaciones, al tener un formato independiente de la aplicación.
             \subsubsubsection{Formato de JSON}
             Un objeto JSON es un conjunto de pares clave-valor rodeado por llaves \{\}. Las claves son cadenas de caracteres y los valores pueden ser:
             \begin{itemize}
-                \item Números
-                \item Cadenas de caracteres
-                \item Booleanos (true o false)
-                \item Otros objetos JSON
-                \item Arrays de cualquiera de las opciones anteriormente mencionadas. Un array JSON es una lista de valores rodeada por corchetes [].
+                \item Números.
+                \item Cadenas de caracteres.
+                \item Booleanos (true o false).
+                \item Otros objetos JSON.
+                \item Arrays de cualquiera de las opciones anteriormente. mencionadas. Un array JSON es una lista de valores rodeada por corchetes [].
             \end{itemize}
-        \subsubsection{Utilización de OpenAPI en Green In House}
-        En el caso concreto de Green In House la epecificación OpenApi se realiza el en el archivo components/backend/backend/openapi/spec.yml. Se utiliza OpenAPI para definir los endpoints que permiten crear y leer los datos de las siguientes clases mediante objetos JSON:
-        \begin{itemize}
-            \item Sensores
-            \item Registros Sensores
-            \item Plantas
-            \item Tipos Plantas
-            \item Sensores Plantas
-            \item Consejos Plantas
-            \item Consejos Tipo Plantas
-        \end{itemize}
-        Las clases que manejan estos endpoints están definidas en la ruta components/backend/backend/presentacion/rest
 
-    \subsection{TKinter:  Librería para implementación de interfaces gráficas en Python}
-    Tkinter es una biblioteca de Python utilizada para el desarrollo de interfaces gráficas de usuario (GUI). Es la interfaz estándar de Python para el kit de herramientas Tk, y es tanto simple como eficaz para la creación de una variedad de programas. Tkinter proporciona un poderoso conjunto de widgets de interfaz de usuario:
+    \subsection{TKinter:  librería de interfaces gráficas en Python}
+    TKinter \cite{wiki:tkinter} es una librería de Python utilizada para el desarrollo de interfaces gráficas de usuario (GUI). Es la interfaz estándar de Python para el kit de herramientas Tk, y es tanto simple como eficaz para la creación de una variedad de programas. TKinter proporciona un poderoso conjunto de widgets de interfaz de usuario:
     \begin{itemize}
-        \item Botones
-        \item Cajetines de texto
-        \item Listas
-        \item Barras de desplazamiento
-        \item Etiquetas
-        \item Menús 
-        \item Ventanas emergentes
-        \item Frames
+        \item Botones.
+        \item Cajetines de texto.
+        \item Listas.
+        \item Barras de desplazamiento.
+        \item Etiquetas.
+        \item Menús.
+        \item Ventanas emergentes.
+        \item Frames.
     \end{itemize}
-    Todo esto permite crear interfaces de usuario altamente personalizables y funcionales.    
-        \subsubsection{Utilización de Tkinter en Green In House}
-        En el caso concreto de Green In House la librería TKinter se utiliza para definir una aplicación gráfica multiventana que permite introducir en el sistema el nombre de la red wifi del usuario y la contraseña de dicha red wifi, así como reiniciar y apagar la maceta.
-        El código de esta aplicación está definido en la ruta components/frontend/forntend/app/rpi
+    Todo esto permite crear interfaces de usuario altamente personalizables y funcionales.  
+    \imagen{app_tkinter}{Captura de pantalla de la app gráfica de Green In House desarrollada en TKinter}{1}
 
-    \subsection{Adafruit: Librería para interactuación con sensores y actuadores eletrónicos implementada en Python}
-    
-       \subsubsection{MCP3008: Conversor de 8 señales analógicas a digital (ADC)}
-    
-    
-        \subsubsection{DHT11: Sensor de humedad y temperatura ambiente}
-    
-    
-        \subsubsection{FC28: Sensor de humedad de tierra de la maceta}
-    
-    
-        \subsubsection{LDR: Sensor de luminosidad ambiente}
-        Un LDR, o fotoresistor es un dispositivo que varía su resistencia en función de la cantidad de luz que incide sobre él. Sin embargo, es importante tener en cuenta que un LDR no mide directamente los lúmenes, la cual es una unidad de flujo luminoso. Un LDR mide la intensidad de luz de una manera no lineal y no opera en una frecuencia en particular.
+    \subsection{Adafruit - CircuitPython: librería de sensores y actuadores en Python}
+    Adafruit CircuitPython \cite{wiki:adafruit_circuit_python} es una implementación de Python diseñada para simplificar la experimentación con hardware de bajo coste. CircuitPython es una implementación de Python 3 diseñada para microcontroladores. Esta librería está desarrollada por Adafruit Industries, una empresa reconocida en el mundo de la electrónica y hardware de código abierto.    
+    Una de las características clave de CircuitPython es su simplicidad. Proporciona una excelente plataforma para aquellos que están empezando a programar y trabajar con hardware. CircuitPython es capaz de interactuar directamente con el hardware. Esto incluye leer entradas y salidas digitales, utilizar la comunicación I2C y SPI, y controlar y leer sensores y actuadores. Esto permite a los desarrolladores y estudiantes explorar la interacción entre el software y el hardware de una manera intuitiva y fácil de entender.
+    % \begin{itemize}
+    %     \item \textbf{MCP3008:} conversor de 8 señales analógicas a digitalES (ADC).
+    %     \item \textbf{DHT11:} sensor de humedad y temperatura ambiente de señal digital.
+    %     \item \textbf{LM35:} sensor de temperatura ambiente de señal analógica.
+    %     \item \textbf{FC28:} sensor de humedad de tierra de la maceta de señal analógica.
+    %     \item \textbf{LDR:} sensor de luminosidad ambiente de señal analógica.
+    %     \item \textbf{BH1750:} sensor de luminosidad ambiente de señal digital.  
+    % \end{itemize}
+    \begin{table}[ht]
+    \resizebox{13cm}{!} {
+    \centering
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline \textbf{Sensor} & \textbf{Función} & \textbf{Tipo de medición} & \textbf{Zona} & \textbf{Tipo de Señal} \\
+    \hline MCP3008 & Conversor & - & - & Analógico a Digital \\
+    \hline DHT11 & Sensor & Humedad, Temperatura & Ambiente & Digital \\
+    \hline LM35 & Sensor & Temperatura & Ambiente & Analógica \\
+    \hline FC28 & Sensor & Humedad & Maceta & Analógica \\
+    \hline LDR & Sensor & Luminosidad & Ambiente & Analógica \\
+    \hline BH1750 & Sensor & Luminosidad & Ambiente & Digital \\
+    \hline
+    \end{tabular}
+    }
+    \caption{Modelos de sensores utilizados en Green In House}
+    \end{table}
+
+    \section{Git: sistema de control de versiones}
+    Git \cite{wiki:git} es un sistema de control de versiones distribuido de código abierto que permite gestionar y ver los cambios que se han ido realizando un proyecto a lo largo del tiempo. Está diseñado para manejar todo tipo de proyectos (ya sean pequeños o muy grandes), con una gran velocidad y eficiencia.Algunas de las características más destacadas de Git son:
+    \begin{itemize}
+        \item \textbf{Sistema distribuido:} su característica más importante es que es un sistema de control de versiones distribuido. Esto significa que cada desarrollador tiene una copia completa del historial de cambios del proyecto en su máquina local. Esta característica permite trabajar de manera descentralizada y autónoma, sin tener que estar constantemente sincronizado con un servidor central.
+        \item \textbf{Integridad de los datos:} está diseñado con un fuerte énfasis en la integridad de los datos. Cada cambio o \textit{commit} tiene una suma de comprobación asociada que se utiliza para verificar la integridad de los datos. Esto permite a los desarrolladores asegurarse de que, una vez que se ha registrado un cambio, los archivos no se alterarán sin su conocimiento.
+        \item \textbf{Ramas:} ofrece un soporte robusto y flexible para la ramificación y fusión de código. Esta característica permite a los desarrolladores trabajar en características y experimentos de manera aislada, sin afectar el código principal del proyecto. Una vez que una característica está lista, proporciona herramientas para fusionar ese trabajo con la rama principal.
+        \item \textbf{Desempeño:} ha sido diseñado con un fuerte enfoque en el rendimiento. A pesar de que maneja historiales de cambios complejos y grandes cantidades de archivos y cambios, las operaciones son generalmente muy rápidas. Esta es una característica de gran valor ya que permite realizar un desarrollo ágil y eficiente.
+        \item \textbf{Plataforma de colaboración:} Combinado con plataformas de alojamiento de código como GitHub, se convierte en una poderosa plataforma de colaboración, permitiendo a los equipos de desarrolladores revisar y discutir cambios, gestionar tareas e integrar de manera continua el código. Este sistema de colaboración es esencial para mantener la calidad del código y coordinar el trabajo en equipo.
+    \end{itemize}
         
-        Para obtener una estimación de la luz en términos de lúmenes, se ha seguido el siguiente proceso:    
-        \begin{enumerate}    
-            \item \textbf{Configuración del circuito:} Conexión de un LDR y una resistencia fija en un circuito divisor de voltaje. Ambos extremos del LDR y la resistencia se conectan a una fuente de alimentación (en este caso a los 5V de la Raspberry Pi), y el otro extremo del LDR se conecta al otro extremo de la resistencia y a tierra (GND). De esta forma, el voltaje entre el LDR y la resistencia se puede medir y estará relacionado con la resistencia del LDR.        
-            \item \textbf{Medición del voltaje:} Este voltaje se mide con un ADC (Convertidor Analógico a Digital) en la Raspberry Pi. El modelo de Raspberry Pi utilizado o dispone de un ADC incorporado, por lo que se utiliza el ADC externo MCP3008, explicado anteriormente.        
-            \item \textbf{Conversión del voltaje a resistencia:} Conociendo el voltaje de la fuente de alimentación (V), el voltaje medido (Vout) y la resistencia seleccionada (R), se calcula la resistencia del LDR (Rldr) utilizando la fórmula: Rldr = R * ((V / Vout) - 1).        
-            \item \textbf{Calibración del sensor:} Para convertir la resistencia del LDR a lúmenes, hay que calibrar el sensor. Para ello, es necesario utilizar una fuente de luz con una salida conocida en lúmenes y medir la resistencia del LDR a diferentes niveles de luz. De esta forma, se puede crear una tabla de correspondencia entre la resistencia del LDR y los lúmenes.        
-            \item \textbf{Conversión de resistencia a lúmenes:} Con la tabla de correspondencia, se puede convertir las medidas de resistencia del LDR a lúmenes, aunque la fiabilidad de la medida depende mucho de lo bien que se haya realizado el proceso de calibración.
-        \end{enumerate}        
-        En lo que respecta a los valores de las resistencias en ohmios, lo mejor es seleccionar un valor que esté en el mismo orden de magnitud que la resistencia del LDR en las condiciones de luz en las que normalmente va a estar la planta.
-        Es importante tener en cuenta que este método proporciona una medida aproximada y tiene sus limitaciones. Los LDR son sensibles a diferentes longitudes de onda de luz de diferentes maneras, por lo que diferentes tipos de luz (como la luz del sol, la luz fluorescente, etc.) darán diferentes lecturas.
+    \subsection{GitHub: Plataforma \textit{open source} de repositorios}
+    GitHub \cite{wiki:github} es una plataforma de desarrollo de software basada en la nube que utiliza el sistema de control de versiones Git. Con el paso del tiempo se ha convertido en una herramienta esencial para muchos desarrolladores y organizaciones debido a las capacidades que ofrece para colaborar y gestionar proyectos de software.
+    GitHub permite a los desarrolladores almacenar sus proyectos en repositorios, que son esencialmente directorios de proyectos. Estos repositorios pueden ser públicos (cualquier persona puede ver y contribuir al código) o privados (restringe el acceso sólo a personas específicas).
+    Una característica principal de GitHub es su enfoque en la colaboración. Los desarrolladores pueden hacer un \textit{fork} de un repositorio, lo que crea una copia del proyecto (de la versión seleccionada) en su propia cuenta de GitHub. Después de eso pueden hacer cambios en esa copia y, cuando estén listos, pueden enviar una \textit{pull request} al repositorio original. El propietario del repositorio original puede revisar estos cambios y optar por descartarlos o por fusionarlos con el proyecto principal.
+    Github también integra un control de ramas dentro de un mismo repositorio. Una rama en Git es una referencia a uno de los \textit{commits}. Cuando creamos una rama, en realidad estamos creando una nueva línea de desarrollo en base al código existente en un determinado \textit{commit}. Esto significa que podemos realizar cambios en esa rama sin afectar a otras ramas. Esto permite a los desarrolladores trabajar en características específicas, pruebas o experimentos en aislamiento, lo que facilita la organización del código y reduce el riesgo de introducir errores en el código de producción.
+    Las ramas son especialmente útiles en el desarrollo colaborativo, ya que cada colaborador puede trabajar en una rama separada sin interferir con el trabajo de los demás. Una vez que un colaborador ha terminado su trabajo en una rama, puede solicitar que se integre de nuevo en la rama principal (a menudo llamada \textit{master} o \textit{main}) a través de un \textit{pull request}.     
+    Además de estas capacidades de colaboración y control de versiones, GitHub ofrece características como la gestión de incidencias para rastrear y resolver problemas, y acciones de GitHub para automatizar flujos de trabajo de desarrollo.
+    \subsection{Utilización de GitHub en Green In House}
+        Git ha sido utilizado en el desarrollo de Green In House junto con la plataforma GitHub para realizar el seguimiento de cambios, garantizar la integridad del código y detección de problemas tras la realización de cambios. También ha sido una herramienta útil para poder mantener en la nube una copia de seguridad del proyecto actualizada continuamente en caso de que se estropease el entorno de desarrollo, evitando la pérdida del código del proyecto.
+
+    \subsection{VSCode: IDE de programación multilenguaje}
+    VSCode \cite{wiki:vscode} es la abreviatura de Visual Studio Code, el cual es un editor de código fuente desarrollado por Microsoft. Es una herramienta extremadamente popular y versátil utilizada por desarrolladores de software en todo el mundo. Algunas de las características clave que tiene son:   
+    \begin{itemize}
+        \item \textbf{Editor de código:} proporciona un editor de código altamente personalizable con resaltado de sintaxis acorde al lenguaje utilizado, sugerencias inteligentes, sangría automática y otras características útiles para facilitar la escritura de código.        
+        \item \textbf{Extensibilidad:} hay miles de extensiones disponibles que agregan funcionalidades adicionales, como soporte para diferentes lenguajes de programación, integración con sistemas de control de versiones, etc.        
+        \item \textbf{Depuración:} incluye capacidades de depuración integradas que permiten ejecutar y depurar el código directamente desde el editor. Esto es especialmente útil para identificar y solucionar problemas de manera ágil en el código.        
+        \item \textbf{Integración con Git:} tiene integración con el sistema de control de versiones de Git. Permite realizar de manera cómoda y ágil tareas comunes de Git, como confirmar cambios, crear ramas y fusionar código, etc.
+        \item \textbf{Terminal integrada:} dispone de una terminal integrada que permite ejecutar comandos de línea de comandos directamente dentro del editor. Esto evita tener que alternar entre el editor y la terminal del sistema operativo, lo que mejora la eficiencia en el flujo de trabajo.
+    \end{itemize}
     
-        \subsubsection{BH1750: Sensor de luminosidad ambiente.}  
-
-
-
-    \subsection{GitHub: Plataforma opensource de repositorios con el sistema de control de versiones Git.}
+    \subsection{Conexión SSH: Control remoto}
+    SSH \cite{wiki:ssh} es la abreviatura de \textit{Secure Shell}. Es un protocolo de red que permite una comunicación segura entre dos sistemas a través de una red insegura. Proporciona un mecanismo de autenticación y cifrado robusto para proteger la información transmitida entre ambos sistemas. Algunos de los de usos más comunes de SSH son:
+    \begin{itemize}
+        \item \textbf{Acceso remoto}: permite acceder a un sistema remoto de forma segura. Esto es útil cuando necesitas administrar un servidor o realizar tareas en un sistema al que no tienes acceso físico.
+        \item \textbf{Transferencia de archivos segura}: permite transferir archivos de manera segura entre sistemas utilizando herramientas como \textit{scp} o \textit{sftp}. Esto es útil cuando necesitas mover archivos de un sistema a otro de forma segura y confiable.
+        \item \textbf{Túneles de red}: permite crear túneles de red seguros que redirigen el tráfico a través de una conexión cifrada. Esto se utiliza comúnmente para acceder de forma segura a servicios de red, como bases de datos o servidores web, a través de una red no confiable. 
+        \item \textbf{Ejecución de comandos remotos}: permite ejecutar comandos en un sistema remoto sin tener que estar físicamente presente en él. Esto es especialmente útil cuando necesitas automatizar tareas o administrar múltiples sistemas de forma remota.
+    \end{itemize}
+    Para poder establecer una conexión SSH es necesario contar con los siguientes elementos:
+    \begin{itemize}
+        \item \textbf{Servidor SSH}: el sistema al que se desea acceder debe tener un servidor SSH instalado y configurado correctamente.
+        \item \textbf{Cliente SSH}: es necesario tener instalado y configurado un cliente SSH en el sistema local desde el cual te conectarás al servidor SSH remoto. En sistemas basados en Unix, como Linux o macOS, el cliente SSH suele estar disponible de forma nativa. En sistemas Windows, se pueden utilizar programas como PuTTY, Git Bash o VSCode, que incluyen clientes SSH. 
+        \item \textbf{Credenciales de acceso}: para poder establecer la comunicación entre cliente y servidor hay que contar con las credenciales de acceso adecuadas, como un nombre de usuario y una contraseña, o una clave SSH privada si se ha configurado.
+    \end{itemize}
     
-    \subsection{VSCode: IDE de programación para diferentes lenguajes.}
-    
-    \subsection{Conexión SSH: Para programación en remoto}
-    
-    \subsection{FlutterFlow: IDE de programación para Flutter mediante un framework de entorno gráfico.}
-
-
-\section{Técnicas y metodologías}
-
-    \subsection{MVC (Modelos vista controlador)}
-    
-    \subsection{Patrones de diseño (Adaptador, factoria, ...)}
-    
-    \subsection{SCRUM: Metodología de gestión ágil}
-
-
-
-
-
-
-Esta parte de la memoria tiene como objetivo presentar las técnicas metodológicas y las herramientas de desarrollo que se han utilizado para llevar a cabo el proyecto. Si se han estudiado diferentes alternativas de metodologías, herramientas, bibliotecas se puede hacer un resumen de los aspectos más destacados de cada alternativa, incluyendo comparativas entre las distintas opciones y una justificación de las elecciones realizadas. 
-No se pretende que este apartado se convierta en un capítulo de un libro dedicado a cada una de las alternativas, sino comentar los aspectos más destacados de cada opción, con un repaso somero a los fundamentos esenciales y referencias bibliográficas para que el lector pueda ampliar su conocimiento sobre el tema.
-
-
- Debido a esto, es necesario estar conectado a la misma red wifi para poder interactuar con Green In House, aunque dicha conexión no es necesaria para que se realice el registro de los sensores en la base de datos.
+    \subsection{FlutterFlow: IDE de programación GUI para Flutter}
+    Flutter Flow \cite{wiki:flutter_flow} es una plataforma online que permite diseñar y desarrollar aplicaciones móviles utilizando Flutter de manera visual y sin necesidad de escribir código. Proporciona una interfaz intuitiva y fácil de utilizar que te permite crear interfaces de usuario y lógica de aplicación de manera rápida y sencilla. Para los desarrolladores experimentados, es importante destacar que también permite el diseño de funcionalidades propias más complejas de las que inicialmente ofrece. Algunas de sus características principales son:
+    \begin{itemize}
+        \item \textbf{Diseño visual:} ofrece una forma sencilla de diseñar la interfaz de usuario de una aplicación de forma visual, arrastrando y soltando componentes en un lienzo. Esto te permite ver instantáneamente cómo se verá la aplicación mientras se va construyendo.
+        \item \textbf{Sin necesidad de codificación:} una de las ventajas más destacadas de Flutter Flow de cara al público general es que no requiere conocimientos de programación para crear aplicaciones móviles. Permite construir la lógica de la aplicación utilizando una interfaz gráfica intuitiva en lugar de escribir código manualmente.
+        \item \textbf{Generación automática de código Flutter}: aunque no es necesario escribir código, Flutter Flow genera automáticamente el código Flutter correspondiente a medida que se diseña la aplicación. Esto permite obtener un proyecto de Flutter completamente funcional, el cual puede ser personalizado y mejorado a mayores según las necesidades de la aplicación.    
+        \item \textbf{Colaboración en tiempo real}: permite la colaboración en tiempo real, lo que significa que puedes trabajar en equipo en el diseño y desarrollo de una aplicación simultáneamente. Esto es especialmente útil cuando se trabaja junto con otros desarrolladores o diseñadores en un mismo proyecto.    
+        \item \textbf{Integraciones y personalizaciones}: admite diversas integraciones y personalizaciones para ampliar las capacidades de la aplicación diseñada. Permite agregar servicios externos, como bases de datos o servicios en la nube, y personalizar la lógica de la aplicación para adaptarse a requisitos específicos.
+    \end{itemize}
+    En sus versiones de pago ofrece integración con el repositorio GitHUB, sistema de traducción automática de textos y despliegue en las tiendas de aplicaciones de Android e iOS. Para el desarrollo de Green In House he contado con una licencia especial de estudiante, la cual me permite utilizar las funciones anteriormente nombradas. Para solicitar dicha licencia tuve que solicitarla a Flutter Flow entregando los documentos necesarios que me acreditan como alumno universitario y en 48 horas me la concedieron.

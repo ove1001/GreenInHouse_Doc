@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt,twoside]{memoir}
+\documentclass[a4paper,12pt,twoside,openany]{memoir}
 
 
 % Castellano
@@ -381,7 +381,7 @@
     \noindent\LARGE
     Presentado por \@author{}\\ 
     en Universidad de Burgos --- \@date{}\\
-    Tutor: \@tutor{}\\
+    Tutores: \@tutor{}\\
   }%
   \end{center}%
   \null
@@ -394,7 +394,7 @@
 % Datos de portada
 \title{{\Huge Green In House}\\Maceta educativa}
 \author{\nombre}
-\tutor{Dr. Raúl Marticorena Sánchez\\ Dr. Antonio J. Canepa Oneto \\ D. Yeray Pescador Calleja (Técnico de Emprendimiento - UBU)}
+\tutor{Dr. Raúl Marticorena Sánchez\\ Dr. Antonio J. Canepa Oneto \\ D. Yeray Pescador Calleja (Técnico de Emprendimiento UBU)}
 \date{\today}
 
 \begin{document}
@@ -411,13 +411,13 @@
 
 \noindent\includegraphics[width=\textwidth]{cabecera}\vspace{1cm}
 
-\noindent D. Raúl Marticorena Sánchez y D.  Antonio J. Canepa Oneto, profesores del departamento del área de Lenguajes y Sistemas Informáticos.
+\noindent D. Raúl Marticorena Sánchez y D.  Antonio J. Canepa Oneto, profesores del departamento de Ingeniería Informática.
 
 \noindent Exponen:
 
-\noindent Que el alumno D. \nombre, con DNI 71309017R, ha realizado el Trabajo Final de Grado en Ingeniería Informática titulado "Green In House - Invernadero inteligente". 
+\noindent Que el alumno D. \nombre, con DNI 71309017R, ha realizado el Trabajo Final de Grado en Ingeniería Informática titulado ``Green In House - Maceta educativa´´. 
 
-\noindent Y que dicho trabajo ha sido realizado por el alumno bajo la dirección del que suscribe, en virtud de lo cual se autoriza su presentación y defensa.
+\noindent Y que dicho trabajo ha sido realizado por el alumno bajo la dirección de los que suscriben, en virtud de lo cual se autoriza su presentación y defensa.
 
 \begin{center} %\large
 En Burgos, {\large \today}
@@ -435,8 +435,8 @@ Dr. Raúl Marticorena Sánchez
 \hfill
 \begin{minipage}{0.45\textwidth}
 \begin{flushleft} %\large
-Vº. Bº. del tutor:\\[2cm]
-Dr  Antonio J. Canepa Oneto
+Vº. Bº. del Tutor:\\[2cm]
+Dr.  Antonio J. Canepa Oneto
 \end{flushleft}
 \end{minipage}
 \hfill
@@ -451,26 +451,28 @@ Dr  Antonio J. Canepa Oneto
 
 \newpage\null\thispagestyle{empty}\newpage
 
-
-
-
 \frontmatter
 
 % Abstract en castellano
 \renewcommand*\abstractname{Resumen}
 \begin{abstract}
-Cultivar una planta es un proceso largo, en el que las acciones no tienen un efecto inmediato, sino que se demoran varias horas o días en hacer efecto. Debido a ello, mantener un control temporal de los factores que afectan al crecimiento y desarrollo de una planta es un factor clave para poder hacerla crecer y desarollarse de manera óptima y evitar así su marchitación. 
+Cultivar una planta es un proceso largo, en el que las acciones no tienen un efecto inmediato, sino que se demoran varias horas o días en hacer efecto. Debido a ello, mantener un control temporal de los factores que afectan al crecimiento y desarrollo de una planta es un factor clave para poder hacerla crecer de manera óptima y evitar así su marchitamiento. 
 
-Green In House es un proyecto que permite al usuario mantener un registro de dichos factores de manera prolongada en el tiempo. Para ello se utilizan sensores que permiten medir estos parámetros. 
+Green In House es un proyecto educativo enfocado principalmente a niños, el cual les permite mantener un registro de los factores principales que influyen en el desarrollo de las plantas, de manera prolongada en el tiempo. Para ello se utilizan sensores que permiten medir estos parámetros esenciales para la supervivencia y buen mantenimiento de una planta. 
 
-Como factores más importantes a medir, se han selecionado la temperatura ambiente, la humedad relativa del ambiente, la humedad relativa  de la tierra de la maceta y la luminosidad ambiente. 
+Como factores más importantes a medir, se han seleccionado la temperatura ambiente, la humedad relativa del ambiente, la humedad relativa  de la tierra de la maceta y la luminosidad ambiente.
 
-Para poder interacctuar de manera sencilla y agradable con Green In House, se utilizará una aplicación movil. Dicha aplicación obtendrá a través de conexión wifi, los datos del servidor integrado en la maceta.
+Green In House no cuenta con actuadores como sistemas de riego automáticos o de iluminación artificial, ya que pretende implicar activamente al niño en el cuidado diario de su planta y hacerle tomar la responsabilidad de mantenerla viva. 
+ 
+Para poder interaccionar de manera sencilla y agradable con Green In House, se proveerá de una aplicación móvil. Dicha aplicación obtendrá a través de conexión WiFi, los datos del servidor integrado en la maceta.
+
+Con esto se consigue que el usuario pueda tener información detallada en el tiempo de los factores que influyen en el desarrollo de las plantas y pueda tomar mejores decisiones a la hora de realizar sus cuidados.
+
 \end{abstract}
 
 \renewcommand*\abstractname{Descriptores}
 \begin{abstract}
-Invernadero inteligente, IoT, aplicación Android, Raspberry, Flutter \ldots
+Maceta educativa, IoT, aplicación Android, Raspberry, Flutter, Python, base de datos, API REST.
 \end{abstract}
 
 \clearpage
@@ -478,30 +480,39 @@ Invernadero inteligente, IoT, aplicación Android, Raspberry, Flutter \ldots
 % Abstract en inglés
 \renewcommand*\abstractname{Abstract}
 \begin{abstract}
-A \textbf{brief} presentation of the topic addressed in the project.
+Growing a plant is a long process, where actions do not have an immediate effect, but rather take several hours or days to take effect. Because of this, maintaining a temporal control of the factors that affect the growth and development of a plant is a key factor in being able to grow it optimally and thus prevent its wilting.
+
+Green In House is an educational project mainly aimed at children, which allows them to keep a record of the main factors that influence the development of plants, over an extended period of time. To do this, sensors are used to measure these essential parameters for the survival and good maintenance of a plant.
+
+The most important factors to measure have been selected as the ambient temperature, the relative humidity of the environment, the relative humidity of the potting soil, and the ambient light.
+
+Green In House does not have actuators such as automatic watering or artificial lighting systems, as it aims to actively involve the child in the daily care of their plant and make them take responsibility for keeping it alive.
+
+To interact easily and pleasantly with Green In House, a mobile application will be provided. This application will obtain, through a WiFi connection, the data from the server integrated into the pot.
+
+This allows the user to have detailed information over time about the factors that influence the development of plants and can make better decisions when it comes to their care.
 \end{abstract}
 
 \renewcommand*\abstractname{Keywords}
 \begin{abstract}
-keywords separated by commas.
+Educational pot, IoT, Android app, Raspberry, Flutter, Python, database, REST API.
 \end{abstract}
-
 \clearpage
 
 % Indices
+\setcounter{tocdepth}{4} %añadida
+\setcounter{secnumdepth}{4} %añadida
 \tableofcontents
-
-
 \clearpage
 
 \listoffigures
-
 \clearpage
 
 \listoftables
 \clearpage
 
 \mainmatter
+
 \include{./tex/1_Introduccion}
 \include{./tex/2_Objetivos_del_proyecto}
 \include{./tex/3_Conceptos_teoricos}
@@ -510,8 +521,17 @@ keywords separated by commas.
 \include{./tex/6_Trabajos_relacionados}
 \include{./tex/7_Conclusiones_Lineas_de_trabajo_futuras}
 
-
-\bibliographystyle{plain}
+\bibliographystyle{plainurl}
 \bibliography{bibliografia}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=2cm]{cc_by_nc}
+\end{figure}
+
+\begin{center}
+Este obra está bajo una licencia Creative Commons Reconocimiento 4.0 Internacional
+(\href{https://creativecommons.org/licenses/by-nc/4.0/}{CC-BY-NC-4.0}).
+\end{center}
 
 \end{document}

@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt,twoside]{memoir}
+\documentclass[a4paper,12pt,twoside,openany]{memoir}
 
 % Castellano
 \usepackage[spanish,es-tabla]{babel}
@@ -8,17 +8,53 @@
 \usepackage{lmodern} % scalable font
 \usepackage{microtype}
 \usepackage{placeins}
+\usepackage{pdfpages}
 
 \RequirePackage{booktabs}
-\RequirePackage[table]{xcolor}
 \RequirePackage{xtab}
 \RequirePackage{multirow}
+%\RequirePackage[table]{xcolor}
+
 
 % Links
 \PassOptionsToPackage{hyphens}{url}\usepackage[colorlinks]{hyperref}
 \hypersetup{
 	allcolors = {red}
 }
+
+% % Añadido por Oscar Valverde
+
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+\renewcommand\thesubparagraph{\theparagraph.\arabic{subparagraph}} % optional; useful if subparagraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@subparagraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
 
 % Ecuaciones
 \usepackage{amsmath}
@@ -36,21 +72,32 @@
 % Evitar solapes en el header
 \nouppercaseheads
 
-% Imagenes
+% Imágenes
+
+% Comando para insertar una imagen en un lugar concreto.
+% Los parámetros son:
+% 1 --> Ruta absoluta/relativa de la figura
+% 2 --> Texto a pie de figura
+% 3 --> Tamaño en tanto por uno relativo al ancho de página
 \usepackage{graphicx}
-\newcommand{\imagen}[2]{
+\newcommand{\imagen}[3]{
 	\begin{figure}[!h]
 		\centering
-		\includegraphics[width=0.9\textwidth]{#1}
+		\includegraphics[width=#3\textwidth]{#1}
 		\caption{#2}\label{fig:#1}
 	\end{figure}
 	\FloatBarrier
 }
 
-\newcommand{\imagenflotante}[2]{
-	\begin{figure}%[!h]
+% Comando para insertar una imagen sin posición.
+% Los parámetros son:
+% 1 --> Ruta absoluta/relativa de la figura
+% 2 --> Texto a pie de figura
+% 3 --> Tamaño en tanto por uno relativo al ancho de página
+\newcommand{\imagenflotante}[3]{
+	\begin{figure}
 		\centering
-		\includegraphics[width=0.9\textwidth]{#1}
+		\includegraphics[width=#3\textwidth]{#1}
 		\caption{#2}\label{fig:#1}
 	\end{figure}
 }
@@ -289,6 +336,8 @@
 % Capítulos
 \chapterstyle{bianchi}
 \newcommand{\capitulo}[2]{
+        \setcounter{tocdepth}{4} %añadida
+        \setcounter{secnumdepth}{4} %añadida
 	\setcounter{chapter}{#1}
 	\setcounter{section}{0}
 	\setcounter{figure}{0}
@@ -351,11 +400,12 @@
   }
 \makeatother
 
+\newcommand{\nombre}{Oscar Valverde Escobar} %%% cambio de comando
 
 % Datos de portada
-\title{título del TFG \\Documentación Técnica}
-\author{nombre alumno}
-\tutor{nombre tutor}
+\title{{\Huge Green In House}\\Maceta educativa}
+\author{\nombre}
+\tutor{Dr. Raúl Marticorena Sánchez\\ Dr. Antonio J. Canepa Oneto \\ D. Yeray Pescador Calleja (Técnico de Emprendimiento UBU)}
 \date{\today}
 
 \begin{document}
@@ -378,22 +428,20 @@
 \clearpage
 
 % Indices
+\setcounter{tocdepth}{4} %añadida
+\setcounter{secnumdepth}{4} %añadida
 \tableofcontents
-
 \clearpage
 
 \listoffigures
-
 \clearpage
 
 \listoftables
-
 \clearpage
 
 \mainmatter
 
 \appendix
-
 \include{./tex/A_Plan_proyecto}
 \include{./tex/B_Requisitos}
 \include{./tex/C_Diseno}
@@ -401,7 +449,18 @@
 \include{./tex/E_Manual_usuario}
 
 
-\bibliographystyle{plain}
+\bibliographystyle{plainurl}
 \bibliography{bibliografiaAnexos}
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=2cm]{cc_by_nc}
+\end{figure}
+
+\begin{center}
+Este obra está bajo una licencia Creative Commons Reconocimiento 4.0 Internacional
+(\href{https://creativecommons.org/licenses/by-nc/4.0/}{CC-BY-NC-4.0}).
+\end{center}
 
 \end{document}
