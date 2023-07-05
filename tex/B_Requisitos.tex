@@ -5,10 +5,122 @@ En este apartado se recogen los requisitos especificados por el cliente para la 
 Al principio la especificación de requisitos era bastante simple, pero a medida que fui construyendo el código, se me fueron ocurriendo nuevas funcionalidades que implementar y al final la especificación de requisitos se ha extendido bastante.
 
 \section{Objetivos generales}
-%TODO
+A continuación se describen los objetivos generales del proyecto:
+\begin{itemize}
+    \item Leer diferentes sensores electrónicos que miden factores físicos como la temperatura, humedad y luminosidad de diferentes zonas como la maceta o el ambiente.
+    \item Desarrollar una base de datos que almacene toda la información recogida de los sensores y la interrelacione con la planta a la que dichos sensores están asociados a los largo de diferentes periodos temporales y a los consejos asociados a dicha planta. Esto permitirá mantener un registro temporal de datos de temperatura, luminosidad y humedad ambiente, así como la humedad de la maceta. Estos son los factores principales de influencia en el desarrollo de una planta en los que se centrará Green In House.
+    \item Generar una estructura modular en la que se puedan incorporar fácilmente y de manera dinámica y persistente, nuevos sensores, plantas, tipos de plantas y consejos de mantenimiento, así como definir interrelaciones entre ellos, sin necesidad de modificar el código de la aplicación.
+    \item Desarrollar una aplicación para generar una interfaz gráfica que permita realizar determinadas acciones de control de la maceta desde una pantalla táctil incorporada a la misma. Entre estas acciones se encuentra la de permitir al usuario introducir las credenciales de su red WiFi, para permitir a la maceta comunicarse por red.
+    \item Implementar un sistema API REST capaz de comunicar datos por red entre el servidor alojado en la Raspberry Pi y aplicaciones externas que hagan uso de ella. Por medio de esta API REST se podrá crear en el sistema nuevos sensores, tipos de plantas, plantas y consejos asociados a ellas.
+    \item Desarrollar una aplicación móvil en Flutter capaz de ser desplegada en diferentes plataformas como Android, iOS,... y que permita leer los registros de los sensores y graficarlos, así como generar nuevas plantas, incorporar sensores, modificar los consejos, etc. haciendo uso del servidor API REST.
+    \item Generar una serie de \textit{scripts} en Bash que permitan realizar fácilmente la instalación de la aplicación de Green In House en cualquier Raspberry Pi y su iniciación automática al encenderla.
+\end{itemize}
+
 \section{Catalogo de requisitos}
-%TODO
+A continuación se enumeran los requisitos funcionales y no funcionales derivados de los objetivos generales del proyecto.
+
+    \subsection{Requisitos no funcionales}
+    \begin{itemize}
+        \item \textbf{RNF-1 Utilización de Raspberry:} Se utilizará una Raspberry Pi para leer los sensores, almacenar los valores y gestionar la comunicación y tratamiento de los datos.
+        \item \textbf{RNF-2 Almacenamiento de los datos:} el almacenamiento de los datos de manera persistente se hará utilizando una base de datos y su correspondiente gestor.
+        \begin{itemize}
+            \item \textbf{RNF-1.1 Borrado de los datos:} Para no violar la integridad referencial de los datos de la base de datos, no se permite borrar las instancias de los datos una vez grabadas. Para poder marcarlas como eliminadas se ha empleado un sistema de fechas, el cual determina cuando se creó la instancia y cuando se declaró como eliminada.
+        \end{itemize}
+        \item \textbf{RNF-2 Utilización de Python} el código de la aplicación para la Raspberry Pi será desarrolado en Python para agilizar el desarrollo del prototipo.
+        \item \textbf{RNF-3 Utilización de Flutter} el código de la aplicación movil será desarrolado en Flutter al ser de desarrollo multiplataforma, para poder desplegar la misma aplicación en varios sistemas.
+        \item \textbf{RNF-4 Comunicación de datos con otros sistemas} para que otros dispositivos puedan hacer uso de los datos recogidos por Green In House se utilizará conetividad red mediante un servidor API REST.
+        \item \textbf{RNF-5 Conexión a red WiFi} será necesario suministrar al usuario una manera de introducir en el sistema las credenciales de la red WiFi.
+    \end{itemize}
+
+    \subsection{Requisitos funcionales}
+    \begin{itemize}
+        \item \textbf{RF-1 Gestión de sensores:} la aplicación tiene que ser capaz de gestionar los sensores del sistema.
+            \begin{itemize}
+                \item \textbf{RF-1.1 Creación de sensores:} la aplicación tiene que ser capaz de crear nuevos sensores en el sistema, especificando la zona en la que estará ubicado el sensor, el tipo de medición que realizará, el modelo de sensor que se utilizará y los pines y dirección que se utilizarán para realizar su lectura. Para facilitar su posterior identificación por parte del usuario se le asignará también un nombre y se almacenará la fecha en la que se dio de alta el sensor.
+                \item \textbf{RF-1.2 Modificación de sensores:} la aplicación tiene que ser capaz de modificar los datos de los sensores existentes en el sistema.
+                \item \textbf{RF-1.3 Eliminación de sensores:} la aplicación tiene que ser capaz de eliminar sensores existentes en el sistema. 
+                \item \textbf{RF-1.4 Obtención de sensores:} la aplicación tiene que ser capaz de recuperar los datos de los sensores existentes en el sistema.
+                \begin{itemize}
+                    \item \textbf{RF-1.4.1 Obtención de sensores activos:} la aplicación tiene que ser capaz de recuperar los datos de los sensores activos existentes en el sistema filtrándoles por su fecha de baja. Este filtrado se tiene que poder aplicar a todos los filtrados detallados continuación. 
+                    \item \textbf{RF-1.4.2 Obtención de sensores por tipo:} la aplicación tiene que ser capaz de recuperar los datos de los sensores existentes en el sistema filtrándoles por su tipo de medición.
+                    \item \textbf{RF-1.4.3 Obtención de sensores por zona:} la aplicación tiene que ser capaz de recuperar los datos de los sensores existentes en el sistema filtrándoles por su zona de ubicación.
+                    \item \textbf{RF-1.4.4 Obtención de sensores por tipo y zona:} la aplicación tiene que ser capaz de recuperar los datos de los sensores existentes en el sistema filtrándoles por su tipo de medición y su zona de ubicación.
+                    \item \textbf{RF-1.4.5 Obtención de sensores por modelo:} la aplicación tiene que ser capaz de recuperar los datos de los sensores existentes en el sistema filtrándoles por su modelo.
+                \end{itemize}
+            \end{itemize}
+            
+        \item \textbf{RF-2 Gestión de plantas:} la aplicación tiene que ser capaz de gestionar las plantas del sistema.
+            \begin{itemize}
+                \item \textbf{RF-2.1 Creación de plantas:} la aplicación tiene que ser capaz de crear nuevas plantas en el sistema, especificando el tipo de planta y el nombre que se asignará a dicha planta.
+                \item \textbf{RF-2.2 Modificación de plantas:} la aplicación tiene que ser capaz de modificar los datos de las plantas existentes en el sistema.
+                \item \textbf{RF-2.3 Eliminación de plantas:} la aplicación tiene que ser capaz de eliminar plantas existentes en el sistema. Para evitar tener que borrar todos los registros asociados a la planta a eliminar y así no perder información de los históricos, se almacenará la fecha en la que se dio de baja la planta.
+                \item \textbf{RF-2.4 Obtención de plantas:} la aplicación tiene que ser capaz de recuperar los datos de las plantas existentes en el sistema.
+                \begin{itemize}
+                    \item \textbf{RF-2.4.1 Obtención de plantas activas:} la aplicación tiene que ser capaz de recuperar los datos de las plantas activas existentes en el sistema filtrándolas por su fecha de baja. Este filtrado se tiene que poder aplicar a todos los filtrados detallados continuación. 
+                    \item \textbf{RF-2.4.2 Obtención de plantas por tipo:} la aplicación tiene que ser capaz de recuperar los datos de las plantas existentes en el sistema filtrándolas por su tipo.
+                \end{itemize}
+            \end{itemize}
+            
+        \item \textbf{RF-3 Gestión de tipos de plantas:} la aplicación tiene que ser capaz de gestionar los tipos de plantas del sistema.
+            \begin{itemize}
+                \item \textbf{RF-3.1 Creación de tipos de plantas:} la aplicación tiene que ser capaz de crear nuevas tipos de plantas en el sistema, especificando el tipo de planta y el nombre que se asignará a dicha planta.
+                \item \textbf{RF-3.2 Modificación de tipos de plantas:} la aplicación tiene que ser capaz de modificar los datos de las tipos de plantas existentes en el sistema.
+                \item \textbf{RF-3.3 Obtención de tipos de plantas:} la aplicación tiene que ser capaz de recuperar los datos de las tipos de plantas existentes en el sistema.
+            \end{itemize}
+            
+        %TODO RF-4 acociación entre sensor y planta
+        
+        \item \textbf{RF-5 Gestión de registros de sensores:} la aplicación tiene que ser capaz de gestionar los registros de sensores del sistema.
+            \begin{itemize}
+                \item \textbf{RF-5.1 Creación de registros de sensores:} la aplicación tiene que ser capaz de crear nuevos registros de sensores en el sistema, especificando el sensor que generó el registro,  el valor del sensor y la unidad de medida del registro.
+                \item \textbf{RF-5.2 Obtención de registros de sensores:} la aplicación tiene que ser capaz de recuperar los datos de los registros de sensores existentes en el sistema.
+                \begin{itemize}
+                    \item \textbf{RF-5.2.1 Obtención de registros de sensores generados entre determinadas fechas:} la aplicación tiene que ser capaz de recuperar los datos de los registros de sensores existentes en el sistema filtrándoles por su fecha de creación. Este filtrado se tiene que poder aplicar a todos los filtrados detallados continuación. 
+    				\item \textbf{RF-5.2.2 Obtención de registros de sensores en formato para graficar:} la aplicación tiene que ser capaz de recuperar los datos de los registros de sensores existentes en el sistema agrupandoles en dos listas (fechas para el eje X y valores para el eje Y) para poder graficarles fácilmente. Este filtrado se tiene que poder aplicar a todos los filtrados detallados continuación. 
+                    \item \textbf{RF-5.2.3 Obtención de registros de sensores por sensor:} la aplicación tiene que ser capaz de recuperar los datos de los registros de sensores existentes en el sistema filtrándoles por el sensor que generó dicho registro.
+                    \item \textbf{RF-5.2.4 Obtención de registros de sensores por planta:} la aplicación tiene que ser capaz de recuperar los datos de los registros de sensores existentes en el sistema filtrándoles por la planta a la que están asociados.
+                \end{itemize}
+            \end{itemize}
+            
+        \item \textbf{RF-6 Gestión de consejos de plantas:} la aplicación tiene que ser capaz de gestionar los consejos de plantas del sistema.
+            \begin{itemize}
+                \item \textbf{RF-6.1 Creación de consejos de plantas:} la aplicación tiene que ser capaz de crear nuevos consejos de plantas en el sistema, el tipo de medida, la zona de ubicación,  la unidad de medida y los valores mínimos y máximos.
+                \item \textbf{RF-6.2 Modificación de consejos de plantas:} la aplicación tiene que ser capaz de modificar los datos de los consejos de plantas existentes en el sistema.
+    			\item \textbf{RF-6.3 Obtención de consejos de plantas:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de plantas existentes en el sistema.
+                \begin{itemize}
+                    \item \textbf{RF-6.3.1 Obtención de consejos de plantas por planta:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de plantas existentes en el sistema filtrándoles por la planta a la que están asociados. Este filtrado se tiene que poder aplicar a todos los filtrados detallados continuación. 
+    				\item \textbf{RF-6.3.2 Obtención de consejos de plantas por zona:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de plantas existentes en el sistema filtrándoles por la zona a la que están asociados.
+    				\item \textbf{RF-6.3.3 Obtención de consejos de plantas por tipo de medida:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de plantas existentes en el sistema filtrándoles por el tipo de medida a la que están asociados.
+                \end{itemize}
+            \end{itemize}
+            
+        \item \textbf{RF-7 Gestión de consejos de tipos de plantas:} la aplicación tiene que ser capaz de gestionar los consejos de tipos de plantas del sistema.
+            \begin{itemize}
+                \item \textbf{RF-7.1 Creación de consejos de tipos de plantas:} la aplicación tiene que ser capaz de crear nuevos consejos de tipos de plantas en el sistema, el tipo de medida, la zona de ubicación,  la unidad de medida y los valores mínimos y máximos.
+                \item \textbf{RF-7.2 Modificación de consejos de tipos de plantas:} la aplicación tiene que ser capaz de modificar los datos de los consejos de tipos de plantas existentes en el sistema.
+    			\item \textbf{RF-7.3 Obtención de consejos de tipos de plantas:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de tipos de plantas existentes en el sistema.
+                \begin{itemize}
+                    \item \textbf{RF-7.3.1 Obtención de consejos de tipos de plantas por planta:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de tipos de plantas existentes en el sistema filtrándoles por el tipo de planta a la que están asociados. Este filtrado se tiene que poder aplicar a todos los filtrados detallados continuación. 
+    				\item \textbf{RF-7.3.2 Obtención de consejos de tipos de plantas por zona:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de tipos de plantas existentes en el sistema filtrándoles por la zona a la que están asociados.
+    				\item \textbf{RF-7.3.3 Obtención de consejos de tipos de plantas por tipo de medida:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de tipos de plantas existentes en el sistema filtrándoles por el tipo de medida a la que están asociados.
+                \end{itemize}
+            \end{itemize}
+            %TODO
+        \item \textbf{RF-8 Graficar los datos de lo sensores agrupandoles por días desde una aplicación movil}
+        \item \textbf{RF-9 Poder introducir las credenciales del WiFi a conectar }
+    \end{itemize}
+    
 \section{Especificación de requisitos}
+
+
+
+caso de uso obtener elemento
+
+Caso de uso Filtrar extiende funcionalidades de obtener elemento:
+
+Casos de usuaos que extienden de filtra espècificacndo el filtro
+
+
 %TODO
 
 % Caso de Uso 1 -> Consultar Experimentos.
@@ -37,3 +149,5 @@ Al principio la especificación de requisitos era bastante simple, pero a medida
 	\end{tabularx}
 	\caption{CU-1 Nombre del caso de uso.}
 \end{table}
+
+De este caso de uso hay 4 variantes que cambian por el tipo de datos

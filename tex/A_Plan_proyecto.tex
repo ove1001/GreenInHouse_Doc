@@ -4,8 +4,8 @@ A continuación se procede a especificar detalladamente como se ha realizado el 
 La planificación es una etapa fundamental en el desarrollo de cualquier proyecto software. A continuación, se expone por qué es importante realizar una planificación adecuada:
 \begin{itemize}
     \item \textbf{Organización y estructura:} La planificación permite establecer una estructura clara y organizada para el proyecto. Define los objetivos, los recursos necesarios, los plazos de entrega y las tareas específicas que se deben realizar para llevar a cabo el proyecto. Esto ayuda a evitar confusiones y asegura que todos los miembros del equipo estén alineados en cuanto a las metas y el enfoque del proyecto.
-    \item \textbf{Estimación de recursos y tiempos:} La planificación ayuda a determinar los recursos necesarios para llevar a cabo el proyecto, en términos de personal, de software y de presupuesto. Además, permite estimar los tiempos de ejecución de cada tarea y establecer un cronograma realista. Esto es esencial para gestionar eficientemente los recursos y evitar retrasos y sobrecostes.  
-    \item \textbf{Identificación de riesgos y mitigación:} Durante la planificación, se pueden identificar posibles riesgos y obstáculos que podrían surgir durante el desarrollo del proyecto. Esto permite tomar medidas preventivas y establecer estrategias para minimizar su impacto en el cronograma y en la calidad del proyecto. Al anticipar y abordar los riesgos de manera proactiva, se reducen las posibilidades de enfrentar problemas imprevistos en un futuro.  
+    \item \textbf{Estimación de recursos y tiempos:} La planificación ayuda a determinar los recursos necesarios para llevar a cabo el proyecto, en términos de personal, de software y de presupuesto. Además, permite estimar los tiempos de ejecución de cada tarea y establecer un cronograma realista. Esto es esencial para gestionar eficientemente los recursos y evitar retrasos y sobre costes.  
+    \item \textbf{Identificación de riesgos y mitigación:} Durante la planificación, se pueden identificar posibles riesgos y obstáculos que podrían surgir durante el desarrollo del proyecto. Esto permite tomar medidas preventivas y establecer estrategias para minimizar su impacto en el cronograma y en la calidad del proyecto. Al anticipar y abordar los riesgos de manera pro activa, se reducen las posibilidades de enfrentar problemas imprevistos en un futuro.  
     \item \textbf{Asignación de tareas y responsabilidades:} La planificación ayuda a definir claramente las tareas específicas que deben ser realizadas y asignar responsabilidades a los miembros del equipo. Esto promueve la colaboración y la eficiencia, ya que cada persona conoce cuál es su rol en el proyecto y qué se espera de ella. Además, facilita la coordinación entre los miembros del equipo y permite realizar un seguimiento más preciso del progreso de cada tarea.
     \item \textbf{Control y seguimiento del progreso:} Una vez que el proyecto se ha iniciado, contar con una planificación adecuada facilita el control y seguimiento del progreso. Esto permite comparar el avance real con el planificado, identificar desviaciones y tomar medidas correctivas cuando sea necesario. Esto ayuda a garantizar que se cumplan los objetivos establecidos.
 \end{itemize}
@@ -19,10 +19,10 @@ Para poder determinar si fabricar a gran escala Green In House podría ser renta
     \subsection{Viabilidad económica}
     El estudio de viabilidad económica es una etapa fundamental para determinar la rentabilidad y viabilidad financiera del proyecto Green In House. Este estudio permitirá evaluar los costos y beneficios asociados al desarrollo y funcionamiento de Green In House.
     Para llevar a cabo el análisis económico, es necesario considerar diferentes aspectos:
-        \subsubsection{Costes}
-        Se deben estimar los costes asociados al desarrollo del software, la adquisición del hardware (ordenador, dispositivo movil, impresoras 3D, Raspberry Pi, sensores y componentes electrónicos), así como los gastos de diseño y construcción de la maceta. Además, se deben incluir los costos de personal (un desarrollador), los costes de alquiler de oficina, los costes de servicios como luz, gas e internet y ver como amortizar dichos gastos en el precio de las macetas educativas.
+        \subsubsection{Costes de desarrollo inicial}
+        Se deben estimar los costes asociados al desarrollo del software, la adquisición del hardware (ordenador, dispositivo móvil, impresoras 3D, Raspberry Pi, sensores y componentes electrónicos), así como los gastos de diseño y construcción de la maceta. El tiempo para esta estimación será de 6 meses.
             \subsubsubsection{Costes de personal}
-            El proyecto lo realizará un desarrollador, a tiempo completo durante 12 meses, teniendo en cuenta el siguiente salario estimado:
+            El proyecto lo realizará un desarrollador, a tiempo parcial (20 horas semanales) durante los 6 meses especificados, teniendo en cuenta el siguiente salario estimado. Estos gastos de personal se reflejan en la tabla \ref{tab:costes de personal de desarrollo inicial}.
             \begin{table}[H]
                 \centering
                 \caption{Costes de personal}
@@ -30,71 +30,54 @@ Para poder determinar si fabricar a gran escala Green In House podría ser renta
                     \hline
                     Concepto & Coste \\
                     \hline
-                    Salario mensual neto & 1220€ \\
-                    Retención IRPF (15\%) & 330€ \\
-                    Seguridad Social (29.9\%) & 650€ \\
+                    Salario mensual neto & 606€ \\
+                    Retención IRPF (15\%) & 165€ \\
+                    Seguridad Social (29.9\%) & 329€ \\
                     \hline
-                    Salario mensual bruto & 2200€ \\
+                    Salario mensual bruto & 1100€ \\
                     \hline
-                    Total 12 meses & 26400€ \\
+                    Total 6 meses & 6600€ \\
                     \hline
                 \end{tabular}
+                \label{tab:costes de personal de desarrollo inicial}
             \end{table}
-            En el apartado de seguridad social se han sumado los costes en contingencias comunes ,desempleo, garantía salarial y la formación profesional.
             \subsubsubsection{Costes de hardware}
-            En este apartado pondremos los costes que han sido necesarios, para desarrollar el dispositivo hardware que hemos necesitado para este proyecto. Considerando que se amortiza en 4 años con una venta de 1000 macetas educativas al año.
+            En este apartado se reflejan los costes que han sido necesarios, para desarrollar el dispositivo hardware que hemos necesitado para este proyecto. Estos gastos de hardware se reflejan en la tabla \ref{tab:costes de hardware de desarrollo inicial}.
             \begin{table}[H]
                 \centering
                 \caption{Costes de hardware}
-                \begin{tabular}{|l|c|c|c|c|}
+                \begin{tabular}{|l|c|c|c|}
                     \hline
-                    Concepto & Coste & Cantidad & Coste total & Coste amortizado anual \\
+                    Concepto & Coste & Cantidad & Coste total \\
                     \hline
-                    Dispositivo móvil & 400€ & 1 & 400€ & 0.1€ \\
-                    Ordenador & 2000€ & 1 & 2000€ & 0.5€ \\
-                    Impresora 3D & 1000€ & 5 & 5000€ & 1.25€ \\
+                    Dispositivo móvil & 400€ & 1 & 400€ \\
+                    Ordenador & 1500€ & 1 & 1500€ \\
+                    Impresora 3D & 1000€ & 1 & 1000€ \\
                     \hline
-                    Total & & & 6600€ & 1.85€ \\
+                    Total & & & 2900€ \\
                     \hline
                 \end{tabular}
+                \label{tab:costes de hardware de desarrollo inicial}
             \end{table}
             \subsubsubsection{Costes de software}
-            En este apartado se definen los costes de las licencias de software que no son gratuitos. Consideraremos una amortización  de 4 años.
+            En este apartado se definen los costes de las licencias de software que no son gratuitos. Estos gastos de software se reflejan en la tabla A.3.
             \begin{table}[H]
                 \centering
                 \caption{Costes de software}
                 \begin{tabular}{|l|c|c|}
                     \hline
-                    Concepto & Coste & Coste amortizado anual \\
+                    Concepto & Coste & Coste total \\
                     \hline
-                    Windows 10 Pro & 200€ & 50€ \\
-                    Flutter flow (suscripción) & 30€ al mes & 360€ \\
+                    Windows 10 Pro & 200€ & 200€ \\
+                    Flutter flow (suscripción) & 30€ al mes & 180€ \\
                     \hline
-                    Total & 230€ & 410€ \\
-                    \hline
-                \end{tabular}
-            \end{table}
-            \subsubsubsection{Costes varios}
-            En este apartado se definen el resto de gastos del proyecto.
-            \begin{table}[H]
-                \centering
-                \caption{Costes varios}
-                \begin{tabular}{|l|c|c|c|}
-                    \hline
-                    Concepto & Coste & Cantidad & Coste total \\
-                    \hline
-                    Memoria impresa & 20€ & 1 & 20€ \\
-                    Alquiler de oficina & 300€ & 12 & 3600€ \\
-                    Internet & 40€ & 12 & 480€ \\
-                    Electricidad & 300€ & 12 & 3600€ \\
-                    Gas & 100€ & 12 & 1200€ \\
-                    \hline
-                    Total & & & 8900€ \\
+                    Total &  & 380€ \\
                     \hline
                 \end{tabular}
+                \label{tab:costes de software de desarrollo inicial}
             \end{table}
-            \subsubsubsection{Costes de producción por maceta}
-            En este apartado se definen los costes de producción de una maceta, sumando la amortización de gastos.
+            \subsubsubsection{Costes de producción de prototipo}
+            En este apartado se definen los costes de materiales utilizados para realizar la producción del prototipo, sumando la amortización de gastos. Estos gastos de producción de la maceta se reflejan en la tabla \ref{tab:costes de producción de prototipo de desarrollo inicial}.
             \begin{table}[H]
                 \centering
                 \caption{Costes de producción por maceta}
@@ -112,48 +95,53 @@ Para poder determinar si fabricar a gran escala Green In House podría ser renta
                     Sensor DHT11 & 3€ & 1 & 3€ \\
                     Sensor BH1750 & 2€ & 2 & 4€ \\
                     Cableado & 0,3€ metro & 5 & 1,5€ \\
-                    Plástico maceta & 1€ kilo & 1 & 1€ \\
-                    Impresión maceta & 0,3€ KWh & 5 & 1,5€ \\
+                    Plástico maceta & 1€ kilo & 2 & 2€ \\
+                    Impresión de maceta & 0,3€ KWh & 5 & 1,5€ \\
                     \hline
-                    Total & & & 99,50€ \\
+                    Total & & & 100,00€ \\
+                    \end{tabular}
+                    \label{tab:costes de producción de prototipo de desarrollo inicial}
+                \end{table}
+            \subsubsubsection{Costes de documentación}
+            En este apartado se definen los costes de los materiales de documentación. Estos gastos de documentación se reflejan en la tabla \ref{tab:costes de documentación de desarrollo inicial}.
+            \begin{table}[H]
+                \centering
+                \caption{Costes de producción por maceta}
+                \begin{tabular}{|l|c|c|c|}
                     \hline
-                    Amortización de hardware & 4€ & 1 & 1,85€ \\
-                    Amortización de software & 0,41€ & 1 & 0,41€ \\
-                    Amortización de personal & 26,4€ & 1 & 26,4€ \\
-                    Amortizaciones varias & 8,9€ & 1 & 8,9€ \\
+                    Concepto & Coste & Cantidad & Coste total \\
                     \hline
-                    Total con amortizaciones & & & 137,06€ \\
+                    Impresión de memoria & 20€ & 1 & 20€ \\
                     \hline
-                \end{tabular}
-            \end{table}
+                    Total & & & 20,00€ \\
+                    \end{tabular}
+                    \label{tab:costes de documentación de desarrollo inicial}
+                \end{table}
+            
             \subsubsubsection{Costes totales}
-            En este apartado se realiza el sumatorio total de todos los gastos anuales estimando la producción y venta de 1000 macetas educativas a lo largo del año.
+            En este apartado se realiza el sumatorio total de todos los gastos estimandos asociados al desarrollo del Green In House. Este resumen de gastos totales se reflejan en la tabla \ref{tab:costes totales de desarrollo inicial}.
             \begin{table}[H]
                 \centering
                 \caption{Costes totales}
-                \begin{tabular}{|l|r|}
+                \begin{tabular}{|l|c|}
                     \hline
                     Concepto & Coste \\
                     \hline
-                    Personal & 26,400€ \\
-                    Hardware & 6,600€ \\
-                    Software & 410€ \\
-                    Varios & 8,900€ \\
-                    Producción 1000 macetas & 99,500€ \\
+                    Personal & 6.600€ \\
+                    Hardware & 2.900€ \\
+                    Software & 380€ \\
+                    Fabricación prototipo & 100€ \\
+                    Documentación & 20€ \\
                     \hline
-                    Total anual & 141,810€ \\
+                    Total & 10.000€ \\
                     \hline
                 \end{tabular}
+                \label{tab:costes totales de desarrollo inicial}
             \end{table}
-            \subsubsubsection{Conclusión de precio de la maceta educativa}
-            Amortizando los costes de personal, de hardware, de software y de varios, en cada una de las macetas, sale que el precio para no perder dinero vendiendo las 1000 macetas estimadas al año, tendría que ser 137,06€. El objetivo de producir estas macetas, es obtener más beneficios a parte del salario que se va a cobrar como desarrollador para poder reinvertirlo en mejorar la empresa, por lo que habría que venderlas a un mayor coste. En estos costes, no están incluidos los gastos de envío, ya que dependerán de la zona a la que halla que realizar el envío y se facturarán aparte. El precio estimado de Green In House sería de 180€. 
-            Gracias a su versatilidad de software se podrían construir modelos que contengan varias plantas en un mismo macetero con sensores independientes para cada una, sin elevar demasiado los costes, ya que los mayores costes vienen del precio de la Raspberry Pi, la cual puede leer muchísimos más sensores de los que se están utilizando. Además, el precio actual de la Raspberry Pi está muy alto debido a los actuales problemas con la distribución de semiconductores, ya que su precio original era de 30€.
-        \subsubsection{Beneficios}
-        Es necesario estimar los ingresos potenciales del proyecto. Esto puede incluir la venta de kits de invernadero a los usuarios, la generación de ingresos a través de la aplicación móvil (por ejemplo, mediante publicidad o suscripciones premium) o la prestación de servicios de consultoría en jardinería.
-        E l beneficio de la venta de  Green in House vendiéndola por 180€, descontando los 137,06€ que nos costaría fabricarla sería de 42,94€ unidad por 1000 que estimamos que se podría vender sería de 42940€anuales
-    
+            Para desarrollar el proyecto el único gasto real que he tenido que afrontar son los gastos de materiales para la fabricación del prototipo, ya que he utilizado mi ordenador actual con Windows, las licencias de software han sido cedidas por el fabricante al ser un estudiante universitario, la impresora 3D ha sido facilitado su uso sin coste más allá del material gastado y no se ha tenido que pagar a ningún desarrollador, ya que esa tarea la he realizado yo.
+
         \subsubsection{Análisis de mercado}
-        Se debe realizar un estudio de mercado para evaluar la demanda potencial de este tipo de invernadero inteligente. Esto implica analizar el tamaño del mercado, identificar a los potenciales clientes y evaluar la competencia existente.
+        Para conocer la potencial demanda de Green In House hay que realizar un estudio de mercado. Esto implica analizar el tamaño del mercado, identificando a los potenciales clientes y evaluando la competencia existente.
             \subsubsubsection{Potenciales clientes}
             Green In House principalmente está diseñado y pensado para niños, pero también puede ser útil para los adultos y hay varias segmentaciones de clientes que podrían encontrar este producto interesante:
             \begin{itemize}      
@@ -173,8 +161,173 @@ Para poder determinar si fabricar a gran escala Green In House podría ser renta
                 \item \textbf{Planty Square :} es un jardín modular inteligente que permite a los usuarios cultivar varias plantas a la vez. Cada módulo puede cultivar una planta y los módulos se pueden conectar entre sí para formar un jardín más grande. Cuenta con una aplicación que envía notificaciones para regar las plantas. El precio ronda los 100€ .
                 \item \textbf{SproutsIO :} otro sistema es un jardín interior de alta tecnología que permite cultivar plantas sin tierra. Utiliza la hidroponía y la aeroponía para cultivar plantas y tiene una aplicación que permite a los usuarios monitorear y controlar su jardín desde su teléfono. El precio es más elevado, alrededor de 800€.
             \end{itemize}
-            Es importante aclarar que estos precios pueden variar por región debido a factores como los impuestos, los costos de envío y la tasa de cambio. Todos estos productos tienen en común la idea de utilizar la tecnología para facilitar el cultivo de plantas en interiores, pero cada uno tiene sus propias características únicas, al igual que Green In House. 
-    
+            Es importante aclarar que estos precios pueden variar por región debido a factores como los impuestos, los costos de envío y la tasa de cambio. Todos estos productos tienen en común la idea de utilizar la tecnología para facilitar el cultivo de plantas en interiores, pero cada uno tiene sus propias características únicas, al igual que Green In House. En la tabla \ref{tab:comparativa competidores} se muestra un análisis comparativo de las funcionalidades que aporta Green In House frente a sus competidores actualmente existentes en el mercado.
+            \begin{table}[ht]
+                \resizebox{13cm}{!} {
+                \begin{tabular}{|l|l|l|l|l|l|}
+                \hline   & \textbf{Green In House} & \textbf{Click and Grow} & \textbf{AeroGarden} & \textbf{Planty Square} & \textbf{SproutsIO} \\ \hline
+                \textbf{Precio}   & Medio   & Medio/Alto   & Alto   & Medio/Alto   & Muy alto   \\ \hline
+                \textbf{Conectividad}   & Sí   & Sí   & Sí   & Sí   & Sí   \\ \hline
+                \textbf{Completamente automatizado}     & No   & Sí   & Sí   & Sí   & Sí   \\ \hline
+                \textbf{Educación Ambiental}   & Sí   & No   & No   & No   & No   \\ \hline
+                \textbf{Personalización}   & Sí   & No   & No   & Parcial   & No   \\ \hline
+                \textbf{Posibilidad de expansión}   & Sí    & No    & No    & No    & No    \\ \hline
+                \textbf{Open Source}   & Sí    & No    & No    & No    & No    \\ \hline
+                \end{tabular}
+                }
+                \caption{Comparativa de Green In House con la competencia}
+                \label{tab:comparativa competidores}
+            \end{table}
+        
+        \subsubsection{Plan de negocio}
+        Para poder definir un precio de venta al público he realizado un plan de negocio básico, sin entrar en demasiado detalle, asumiendo que el dinero de la inversión inicial se posee y no sería necesario pedir créditos. Debido a ello no se han tenido en cuenta intereses aplicados en el tiempo. Para realizar este plan he estimado los costes asociados al sueldo del desarrollador, la adquisición del hardware (ordenador, dispositivo móvil, impresoras 3D, Raspberry Pi, sensores y componentes electrónicos), así como los gastos de diseño y construcción de las maceta. Además, se deben incluir los costos de personal (un desarrollador), los costes de alquiler de oficina, los costes de servicios como luz, gas e internet y ver como amortizar dichos gastos en el precio de las macetas educativas vendidas. Para calcular el sobrecoste derivado de la amortización de costes de fabricación que habría que aplicar al precio de los materiales de cada maceta, he estimado como tiempo de amortización de gastos iniciales total de 4 años y una producción y venta mensual de 100 macetas.
+            \subsubsubsection{Costes de personal}
+            El proyecto lo realizará un desarrollador, a tiempo completo, teniendo en cuenta el siguiente salario estimado. Estos gastos de personal se reflejan en la tabla \ref{tab:costes de personal de plan de negocio}.
+            \begin{table}[H]
+                \centering
+                \caption{Costes de personal}
+                \begin{tabular}{|l|c|c|}
+                    \hline
+                    Concepto & Coste & Coste amortizado\\
+                    \hline
+                    Salario mensual neto & 1212€ & 1,01€ \\
+                    Retención IRPF (15\%) & 330€ & 0,28€ \\
+                    Seguridad Social (29.9\%) & 658€ & 0,55€\\
+                    \hline
+                    Salario mensual bruto & 2200€ & 1,83€\\
+                    \hline
+                    Total 14 pagas & 30800€ & 25,67\\
+                    \hline
+                \end{tabular}
+                \label{tab:costes de personal de plan de negocio}
+            \end{table}
+            En el apartado de seguridad social se han sumado los costes en contingencias comunes ,desempleo, garantía salarial y la formación profesional.
+            \subsubsubsection{Costes de hardware}
+            En este apartado pondremos los costes que han sido necesarios, para desarrollar el dispositivo hardware que hemos necesitado para este proyecto. Estos gastos de hardware se reflejan en la tabla \ref{tab:costes de hardware de plan de negocio}.
+            \begin{table}[H]
+                \centering
+                \caption{Costes de hardware}
+                \begin{tabular}{|l|c|c|c|c|}
+                    \hline
+                    Concepto & Coste & Cantidad & Coste total & Coste amortizado \\
+                    \hline
+                    Dispositivo móvil & 400€ & 1 & 400€ & 0,08€ \\
+                    Ordenador & 1500€ & 1 & 1500€ & 0,31€ \\
+                    Impresora 3D & 1000€ & 5 & 5000€ & 1,04€ \\
+                    \hline
+                    Total & & & 6900€ & 1,44€ \\
+                    \hline
+                \end{tabular}
+                \label{tab:costes de hardware de plan de negocio}
+            \end{table}
+            \subsubsubsection{Costes de software}
+            En este apartado se definen los costes de las licencias de software que no son gratuitos. Estos gastos de software se reflejan en la tabla \ref{tab:costes de software de plan de negocio}.
+            \begin{table}[H]
+                \centering
+                \caption{Costes de software}
+                \begin{tabular}{|l|c|c|c|}
+                    \hline
+                    Concepto & Coste & Coste amortizado anual & Coste amortizado \\
+                    \hline
+                    Windows 10 Pro & 200€ & 50€ & 0,04€ \\
+                    Flutter flow (suscripción) & 30€ al mes & 360€ & 0,30€ \\
+                    \hline
+                    Total & 230€ & 410€ & 0,34€ \\
+                    \hline
+                \end{tabular}
+                \label{tab:costes de software de plan de negocio}
+            \end{table}
+            \subsubsubsection{Costes de servicios}
+            En este apartado se definen el resto de gastos del proyecto. Estos gastos de servicios se reflejan en la tabla \ref{tab:costes de servicios de plan de negocio}.
+            \begin{table}[H]
+                \centering
+                \caption{Costes varios}
+                \begin{tabular}{|l|c|c|c|c|}
+                    \hline
+                    Concepto & Coste & Cantidad & Coste total & Coste amortizado \\
+                    \hline
+                    Alquiler de oficina & 600€ & 12 & 7.200€ & 6,00€ \\
+                    Internet & 40€ & 12 & 480€ & 0,40€ \\
+                    Electricidad & 300€ & 12 & 3600€ & 3,00€ \\
+                    Gas & 100€ & 12 & 1200€ & 1,00€ \\
+                    \hline
+                    Total 1.040€ & & & 12.480€ & 10,40\\
+                    \hline
+                \end{tabular}
+                \label{tab:costes de servicios de plan de negocio}
+            \end{table}
+            \subsubsubsection{Costes de producción por maceta}
+            En este apartado se definen los costes de producción de una maceta. Primeramente se calculan los costes referentes a los gastos de materiales como se reflejan en la tabla \ref{tab:costes de materiales por maceta de plan de negocio}.
+            \begin{table}[H]
+                \centering
+                \caption{Costes de materiales por maceta}
+                \begin{tabular}{|l|c|c|c|}
+                    \hline
+                    Concepto & Coste & Cantidad & Coste total \\
+                    \hline
+                    Raspberry Pi & 60€ & 1 & 60€ \\
+                    Tarjeta SD & 7€ & 1 & 7€ \\
+                    Batería & 4€ & 1 & 4€ \\
+                    Pantalla táctil & 12€ & 1 & 12€ \\
+                    Cable HDMI & 1,5€ & 1 & 1,5€ \\
+                    Cable USB & 0,5€ & 1 & 0,5€ \\
+                    Sensor FC28 & 3€ & 1 & 3€ \\
+                    Sensor DHT11 & 3€ & 1 & 3€ \\
+                    Sensor BH1750 & 2€ & 2 & 4€ \\
+                    Cableado & 0,3€ metro & 5 & 1,5€ \\
+                    Plástico maceta & 1€ kilo & 2 & 2€ \\
+                    Impresión maceta & 0,3€ KWh & 5 & 1,5€ \\
+                    \hline
+                    Total & & & 100,00€ \\
+                    \hline
+                \end{tabular}
+                \label{tab:costes de materiales por maceta de plan de negocio}
+            \end{table}
+            A estos costes hay que sumarle las amortizaciones de gatos estimados, para calcular el precio de producción total asociado a cada maceta, como se refleja en la tabla \ref{tab:costes de producción por maceta de plan de negocio} .
+            \begin{table}[H]
+                \centering
+                \caption{Costes de producción por maceta}
+                \begin{tabular}{|l|c|c|c|}
+                    \hline
+                    Concepto & Coste & Cantidad & Coste total \\
+                    \hline
+                    Costes de materiales & 100,00€ & 1 & 100,00€ \\
+                    Amortización de personal & 25,67€ & 1 & 25,67€ \\
+                    Amortización de hardware & 1,44€ & 1 & 1,44€ \\
+                    Amortización de software & 0,34€ & 1 & 0,34€ \\
+                    Amortización de servicios & 10,40€ & 1 & 10,40€ \\
+                    \hline
+                    Total & & & 137,85€ \\
+                    \hline
+                \end{tabular}
+                \label{tab:costes de producción por maceta de plan de negocio}
+            \end{table}
+            \subsubsubsection{Costes totales}
+            En este apartado se realiza el sumatorio total de todos los gastos anuales estimados. Este resumen de gastos totales se reflejan en la tabla \ref{tab:costes totales por maceta de plan de negocio}.
+            \begin{table}[H]
+                \centering
+                \caption{Costes totales}
+                \begin{tabular}{|l|r|}
+                    \hline
+                    Concepto & Coste \\
+                    \hline
+                    Personal & 30.800€ \\
+                    Hardware & 6.900€ \\
+                    Software & 410€ \\
+                    Varios & 12.480€ \\
+                    Producción 1200 macetas & 120.000€ \\
+                    \hline
+                    Total anual & 170.590€ \\
+                    \hline
+                \end{tabular}
+                \label{tab:costes totales por maceta de plan de negocio}
+            \end{table}
+            \subsubsubsection{Conclusión de precio de la maceta educativa}
+            Amortizando los costes de personal, de hardware, de software y de varios, en cada una de las macetas, sale que el precio para no perder dinero vendiendo las 1200 macetas estimadas al año, tendría que ser 137,85€. El objetivo de producir estas macetas, es obtener más beneficios a parte del salario que se va a cobrar como desarrollador para poder reinvertirlo en mejorar la empresa, por lo que habría que venderlas a un mayor coste. En estos costes, no están incluidos los gastos de envío, ya que dependerán de la zona a la que halla que realizar el envío y se facturarán aparte. El precio estimado de Green In House sería de 180€. 
+            Gracias a su versatilidad de software se podrían construir modelos que contengan varias plantas en un mismo macetero con sensores independientes para cada una, sin elevar demasiado los costes, ya que los mayores costes vienen del precio de la Raspberry Pi, la cual puede leer muchísimos más sensores de los que se están utilizando. Además, el precio actual de la Raspberry Pi está muy alto debido a los actuales problemas con la distribución de semiconductores, ya que su precio original era de 30€.
+            \subsubsubsection{Beneficios}
+            El beneficio estimado de la venta de Green in House vendiéndolo a 180€ y descontando los 137,85€ que costaría fabricar la maceta, da un beneficio de 42,15€ por unidad. Esto multiplicado por las 1200 unidades que se estiman vender, daría unos beneficios anuales de 50.585€.
+
     
     \subsection{Viabilidad legal}
     %TODO

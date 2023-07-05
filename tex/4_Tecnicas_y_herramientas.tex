@@ -1,5 +1,5 @@
 \capitulo{4}{Técnicas y herramientas}
-A continuación se describen 
+En este capítulo se describen las técnicas y metodologías que se han empleado para realizar el diseño de la aplicación de Green In House, así como las diferentes tecnologías que se han empleado para su desarrollo.
 
 \section{Técnicas y metodologías}
 Para poder realizar de manera óptima y eficiente el diseño de Green In House, con un carácter iterativo y con posibilidades de ampliar sus funcionalidades continuamente en cada iteración, se ha recurrido a la utilización de patrones de diseño y a una metodología ágil. 
@@ -19,7 +19,9 @@ Para poder realizar de manera óptima y eficiente el diseño de Green In House, 
 
     \subsection{Scrum: Metodología de gestión ágil}
     Scrum \cite{wiki:scrum} es un marco de trabajo de metodología ágil ampliamente utilizado en el desarrollo de software. Se basa en principios colaborativos, flexibilidad y entrega incremental. El objetivo principal de Scrum es permitir a los equipos de trabajo desarrollar productos de alta calidad de manera eficiente. Además permite realizar una entrega temprana y continua de valor al cliente, a la vez que se fomenta la mejora continua del proceso de desarrollo.
+    
     Scrum se basa en un enfoque iterativo e incremental, en el que el trabajo se divide en ciclos continuos de desarrollo llamados \textit{sprints}. Cada sprint tiene una duración fija, generalmente de 1 a 4 semanas, y al final de cada sprint se entrega un incremento funcional del producto. Esta metodología permite ajustar y cambiar los requisitos a medida que se realizan los incrementos y se obtiene retroalimentación del cliente.
+    
     Durante el \textit{sprint}, se llevan a cabo reuniones diarias llamadas \textit{Daily Scrum}, en las cuales el equipo comparte el progreso realizado, identifica posibles problemas y planifica las tareas para el día. También se realizan reuniones de planificación de \textit{sprint}, revisión de \textit{sprint} y retrospectivas, que ayudan al equipo a refinar y mejorar continuamente su trabajo.
     El equipo de desarrollo de Scrum se organiza de manera autónoma y autoorganizada. No hay jerarquías rígidas, sino que se fomenta la colaboración y la toma de decisiones conjunta. El equipo se compone de roles claramente definidos:
     \begin{itemize}
@@ -27,13 +29,15 @@ Para poder realizar de manera óptima y eficiente el diseño de Green In House, 
       \item \textbf{Scrum Master:} es el facilitador del equipo Scrum. Su rol es asegurar que se sigan los principios y prácticas de Scrum, eliminar problemas y garantizar un ambiente de trabajo colaborativo y productivo.
       \item \textbf{Equipo de Desarrollo:} está formado por profesionales que llevan a cabo el trabajo de desarrollo del producto. Son multidisciplinares y autorganizados, asumiendo la responsabilidad de entregar un incremento de software funcional al final de cada \textit{sprint}.
     \end{itemize}
-    \imagen{scrum}{Resumen de funcionamiento de metodología Scrum}{.7}
+    En la figura 4.1 se puede ver un diagrama de los roles de Scrum y como intervienen en las diferentes fases de proceso.
+    \imagen{scrum}{resumen de funcionamiento de metodología Scrum}{.7}
 
 \section{Herramientas}
 Green In House no es una simple maceta, si no que es un proyecto que aglutina una gran cantidad de funcionalidades y tecnologías diferentes, las cuales han sido desarrolladas utilizando las siguientes herramientas.
 
     \subsection{Venv: Entornos Virtuales en Python}
     Uno de los aspectos más críticos al desarrollar proyectos en Python es la gestión de dependencias. Con frecuencia, diferentes proyectos requieren diferentes versiones de las mismas librerías. La instalación global de dichas librerías se hace inviable, ya que puede generar conflictos, debido a que determinadas versiones pueden integrar métodos que otras no, o requerir otra sintaxis, etc. Debido a esto, los entornos virtuales de Python, o \textit{venv} desempeñan un papel crucial. \cite{wiki:venv}
+    
     El módulo \textit{venv} de Python proporciona un soporte para crear entornos virtuales ligeros con sus propios directorios de sitio, aislados del intérprete Python global del sistema. Cada entorno virtual tiene su propio intérprete de Python, lo que permite instalar y gestionar paquetes de Python independientes para cada proyecto.
 
     \subsection{SQLAlchemy: librería de base de datos en Python}
@@ -80,20 +84,13 @@ Green In House no es una simple maceta, si no que es un proyecto que aglutina un
         \item Ventanas emergentes.
         \item Frames.
     \end{itemize}
-    Todo esto permite crear interfaces de usuario altamente personalizables y funcionales.  
+    Todo esto permite crear interfaces de usuario altamente personalizables y funcionales. En la Figura 4.2 se muestra la interfaz de la aplicación desarrollada con TKinter para que el usuario pueda introducir los datos de su red WiFi.
     \imagen{app_tkinter}{Captura de pantalla de la app gráfica de Green In House desarrollada en TKinter}{1}
 
     \subsection{Adafruit - CircuitPython: librería de sensores y actuadores en Python}
     Adafruit CircuitPython \cite{wiki:adafruit_circuit_python} es una implementación de Python diseñada para simplificar la experimentación con hardware de bajo coste. CircuitPython es una implementación de Python 3 diseñada para microcontroladores. Esta librería está desarrollada por Adafruit Industries, una empresa reconocida en el mundo de la electrónica y hardware de código abierto.    
-    Una de las características clave de CircuitPython es su simplicidad. Proporciona una excelente plataforma para aquellos que están empezando a programar y trabajar con hardware. CircuitPython es capaz de interactuar directamente con el hardware. Esto incluye leer entradas y salidas digitales, utilizar la comunicación I2C y SPI, y controlar y leer sensores y actuadores. Esto permite a los desarrolladores y estudiantes explorar la interacción entre el software y el hardware de una manera intuitiva y fácil de entender.
-    % \begin{itemize}
-    %     \item \textbf{MCP3008:} conversor de 8 señales analógicas a digitalES (ADC).
-    %     \item \textbf{DHT11:} sensor de humedad y temperatura ambiente de señal digital.
-    %     \item \textbf{LM35:} sensor de temperatura ambiente de señal analógica.
-    %     \item \textbf{FC28:} sensor de humedad de tierra de la maceta de señal analógica.
-    %     \item \textbf{LDR:} sensor de luminosidad ambiente de señal analógica.
-    %     \item \textbf{BH1750:} sensor de luminosidad ambiente de señal digital.  
-    % \end{itemize}
+    
+    Una de las características clave de CircuitPython es su simplicidad. Proporciona una excelente plataforma para aquellos que están empezando a programar y trabajar con hardware. CircuitPython es capaz de interactuar directamente con el hardware. Esto incluye leer entradas y salidas digitales, utilizar la comunicación I2C y SPI, y controlar y leer sensores y actuadores. Esto permite a los desarrolladores y estudiantes explorar la interacción entre el software y el hardware de una manera intuitiva y fácil de entender. En la tabla 4.1 se muestran los diferentes módulos y sensores electrónicos que se han utilizado en el desarrollo de Green In House mediante la librería Circuit Python de AdaFruit.
     \begin{table}[ht]
     \resizebox{13cm}{!} {
     \centering
@@ -111,7 +108,7 @@ Green In House no es una simple maceta, si no que es un proyecto que aglutina un
     \caption{Modelos de sensores utilizados en Green In House}
     \end{table}
 
-    \section{Git: sistema de control de versiones}
+    \subsection{Git: sistema de control de versiones}
     Git \cite{wiki:git} es un sistema de control de versiones distribuido de código abierto que permite gestionar y ver los cambios que se han ido realizando un proyecto a lo largo del tiempo. Está diseñado para manejar todo tipo de proyectos (ya sean pequeños o muy grandes), con una gran velocidad y eficiencia.Algunas de las características más destacadas de Git son:
     \begin{itemize}
         \item \textbf{Sistema distribuido:} su característica más importante es que es un sistema de control de versiones distribuido. Esto significa que cada desarrollador tiene una copia completa del historial de cambios del proyecto en su máquina local. Esta característica permite trabajar de manera descentralizada y autónoma, sin tener que estar constantemente sincronizado con un servidor central.
@@ -121,15 +118,20 @@ Green In House no es una simple maceta, si no que es un proyecto que aglutina un
         \item \textbf{Plataforma de colaboración:} Combinado con plataformas de alojamiento de código como GitHub, se convierte en una poderosa plataforma de colaboración, permitiendo a los equipos de desarrolladores revisar y discutir cambios, gestionar tareas e integrar de manera continua el código. Este sistema de colaboración es esencial para mantener la calidad del código y coordinar el trabajo en equipo.
     \end{itemize}
         
-    \subsection{GitHub: Plataforma \textit{open source} de repositorios}
-    GitHub \cite{wiki:github} es una plataforma de desarrollo de software basada en la nube que utiliza el sistema de control de versiones Git. Con el paso del tiempo se ha convertido en una herramienta esencial para muchos desarrolladores y organizaciones debido a las capacidades que ofrece para colaborar y gestionar proyectos de software.
-    GitHub permite a los desarrolladores almacenar sus proyectos en repositorios, que son esencialmente directorios de proyectos. Estos repositorios pueden ser públicos (cualquier persona puede ver y contribuir al código) o privados (restringe el acceso sólo a personas específicas).
-    Una característica principal de GitHub es su enfoque en la colaboración. Los desarrolladores pueden hacer un \textit{fork} de un repositorio, lo que crea una copia del proyecto (de la versión seleccionada) en su propia cuenta de GitHub. Después de eso pueden hacer cambios en esa copia y, cuando estén listos, pueden enviar una \textit{pull request} al repositorio original. El propietario del repositorio original puede revisar estos cambios y optar por descartarlos o por fusionarlos con el proyecto principal.
-    Github también integra un control de ramas dentro de un mismo repositorio. Una rama en Git es una referencia a uno de los \textit{commits}. Cuando creamos una rama, en realidad estamos creando una nueva línea de desarrollo en base al código existente en un determinado \textit{commit}. Esto significa que podemos realizar cambios en esa rama sin afectar a otras ramas. Esto permite a los desarrolladores trabajar en características específicas, pruebas o experimentos en aislamiento, lo que facilita la organización del código y reduce el riesgo de introducir errores en el código de producción.
-    Las ramas son especialmente útiles en el desarrollo colaborativo, ya que cada colaborador puede trabajar en una rama separada sin interferir con el trabajo de los demás. Una vez que un colaborador ha terminado su trabajo en una rama, puede solicitar que se integre de nuevo en la rama principal (a menudo llamada \textit{master} o \textit{main}) a través de un \textit{pull request}.     
-    Además de estas capacidades de colaboración y control de versiones, GitHub ofrece características como la gestión de incidencias para rastrear y resolver problemas, y acciones de GitHub para automatizar flujos de trabajo de desarrollo.
-    \subsection{Utilización de GitHub en Green In House}
-        Git ha sido utilizado en el desarrollo de Green In House junto con la plataforma GitHub para realizar el seguimiento de cambios, garantizar la integridad del código y detección de problemas tras la realización de cambios. También ha sido una herramienta útil para poder mantener en la nube una copia de seguridad del proyecto actualizada continuamente en caso de que se estropease el entorno de desarrollo, evitando la pérdida del código del proyecto.
+        \subsubsection{GitHub: Plataforma \textit{open source} de repositorios}
+        GitHub \cite{wiki:github} es una plataforma de desarrollo de software basada en la nube que utiliza el sistema de control de versiones Git. Con el paso del tiempo se ha convertido en una herramienta esencial para muchos desarrolladores y organizaciones debido a las capacidades que ofrece para colaborar y gestionar proyectos de software.
+        
+        GitHub permite a los desarrolladores almacenar sus proyectos en repositorios, que son esencialmente directorios de proyectos. Estos repositorios pueden ser públicos (cualquier persona puede ver y contribuir al código) o privados (restringe el acceso sólo a personas específicas).
+        
+        Una característica principal de GitHub es su enfoque en la colaboración. Los desarrolladores pueden hacer un \textit{fork} de un repositorio, lo que crea una copia del proyecto (de la versión seleccionada) en su propia cuenta de GitHub. Después de eso pueden hacer cambios en esa copia y, cuando estén listos, pueden enviar una \textit{pull request} al repositorio original. El propietario del repositorio original puede revisar estos cambios y optar por descartarlos o por fusionarlos con el proyecto principal.
+        
+        Github también integra un control de ramas dentro de un mismo repositorio. Una rama en Git es una referencia a uno de los \textit{commits}. Cuando creamos una rama, en realidad estamos creando una nueva línea de desarrollo en base al código existente en un determinado \textit{commit}. Esto significa que podemos realizar cambios en esa rama sin afectar a otras ramas. Esto permite a los desarrolladores trabajar en características específicas, pruebas o experimentos en aislamiento, lo que facilita la organización del código y reduce el riesgo de introducir errores en el código de producción.
+        
+        Las ramas son especialmente útiles en el desarrollo colaborativo, ya que cada colaborador puede trabajar en una rama separada sin interferir con el trabajo de los demás. Una vez que un colaborador ha terminado su trabajo en una rama, puede solicitar que se integre de nuevo en la rama principal (a menudo llamada \textit{master} o \textit{main}) a través de un \textit{pull request}.     
+        
+        Además de estas capacidades de colaboración y control de versiones, GitHub ofrece características como la gestión de incidencias para rastrear y resolver problemas, y acciones de GitHub para automatizar flujos de trabajo de desarrollo.
+        \subsubsubsection{Utilización de GitHub en Green In House}
+            Git ha sido utilizado en el desarrollo de Green In House junto con la plataforma GitHub para realizar el seguimiento de cambios, garantizar la integridad del código y detección de problemas tras la realización de cambios. También ha sido una herramienta útil para poder mantener en la nube una copia de seguridad del proyecto actualizada continuamente en caso de que se estropease el entorno de desarrollo, evitando la pérdida del código del proyecto.
 
     \subsection{VSCode: IDE de programación multilenguaje}
     VSCode \cite{wiki:vscode} es la abreviatura de Visual Studio Code, el cual es un editor de código fuente desarrollado por Microsoft. Es una herramienta extremadamente popular y versátil utilizada por desarrolladores de software en todo el mundo. Algunas de las características clave que tiene son:   

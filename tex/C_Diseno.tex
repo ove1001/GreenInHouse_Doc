@@ -66,7 +66,7 @@ A continuación se detalla la estructura que tiene cada tabla de la base de dato
             \item \textbf{consejos\_plantas}
             \begin{itemize}
                 \item descripcion \texttt{\{String\}}: Una descripción del consejo.
-                \item nombre\_elemento \texttt{\{String\}} \textbf{FK} de \textit{ plantas.nombre\_planta}: El nombre del elemento que se refiere al consejo.
+                \item nombre\_elemento \texttt{\{String\}} \textbf{PK} \textbf{FK} de \textit{ plantas.nombre\_planta}: El nombre del elemento que se refiere al consejo.
                 \item zona\_consejo \texttt{\{Enum type\}} \textbf{PK}: La zona del sensor.
                 \item tipo\_medida \texttt{\{Enum type\}} \textbf{PK}: El tipo de medida.
                 \item unidad\_medida \texttt{\{Enum type\}}: La unidad de la medida.
@@ -78,7 +78,7 @@ A continuación se detalla la estructura que tiene cada tabla de la base de dato
             \item \textbf{consejos\_tipos\_plantas}
             \begin{itemize}
                 \item descripcion \texttt{\{String\}}: Una descripción del consejo.
-                \item nombre\_elemento \texttt{\{String\}} \textbf{FK} de \textit{tipos\_plantas.tipo\_planta}: El nombre del elemento que se refiere al consejo.
+                \item nombre\_elemento \texttt{\{String\}} \textbf{PK} \textbf{FK} de \textit{tipos\_plantas.tipo\_planta}: El nombre del elemento que se refiere al consejo.
                 \item zona\_consejo \texttt{\{Enum type\}} \textbf{PK}: La zona del sensor.
                 \item tipo\_medida \texttt{\{Enum type\}} \textbf{PK}: El tipo de medida.
                 \item unidad\_medida \texttt{\{Enum type\}}: La unidad de la medida.
@@ -89,37 +89,44 @@ A continuación se detalla la estructura que tiene cada tabla de la base de dato
             \end{itemize}
         \end{itemize}
 
-    %TODO Diagrama entidad relacción
-
     \subsubsection{Utilización de un sistema de fechas}
-    Al no poder borrar las instancias de la base de datos, porque se eliminarían o corromperían los registros asociados a ellos, se ha optado por generar un sistema de fechas para dar de alta y de baja dichas instancias a lo largo del tiempo.
+    Para no violar la integridad referencial de los datos de la base de datos, no se permite borrar las instancias de los datos una vez grabadas. Para poder marcarlas como eliminadas se ha empleado un sistema de fechas, el cual determina cuando se creó la instancia y cuando se declaró como eliminada.
+
+\includepdf[pages=1,fitpaper]{diagrama_entidad_relaccion}  
 
 \section{Diseño procedimental}
-%TODO
-    \subsection{Diseño de gestión interna de los datos}
+Todas las siguientes entidades, las cuales son con las que trabaja Green In House para poder funcionar, siguen la misma estructura de clases, la cual se detalla a continuación. La única diferencia que hay entre estas entidades se debe a los atributos que contiene cada entidad, acorde a lo especificado en el diseño de datos, y a como se utilizan esos atributos para filtrar los objetos en los métodos get y list, utilizados para recuperar objetos de la base de datos. El método post y create se utiliza para crear los objetos en la base de datos. El método update se utiliza para actualizar los datos de los objetos en la base de dar y el método unsubscribe se utilizar para dar de baja dichos objetos, almacenando la fecha en que se dieron de baja.
+\begin{itemize}
+        \item Sensores
+        \item Registros Sensores
+        \item Plantas
+        \item Tipos Plantas
+        \item Sensores Plantas
+        \item Consejos Plantas
+        \item Consejos Tipo Plantas
+    \end{itemize}
     
-        \subsubsection{Intermediario para trabajar con los datos de la base de datos mediante un sistema orientado a objetos y viceversa}
-        resultset : convertir instancias de la base de datos a objetos con los que trabajar cómodamente en Pyhton.
-        
-            Definición de una clase intermedia para cada tabla de la base de datos
-        
-        \subsubsection{Definición de servicios de alto nivel para interactuar con la base de datos mediante objetos, manejando internamente las sesiones de acceso a la base de datos}
-    
-    \subsection{Diseño de comunicación externa de los datos}
-    
-        \subsubsection{Utilización de API-REST para leer y generar datos en la aplicación de Green In House mediante archivos JSON}
-    
-        \subsection{Diseño de aplicación movil para poder interactuar cómodamente con Green In House desde dispositivos móviles}
-    
-            \subsubsection{Utilización de Flutter para desarrollo de App multiplataforma}
-            
-    
-            \subsubsection{Utilización de Flutter Flow para desarrollo de App multiplataforma basado en interactuación gráfica en lugar de escritura de código}
-    
+\includepdf[pages=1,fitpaper]{diagrama_de_clases}  
+
+
+%TODO clases de sensor electronico
+
+%TODO pantalla tactil servicos wifi
+
+
+El usuario siempre va a interactuar con el sistema a través del API REST, ya sea desde la aplicación móvil haciendo consultas a la API REST, como desde un cliente API REST estilo postman o el propio Swager que recupere los objetos JSON para leerlos. Por lo tanto, la secuencia del flujo de consultas siempre va a ser muy similar al que se detalla en el ejemplo de acontinuación. En este ejemplo se aprecia como el usuario utiliza un método de la API REST, el cual utiliza un método de la capa de servicos, el cual a su vez hace uso de un método del manejador de la base de datos para dicha clase. Esto devuelve una instancia de la base de datos en forma de objeto, del cual se extraen sus atributos para generar un objeto del tipo common, con el que poder trabajar en la applicación de manera segura, sin miedo a que sea modificado por error y esto realice algún cambio en los datos de la instanciar al hacer el commit de alguna transacción en curso.
+
+\includepdf[pages=1,fitpaper]{diagrama_de_secuencia}  
+
+
+% Generar diagrama de como sensor backend encapsula sensor electronico que usa factoria para crear el tipo correspondiente
+
+% Generar diagrama de pantalla como usa servicios para definir las credenciales de red
+
     
 
 \section{Diseño arquitectónico}
-Para poder desarrollar la arquitectura de Green In House de manera eficiente y con amplias posibilidades de crecimiento y reutilización, se ha recurrido a la utilización de patrones de diseño. 
+Para poder desarrollar la arquitectura de Green In House de manera eficiente y con amplias posibilidades de crecimiento y reutilización, se ha recurrido a la utilización de patrones de diseño. Para la realización de la estructura inicial de Green In House separando las funcionalidades en diferentes capas y servicios, reutilicé la estructura básica de la práctica final de la asignatura "Diseño y mantenimiento del software". De esta práctica reutilicé y modifiqué según mis necesidades, algunos archivos de código fuente originalmente desarrollados por Jesús Alonso Abad, para definir los servicios básicos de configuración de directorios de la base de datos y de la API REST, así como la instalación de dependencias declaradas para cada entorno virtual, adaptándolos al código y estructura de Green In House.
 
     \subsection{Patrón de diseño MVC (Modelo-Vista-Controlador)}
     El patrón de diseño Modelo-Vista-Controlador (MVC) se ha utilizado en Green In House para separar la lógica de la aplicación en tres componentes principales: el Modelo, la Vista y el Controlador. 
@@ -181,3 +188,13 @@ Para poder desarrollar la arquitectura de Green In House de manera eficiente y c
     \subsection{Partón de diseño Singleton}
         Durante el lanzamiento del servidor API REST se define una única instancia de aplicación, la cual se almacena de manera global mediante el uso de Flask. Esta instancia de aplicación Flask se recupera cuando se hace uso de los métodos de la API REST para recuperar el directorio de la base de datos y pasárselo a la capa de servicios para que trabaje con él.
     %TODO diagrama
+
+\section{Diseño 3D}
+
+Para la realización del prototipo se ha realizado un diseño de modelado 3D de la maceta de Green In House preparada para albergar la planta, la raspberri y la pantalla tactil. Estos archivos han sido diseñados por Yeray Pescador Calleja y se encuentran accesibles en el repositorio de Green In House \cite{GreenInHouse:repo:Maceta}, en el apartado \texttt{/cad3D/maceta}. En las imágenes \ref{fig:maceta1}, \ref{fig:maceta2} y \ref{fig:maceta3} puede apreciarse como es el diseño 3D de la maceta educativa de Green In House..
+\imagen{maceta1}{captura de pantalla 1 del modelo 3D de Green In House.}{.7}
+\imagen{maceta2}{captura de pantalla 2 del modelo 3D de Green In House.}{.7}
+\imagen{maceta3}{captura de pantalla 3 del modelo 3D de Green In House.}{.7}
+
+
+
