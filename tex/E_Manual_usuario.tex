@@ -1,17 +1,45 @@
 \apendice{Documentación de usuario}
-A continuación se exponen 
-
-como que soy un usuario que ha comprado el producto y lo desembala la caja . como lo configura y usa
-
-
-
+En este apartado se expone como un usuario que ha adquirido una maceta educativa Green In House tiene que realizar el arranque inicial del sistema para ponerlo en funcionamiento y cómo utilizarle una vez está funcionando.
 
 \section{Introducción}
-%TODO
+Para poder facilitar al usuario su iniciación en el uso de Green In House se ha redactado la siguiente guía. En ella se exponen los pasos necesarios a realizar para poner Green In House a funcionar y como hacer uso del sistema posteriormente.
+
 \section{Requisitos de usuarios}
-%TODO
+Es necesario que el usuario cumpla con los siguientes requisitos para poder hacer uso de Green In House.
+\begin{itemize}
+    \item Para poder poner el sistema a funcionar, el usuario tendrá que disponer en casa de una red WiFi a la que conectar Green In House. Si no dispone de dicha red, podrá realizar lecturas de los sensores, pero no podrá consultar los registros de los datos desde el móvil.
+    \item Para poder utilizar la aplicación móvil para visualizar los registros de Green In House, el usuario tendrá que disponer de un dispositivo Android en el que instalar la aplicación móvil.
+    \item El usuario tendrá que conectar regularmente Green In House a la corriente eléctrica mediante su cargador para recargar la batería de la maceta.
+    \item Este primer prototipo no es completamente impermeable, por lo que el usuario tendrá que tener un mínimo cuidado durante la operación de regado de la planta para evitar inundarla, ya que podría dañar la electrónica del sistema. 
+\end{itemize}
+
 \section{Instalación}
-Activar permiso de instalador de fuentes desconocidas
-%TODO
+A continuación se detallan los pasos necesarios a seguir para poder realizar la instalación de la aplicación de Green In House en un dispositivo móvil Android.
+\begin{enumerate}
+    \item Descargar el instalador .apk de la App móvil de Green In House desde el repositorio oficial https://github.com/ove1001/GreenInHouse\_MobileApp \cite{GreenInHouse:repo:AppMovil}, ya que actualmente no se encuentra aún disponible en la tienda de aplicaciones Android.
+    \item Ejecutar el instalador .apk descargado.
+    \item Como la App no está siendo instalada desde la tienda oficial de aplicaciones, es necesario dar permiso de instalación desde fuentes desconocidas a la aplicación desde la que se esté realizando la instalación como se puede ver en las imágenes \ref{fig:app_android_falta_permiso} y \ref{fig:app_android_permiso}
+    \imagen{app_android_falta_permiso}{Conceder permisos de intalación en Android}{.35}
+    \imagen{app_android_permiso}{Conceder permisos de intalación en Android}{.35}
+    \item Una vez terminado el proceso de instalación, se podrá abrir la App y se conectará automáticamente al servidor de Green In House, siempre que ambos dispositivos (móvil y maceta) estén conectados a la misma red WiFi como se muestra en la imagen \ref{fig:app_android_4}.
+    \imagen{app_android_4}{Imagen de App Android de monitorización de GreenInHouse}{.35}
+\end{enumerate}
+
 \section{Manual del usuario}
-%TODO
+Para poner en funcionamiento su nueva maceta educativa Green In House, lo primero que tiene que hacer es encender la maceta pulsando el interruptor de encendido. Cuando arranque el proceso de encendido se iluminará la pantalla táctil y a los pocos segundos aparecerá la ventana de la aplicación de Green In House, en la que se muestra la red Wi-Fi a la que estamos conectados. Al arrancar el sistema dirá que no estamos conectados a ninguna red WiFi como se muestra en la imagen \ref{fig:app_raspberry_ventana_principal}.
+\imagen{app_raspberry_ventana_principal}{GreenInHouse no esta conectado a la red WiFi.}{.7}
+
+Para conectarle a la red WiFi lo que hay que hacer es pulsar sobre el botón \textbf{Conectarse a red WiFi} y se mostrará una nueva pantalla en la que pide que introduzcamos el nombre de nuestra red WiFi y su contraseña como se puede ver en la imagen \ref{fig:app_raspberry_ventana_wifi}.
+\imagen{app_raspberry_ventana_wifi}{Conectar GreenInHouse a red WiFi.}{.7}
+Para introducir estos datos hay que pulsar sobre los botones azules que dicen \textbf{Nombre WiFi} y \textbf{ContraseñaWiFi}. Al pulsar sobre ellos aparecerá un teclado en la pantalla como se muestra en la imagen \ref{fig:app_raspberry_ventana_teclado} que permitirá introducir dichos datos.
+\imagen{app_raspberry_ventana_teclado}{Teclado en pantalla de GreenInHouse.}{.7}
+Tras introducirlos, hay que pulsar en aceptar y se volverá a la ventana principal. En esta venta nos pedirá que reiniciemos el sistema como se puede ver en la imagen \ref{fig:app_raspberry_pide_reiniciar}.
+\imagen{app_raspberry_pide_reiniciar}{GreenInHouse necesita reiniciar.}{.7}
+Pulsar sobre el botón reiniciar y el sistema se reiniciará y arrancará de nuevo. Si las credenciales de la red WiFi eran correctas y estamos dentro de su rango de conexión, al encenderse GreenInHouse nos mostrá el nombre de la red WiFi a la que estamos conectados como se muestra en la imagen \ref{fig:app_raspberry_ventana_principal_conectado_wifi}.
+\imagen{app_raspberry_ventana_principal_conectado_wifi}{GreenInHouse conectado a red a red WiFi.}{.7}
+
+Tras conectar GreenInHouse a la red WiFi, ya podemos utilizar la app móvil de GreenInHouse para ver los registros de los sensores siempre que el dispositivo móvil esté conectado a la misma red WiFi. Al abrir la app se mostrará un gráfico como el de la imagen \ref{fig:app_android}.
+\imagen{app_android}{Gráfica de aplicación Android de GreenInHouse}{.35}
+Para cambiar el número de dias a mostrar en la gráfica, utilizar los botones - y + de al lado del valor de dias mostrados. Desplazando el gráfico hacia los lados podemos ver los gráficos de los diferentes sensores del sistema agrupados por tipo de medición y lugar de ubicación del sensor como se puede ver en la imagen \ref{fig:app_android2}.
+\imagen{app_android2}{Gráfica de aplicación Android de GreenInHouse}{.35}
+

@@ -11,8 +11,107 @@ La planificación es una etapa fundamental en el desarrollo de cualquier proyect
 \end{itemize}
 
 \section{Planificación temporal}
-PLANIFICACION POR SPRINTS
-%TODO
+Al comenzar con el proyecto, se planteó utilizar una metodología ágil. En este caso se decidió utilizar Scrum. Aunque no se a seguido completamente en todos los aspectos que especifica esta metodología, ya que el equipo de desarrollo únicamente está formado por una persona, la cual hace todos los roles. Debido a eso, no se han realizado reuniones diarias. Las reuniones que se han realizado son las de seguimiento de los sprint, con los tutores del proyecto Raúl Martincorena y Jose Antonio Canepa y con Yeray Pescador. Durante estas reuniones se han definido los objetivos importantes a desarrollar durante el nuevo sprint, se ha hablado de los objetivos conseguidos del sprint anterior y los objetivos que no se han conseguido realizar, se han incluido de nuevo en el siguiente sprint. No se ha empleado ninguna herramienta de seguimiento de los sprint estilo ZenHUB, aunque habría sido una buena idea utilizarla para tener un mejor control del proceso iterativo del proyecto. la duración normal de los \textit{sprints} ha sido de dos semanas, hasta llegar a las fases finales, en las que está duración ha sido modificada a una semana.
+
+\subsection{Sprint 0 (30/1/2023 - 12/2/2023)}
+
+En la reunión de este sprint inicial, lo que se realizó fue hacer una propuesta inicial de lo que sería el TFG, y hacer una lluvia de ideas sobre qué objetivos básicos se debería buscar cumplir, a qué público debería ir destinado, cuál sería la función principal del proyecto, como se haría la comunicación de los datos con sistemas externos y varios aspectos de carácter general
+
+Como objetivos a cumplir en el primer sprint, se propusieron decidir las funcionalidades principales que se iban a implementar e investigar qué tecnologías podría utilizar para resolverlo. 
+
+Las tareas que se realizaron durante este sprint, fue la toma de decisión de que IDE utilizar, que tipo de microcontrolador utilizar (Arduino o Raspberry pi), qué factores de la planta habría que medir, cómo almacenar los datos (en archivos o en base de datos), investigar como realizar la comunicación de los datos con sistemas exteonrs, decidir qué metodología utilizar, realizar un primer enfoque del diseño y empezar con la parte de desarrollo de la parte de qué datos utilizar.
+
+\subsection{Sprint 1 (13/2/2023 - 26/2/2023)}
+
+En la reunión de este \textit{sprint}, lo que se hizo fue debatir entre todos, cuales de los objetivos que había pensado, sería buena idea implementar, definir una serie de funcionalidades básicas con las que empezar a trabajar y decidir  el alcance inicial del proyecto para no abordar más aspectos de los necesarios. Se aceptó la utilización de Raspberry Pi como entorno de desarrollo a utilizar por su posibilidad de cubrir todos los aspecto necesarios del sistema y se decidió utilizar una base de datos como sistema de almacenamiento persistente e implementar toda la aplicación en Python al ser un lenguaje óptimo para desarrollar prototipos y tener ya conocimientos te he dicho lenguaje. Para realizar la comunicación de los datos con sistemas externos se decidió realizar a través de comunicación por red utilizando un servidor API REST 
+
+Como objetivos a cumplir en este \textit{sprint}, se estableció realizar la instalación de el sistema operativo Raspbian en la Raspberry, iniciar con el desarrollo del modelo de datos, comenzar con la implementación de la base de datos del sistema e investigar como realizar la lectura de los sensores.
+
+Las tareas realizadas durante este \textit{sprint} fue la instalación de Raspbian, realizar el diseño inicial de las clases que se iban a utilizar en el sistema, definiendo sus atributos y sus jerarquías, e implementar la base de datos utilizando Python y la librería SQLAlchemy. También se comenzó con el desarrollo de los scripts de instalación del sistema para automatizar y simplificar la instalación y se investigó el uso de la librería AdaFruit para leer los sensores del sistema.
+
+\subsection{Sprint 2 (27/2/2023 - 12/3/2023)}
+En la reunión de este \textit{sprint}, lo que se hizo fue analizar el modelo de datos que había diseñado para ver si cubría las necesidades de los objetivos propuestos, resolver dudas que tenía respecto al uso de SQLAlchhemi para resolver las consultas a la base de datos utilizando el ORM y explicar el primer acercamiento con el trabajo con sensores en Raspberry. Se propusieron varias mejoras del modelo de datos y se estudiaron las posibilidades de las consultas mediante el ORM. Durante esta reunión se introdujo un problema que no se había contemplado anteriormente y era decidir cómo el usuario iba a introducir en el sistema las credenciales de su red WiFi.
+
+Como objetivos a cumplir en este \textit{sprint}, se estableció empezar con el desarrollo de la lectura de sensores utilizando aAdaFruit, implementar las mejoras propuestas en el modelo de datos y en el gestor de la base de datos para realizar las consultas. También se propuso como objetivo empezar a investigar cómo desarrollar posteriormente el servidor API Rest.
+
+Las tareas realizadas durante este \textit{sprint} fue la implementación de las mejoras propuestas en el modelo de datos, la mejora de las consultas realizadas por el gestor de la base de datos utilizando el ORM e intentar comunicar con todos los sensores por separado, para ver como había que trabajar con cada sensor.
+
+\subsection{Sprint 3 (13/3/2023 - 26/3/2023)}
+En la reunión de este \textit{sprint}, lo que se hizo fue analizar el estado actual del modelo de datos y del gestor de la base de datos, dando por buena la aproximación actual. Se debatió sobre los resultados que había obtenido con las primeras pruebas leyendo los sensores desde Raspberry Pi y los problema que había tenido para ponerlos en funcioamiento. También se debatió sobre qué lirerías utilizar para implementar la API Rest y se decidió utilizar Swagger y Conexxion.
+
+Como objetivos a cumplir en este \textit{sprint}, se estableció definir el funcionamiento de los sensores y crear una interfaz general para todos ellos, la cual implemente cada sensor para sobre escribir el método de lectura en cada clase de manera específica para dicho sensor y poder trabajar con todos los sensores de la misma manera.
+
+Las tareas que se llevaron a cabo en este \textit{sprint} fueron las de crear una interfaz para los sensores electrónicos y una factoría que se encargase de mapear automáticamente los datos almacenados en la base de datos para determinar el objeto de sensor a instanciar en base al modelo declarado y utilizase los datos de las patillas para saber donde estaba conectado el sensor.
+
+
+\subsection{Sprint 4 (27/3/2023 - 9/4/2023)}
+En la reunión de este \textit{sprint} se debatió la estructura que había realizado para trabajar con los sensores electrónicos, y se analizó su eficiencia y escalabilidad si necesitaba meter nuevos sensor durante el proyecto. También se debatió sobre la capa de servicio que estaba implementando para hacer uso del gestor de la base de datos y separar así la lógica del modelo de datos y se comenzó a indagar sobre qué librerías utilizar para implementar la API Rest y se decidió utilizar Swagger y Conexxion.
+
+Como objetivos a cumplir en este \textit{sprint}, se estableció continuar desarrollando la capa de servicios y comenzar con el desarrollo de la API Rest, utilizando Swagger y diseñar un script en Bash para que realizase la lectura periódica de los sensores del sistema, gestionando el arranque de periódico mediante un hilo controlado por el propio sistema operativo.
+
+Las tareas que se realizaron durante este \textit{sprint} fueron las de terminar de crear la capa de servicios que utiliza al gestor de la base de datos y empezar a crear la API REST, encargada de gestionar la comunicación con servicios externos. 
+
+\subsection{SSprint 5 (10/4/2023 - 23/4/2023)}
+En la reunión de este \textit{sprint} se debatió los problemas encontrados al trabajar con sensores analógicoa, al no tener Raspberry un conversor analógico digital integrado y se estudió las posibles soluciones. También se habló sobre el uso de conexión en remoto por SSH a la Raspberry ya que era muy ineficiente tener que desarrollar el código en la propia Raspberry.
+
+Como objetivos de este \textit{sprint} se propuso implementar una solución para leer los sensores que faltaban en el sistema, continuar con el desarrollo de la API REST e instalar SSH en la Raspberry para hacer trabajo en remoto sobre ella.
+
+Las tareas que se realizaron durante este \textit{sprint} fueron las de investigar e implementar alternativas para leer los sensores que estaban dando problemas, configurar la comunicación SSH, actualizar los scripts de instalación automática del sistema y continuar con el desarrollo de la API REST y la capa de servicios
+
+\subsection{Sprint 6 (24/4/2023 - 14/5/2023}
+En la reunión de este \textit{sprint} se hablo sobre como había resuelto el problema con la lectura de los sensores analógicos, si había podido establecer la comunicación por ssh. En esta reunión se planteó el problema que había tenido al realizar el cambio de red cableada a red wifi en la raspberry pi, ya que no mi Raspberry no tiene WiFi integrado, y la instalación de un USB wifi estaba dando problemas.
+
+Como objetivos del \textit{sprint} se propuso solucionar el problema con la conectividad WiFi, continuar con el desarrollo d ela API REST y estudiar como desarrollar unos \textit{scripts} que me permitiesen lanzar los trabajos de lecturas de sensores miediante hilos del sistema operativo.
+
+Las tareas que se realizaron durante este \textit{sprint} fueron las de conseguir instalar el USB WiFi para poder tener red WiFi en la Raspberr y desarrollar unos scripts que lanzasen durante el arranque del sistema operativo el servicio de lectura de sensores y el servidor API REST.
+
+\subsection{Sprint 7 (15/5/2023 - 28/5/2023)}
+En la reunión de este \textit{sprint} se hablo sobre cómo había solucionado el problema con el USB WiFi y sobre el funcionamiento de los scripts de lectura y los problemas que había tenido a la hora de establecer que se lanzasen automáticamente durante el arranque. Se comenzó a debatir cómo realizar la aplicación móvil, como conectar la Raspberry a la red WiFi, y cómo enfocar la memoria.
+
+Como objetivos del \textit{sprint} se propuso comenzar con el desarrollo de la aplicación móvil e intentar comunicar por Bluetooth con la Raspberry para enviarle las credenciales del WiFi. También se decidió comenzar con la memoria.
+
+Las tareas que se realizaron durante este \textit{sprint} fueron comenzar con el desarrollo de la aplicación móvil e intentar comunicar por Bluetooth con la Raspberry y hacer uso del servidor API REST cuando tuviera conexión de red. también se comenzó con el desarrollo de la memoria.
+
+
+\subsection{Sprint 8 (29/5/2023 - 4/6/2023)}
+En la reunión de este \textit{sprint} se hablo sobre los problemas encontrados al hacer uso del Bluetooth desde Flutter Flow, y qué alternativa utilizar al no poder enviar las credenciales del WiFi por Bluetooth. se habló sobre el uso de los \textit{endpoint} de la API Rest desde Flutter Flow y se revisó los primeros pasos de la memoria.
+
+Como objetivos del \textit{sprint} se propuso desarrollar una alternativa para introducir las credenciales WiFi en la Raspberry y continuar con el desarrollo de la aplicación móvil y de la memoria. También se decidió crear un sistema de consejos a seguir para el cuidado de la planta.
+
+Las tareas que se realizaron durante este \textit{sprint} fueron realizar una aplicación en una pantalla táctil conectada a la Raspberry que permitiera introducir las credenciales WiFi, crear el sistema de consejos de la planta, añadir más servicios de API REST y continuar con el desarrollo de la aplicación móvil y de la memoria.
+
+
+S\subsection{Sprint 9 (5/6/2023 - 11/6/2023)}
+En la reunión de este \textit{sprint} se hablo sobre el estado de la API REST, la aplicación de la pantalla táctil para introducir las credenciales de la red WiFi, cómo graficar los datos de los registros en la aplicación móvil y los problemas que me estaba dando, cómo se había resuelto la parte de los consejos, y se continuó revisando la memoria
+
+Como objetivos del \textit{sprint} se propuso terminar la aplicación móvil, mostrando únicamente las gráficas de los sensores en intervalos temporales y continuar con el desarrollo de la memoria y los anexos.
+
+Las tareas que se realizaron durante este \textit{sprint} fueron terminar de desarrollar la aplicación móvil para que pudieran mostrar las gráficas de los sensores agrupados por intervalos temporales y continuar con la documentación de la memoria y los anexos.
+
+
+\subsection{Sprint 10 (11/6/2023 - 18/6/2023)}
+En la reunión de este \textit{sprint} se hablo sobre el estado general de la aplicación de la maceta y del móvil, dando por terminadas estas partes. Se decidió centrar los esfuerzos en terminar la memoria y los anexos.
+
+Como objetivos del \textit{sprint} se propuso avanzar lo máximo posible en la documentación de la memoria y los anexos.
+
+Las tareas que se realizaron durante este \textit{sprint} fueron para desarrollar lo máximo posible la parte de la memoria y los anexos.
+
+
+\subsection{Sprint 11 (19/6/2023 - 25/6/2023)}
+En la reunión de este \textit{sprint} se hablo sobre el estado actual de la memoria, se hizo una revisión de los puntos realizados y se planteó cómo enfocar los puntos faltantes.
+
+Como objetivos del \textit{sprint} se propuso terminar de desarrollar la memoria y avanzar lo máximo posible en la parte de anexos
+
+Las tareas que se realizaron durante este \textit{sprint} fueron para terminar la parte de la memoria y avanzar lo máximo posible en la parte de anexos.
+
+
+\subsection{Sprint 12 (26/6/2023 - 5/7/2023)}
+En la reunión de este ultimo \textit{sprint} se  revisó completamente de la memoria y los anexos, a falta de algunos apartados de anexos.
+
+Como objetivos del \textit{sprint} se propuso terminar la parte de anexos y revisar que el sistema se pudiera instalar correctamente de manera automática en un entorno limpio, utilizando los \textit{scripts} de instalación.
+
+Las tareas que se realizaron durante este \textit{sprint} fueron terminar la parte de anexos y verificar que el sistema se pudiera instalar correctamente de manera automática en un entorno limpio, utilizando los \textit{scripts} de instalación.
+
 
 \section{Estudio de viabilidad}
 Para poder determinar si fabricar a gran escala Green In House podría ser rentable, o no, es necesario realizar correctamente un estudio de viabilidad.
@@ -330,9 +429,39 @@ Para poder determinar si fabricar a gran escala Green In House podría ser renta
 
     
     \subsection{Viabilidad legal}
-    %TODO
-    ESTUDIO DE LICENCIAS SOFTWARE
-    (LICENCIAS MIT / APACHE)
-    CC-by-nc
+    Para poder distribuir Green In House es necesario tener en cuenta que hay que cumplir con ciertos requisitos legales, entre ellos el más importante tiene que ver con el tema de la licencia con la que se suministra. Esta licencia no puede ser impuesta arbitrariamente, ya que al utilizar otras librerías es necesario adapte a la licencia con la que cuentan dichas librerías, teniendo que utilizar como mínimo la licencia más restrictiva de todas. Para poder realizar correctamente este análisis a continuación se expone una tabla \ref{tab:Dependencias y versiones} con las dependencias que utiliza Green In House, sus versiones, su uso y su licencia de uso asociada. 
+
+    \begin{longtable}{ p{0.2\columnwidth} p{0.1\columnwidth} p{0.4\columnwidth} p{0.3\columnwidth} }
+	\caption{Dependencias y versiones}\\
+        \label{tab:Dependencias y versiones}\\
+	\hline
+	\textbf{Dependencia} & \textbf{Versión} & \textbf{Descripción} & \textbf{Licencia}\\
+	\hline
+	\endfirsthead
+	\textbf{Dependencia} & \textbf{Versión} & \textbf{Descripción} & \textbf{Licencia}\\
+	\hline
+	\endhead
+	Python & 3.9 & Lenguaje de programación general & PSFL \\
+	Flutter & 3.7.12 & Lenguaje de programación multiplataforma & BSD3-Clause \\
+	Venv & 3.9 & Entorno virtual Python & PSFL \\
+	SQLAlchemy & 2.0.0b3 & Librería Python para ORM de base de datos & MIT \\
+	SQLite3 & 3.34.1 & Librería C de motor de base de datos SQL ligero & BSD \\
+	OpenAPI (swagger) & 2.14.2 & Libería Python para desarrllo de servidor API REST & MIT \\
+	Connexion & 2.14.2 & Libería Python para desarrllo de servidor API REST & MIT \\
+	Tkinter & 0.1.0 & Libería Python para desarrllo de aplicaciones gráficas & PSFL \\
+	AdaFruit Circuit Python DHT & 4.0.2 & Librería Python para trabajo con sensores DHT & MIT \\
+	AdaFruit Circuit Python BH1750 & 4.0.2 & Librería Python para trabajo con sensores BH1750 & MIT \\
+	AdaFruit Circuit Python MCP3XXX & 4.0.2 & Librería Python para trabajo con ADC MCP3XXX & MIT \\
+	Flask & 2.2.5 & Framework de microservicios Python & BSD3-Clause \\
+	PyYAML & 6.0 & Librería Python para archivos yaml & MIT \\
+	appdirs & 1.4.4 & Librería Python para gestión de directorios & MIT \\
+	\hline
+    \end{longtable}
+
+    Al revisar la tabla de dependencias utilizas en Green In House, se aprecia que las licencias más comunes son MIT, PSFL, y BSD, las cuales son todas licencias permisivas. Estas licencias permiten la redistribución y modificación del código, incluso en software cerrado o comercial, siempre que se incluya una copia de la licencia original y los derechos de autor. 
+    
+    Por lo tanto, creo que la elección más acertada de licencia a utilizar para Green In House sería una licencia MIT. La razón por la que he escogido una licencia MIT es porque es simple, fácil de entender, y compatible con prácticamente todas las demás licencias. Además, permite la utilización en aplicaciones comerciales, lo cual abre la posibilidad de monetizar Green In House en el futuro si así lo decidiese. Además, aunque esta licencia permite el uso comercial de Green In House, no ofrecen ninguna garantía y no se responsabilizan de los posibles daños derivados de su uso.
+    
+
     
     

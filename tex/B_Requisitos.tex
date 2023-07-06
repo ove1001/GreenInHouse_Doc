@@ -53,7 +53,7 @@ A continuación se enumeran los requisitos funcionales y no funcionales derivado
             \begin{itemize}
                 \item \textbf{RF-2.1 Creación de plantas:} la aplicación tiene que ser capaz de crear nuevas plantas en el sistema, especificando el tipo de planta y el nombre que se asignará a dicha planta.
                 \item \textbf{RF-2.2 Modificación de plantas:} la aplicación tiene que ser capaz de modificar los datos de las plantas existentes en el sistema.
-                \item \textbf{RF-2.3 Eliminación de plantas:} la aplicación tiene que ser capaz de eliminar plantas existentes en el sistema. Para evitar tener que borrar todos los registros asociados a la planta a eliminar y así no perder información de los históricos, se almacenará la fecha en la que se dio de baja la planta.
+                \item \textbf{RF-2.3 Eliminación de plantas:} la aplicación tiene que ser capaz de eliminar plantas existentes en el sistema.
                 \item \textbf{RF-2.4 Obtención de plantas:} la aplicación tiene que ser capaz de recuperar los datos de las plantas existentes en el sistema.
                 \begin{itemize}
                     \item \textbf{RF-2.4.1 Obtención de plantas activas:} la aplicación tiene que ser capaz de recuperar los datos de las plantas activas existentes en el sistema filtrándolas por su fecha de baja. Este filtrado se tiene que poder aplicar a todos los filtrados detallados continuación. 
@@ -69,6 +69,17 @@ A continuación se enumeran los requisitos funcionales y no funcionales derivado
             \end{itemize}
             
         %TODO RF-4 acociación entre sensor y planta
+        \item \textbf{RF-4 Gestión de asociaciones entre sensores y plantas:} la aplicación tiene que ser capaz de gestionar las asociaciones entre los sensores y las plantas del sistema.
+            \begin{itemize}
+                \item \textbf{RF-4.1 Creación de asociación sensor-planta:} la aplicación tiene que ser capaz de crear nuevas asociaciones entre los sensores y las plantas existentes en el sistema, especificando el sensor y la planta asociados que se quieren asociar.
+                \item \textbf{RF-4.2 Eliminación de asociación sensor-planta:} la aplicación tiene que ser capaz de eliminar las asociaciones existentes entre los sensores y las plantas del sistema, especificando el sensor y la planta asociados que se quieren desasociar.
+                \item \textbf{RF-4.3 Obtención de asociación sensor-planta:} la aplicación tiene que ser capaz de obtener las asociaciones existentes entre los sensores y las plantas del sistema, especificando el sensor y la planta asociados que se quiere modificar.
+                \begin{itemize}
+                    \item \textbf{RF-4.3.1 Obtención de asociaciones sensor-planta activas:} la aplicación tiene que ser capaz de recuperar las asociaciones activas entre sensores y plantas existentes en el sistema filtrándolas por su fecha de baja. Este filtrado se tiene que poder aplicar a todos los filtrados detallados continuación. 
+                    \item \textbf{RF-4.3.2 Obtención de todos los sensores asociados a una planta:} la aplicación tiene que ser capaz de obtener todos los sensores asociados a una planta del sistema, especificando la planta de la cual se quieren obtener los sensores.
+                    \item \textbf{RF-4.3.3 Obtención de todas las plantas asociadas a un sensor:} la aplicación tiene que ser capaz de obtener todas las plantas asociadas a un sensor del sistema, especificando el sensor de la cual se quieren obtener las plantas.
+                \end{itemize}
+            \end{itemize}
         
         \item \textbf{RF-5 Gestión de registros de sensores:} la aplicación tiene que ser capaz de gestionar los registros de sensores del sistema.
             \begin{itemize}
@@ -76,7 +87,7 @@ A continuación se enumeran los requisitos funcionales y no funcionales derivado
                 \item \textbf{RF-5.2 Obtención de registros de sensores:} la aplicación tiene que ser capaz de recuperar los datos de los registros de sensores existentes en el sistema.
                 \begin{itemize}
                     \item \textbf{RF-5.2.1 Obtención de registros de sensores generados entre determinadas fechas:} la aplicación tiene que ser capaz de recuperar los datos de los registros de sensores existentes en el sistema filtrándoles por su fecha de creación. Este filtrado se tiene que poder aplicar a todos los filtrados detallados continuación. 
-    				\item \textbf{RF-5.2.2 Obtención de registros de sensores en formato para graficar:} la aplicación tiene que ser capaz de recuperar los datos de los registros de sensores existentes en el sistema agrupandoles en dos listas (fechas para el eje X y valores para el eje Y) para poder graficarles fácilmente. Este filtrado se tiene que poder aplicar a todos los filtrados detallados continuación. 
+                    \item \textbf{RF-5.2.2 Obtención de registros de sensores en formato para graficar:} la aplicación tiene que ser capaz de recuperar los datos de los registros de sensores existentes en el sistema agrupandoles en dos listas (fechas para el eje X y valores para el eje Y) para poder graficarles fácilmente. Este filtrado se tiene que poder aplicar a todos los filtrados detallados continuación. 
                     \item \textbf{RF-5.2.3 Obtención de registros de sensores por sensor:} la aplicación tiene que ser capaz de recuperar los datos de los registros de sensores existentes en el sistema filtrándoles por el sensor que generó dicho registro.
                     \item \textbf{RF-5.2.4 Obtención de registros de sensores por planta:} la aplicación tiene que ser capaz de recuperar los datos de los registros de sensores existentes en el sistema filtrándoles por la planta a la que están asociados.
                 \end{itemize}
@@ -86,7 +97,7 @@ A continuación se enumeran los requisitos funcionales y no funcionales derivado
             \begin{itemize}
                 \item \textbf{RF-6.1 Creación de consejos de plantas:} la aplicación tiene que ser capaz de crear nuevos consejos de plantas en el sistema, el tipo de medida, la zona de ubicación,  la unidad de medida y los valores mínimos y máximos.
                 \item \textbf{RF-6.2 Modificación de consejos de plantas:} la aplicación tiene que ser capaz de modificar los datos de los consejos de plantas existentes en el sistema.
-    			\item \textbf{RF-6.3 Obtención de consejos de plantas:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de plantas existentes en el sistema.
+                \item \textbf{RF-6.3 Obtención de consejos de plantas:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de plantas existentes en el sistema.
                 \begin{itemize}
                     \item \textbf{RF-6.3.1 Obtención de consejos de plantas por planta:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de plantas existentes en el sistema filtrándoles por la planta a la que están asociados. Este filtrado se tiene que poder aplicar a todos los filtrados detallados continuación. 
     				\item \textbf{RF-6.3.2 Obtención de consejos de plantas por zona:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de plantas existentes en el sistema filtrándoles por la zona a la que están asociados.
@@ -98,7 +109,7 @@ A continuación se enumeran los requisitos funcionales y no funcionales derivado
             \begin{itemize}
                 \item \textbf{RF-7.1 Creación de consejos de tipos de plantas:} la aplicación tiene que ser capaz de crear nuevos consejos de tipos de plantas en el sistema, el tipo de medida, la zona de ubicación,  la unidad de medida y los valores mínimos y máximos.
                 \item \textbf{RF-7.2 Modificación de consejos de tipos de plantas:} la aplicación tiene que ser capaz de modificar los datos de los consejos de tipos de plantas existentes en el sistema.
-    			\item \textbf{RF-7.3 Obtención de consejos de tipos de plantas:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de tipos de plantas existentes en el sistema.
+                \item \textbf{RF-7.3 Obtención de consejos de tipos de plantas:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de tipos de plantas existentes en el sistema.
                 \begin{itemize}
                     \item \textbf{RF-7.3.1 Obtención de consejos de tipos de plantas por planta:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de tipos de plantas existentes en el sistema filtrándoles por el tipo de planta a la que están asociados. Este filtrado se tiene que poder aplicar a todos los filtrados detallados continuación. 
     				\item \textbf{RF-7.3.2 Obtención de consejos de tipos de plantas por zona:} la aplicación tiene que ser capaz de recuperar los datos de los consejos de tipos de plantas existentes en el sistema filtrándoles por la zona a la que están asociados.
@@ -106,48 +117,449 @@ A continuación se enumeran los requisitos funcionales y no funcionales derivado
                 \end{itemize}
             \end{itemize}
             %TODO
-        \item \textbf{RF-8 Graficar los datos de lo sensores agrupandoles por días desde una aplicación movil}
-        \item \textbf{RF-9 Poder introducir las credenciales del WiFi a conectar }
+        \item \textbf{RF-8 Lectura de sensores electrónicos:} Se tienen que poder leer sensores electrónicos conectados al sistema, utilizando los datos almacenados de los sensores y generando registros de sesores con los valores leidos.
+        \item \textbf{RF-9 Conexión a red WiFi:} Se tiene que poder introducir las credenciales de la red WiFi a conectar.
+        \item \textbf{RF-10 Graficar los datos de lo sensores desde una aplicación móvil:} Se tiene que poder graficar desde una aplicación móvil los registros de los sensores agrupándoles en diferentes periodos temporales.
     \end{itemize}
-    
+
+\newpage
 \section{Especificación de requisitos}
 
+Este caso de uso es aplicable a todas las entidades del sistema. Únicamente cambiarían los datos suministrados para realizar la creación de la instancia de la entidad respectiva y variaría el tipo de objeto generado, correspondiente al tipo de entidad creada, así como los datos del archivo JSON devuelto al cliente.
+
+\begin{longtable}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+    \caption{CU-1 Creación de una entidad.}\\
+    \hline
+    \textbf{CU-1}    & \textbf{Creación de una instancia de una entidad}\\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{CU-1}    & \textbf{Creación de una instancia de una entidad}\\
+    \hline
+    \endhead
+    \hline
+    \multicolumn{2}{c}{Sigue en la página siguiente.}
+    \endfoot
+    \hline
+    \endlastfoot
+
+  \textbf{Versión}              & 1.0    \\
+    \textbf{Autor}                & Oscar Valverde Escobar \\
+    \textbf{Requisitos asociados} & RF-1.1, RF-2.1, RF-3.1, RF-4.1, RF-5.1, RF-6.1, RF-7.1\\
+    \textbf{Descripción}          & Operaciones realizadas para crear una nueva instancia de una entidad de manera persistente en la base de datos de la aplicación.\\
+    \textbf{Precondición}         & 
+    \begin{itemize}
+        \item El sistema tiene que estar conectado a la red WiFi y tener el servidor API REST funcionando. 
+        \item La instancia de la entidad existe en la base de datos. 
+        \item Se dispone de todos los datos necesarios para eliminar la entidad.
+        \item Si contiene referencias a otras entidades, tienen que existir dichas instancias de las entidades en la base de datos.
+        \item El almacenamiento del sistema no está lleno
+    \end{itemize}\\
+    \textbf{Acciones}             &
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item Suministrar al \textit{endpoint} de la API REST los datos necesarios para crear la entidad correspondiente .
+        \item Verificar que dichos datos son válidos.
+        \item Comunicar la petición de la API REST a la capa de servicios para que resuelva como realizar la creación.
+        \item Comunicar la petición de la capa de servicios al manejador de la base de datos para que resuelva como realizar la creación.
+        \item Realizar la creación del objeto en la base de datos.
+        \item Devolución del objeto creado por el manejador de la base de datos a la capa de servicios.
+        \item Devolución del objeto creado por la capa de servicios a la API REST.
+        \item Devolución  al cliente  desde la API REST de un archivo JSON con los atributos del objeto creado por la capa de servicios junto con un código HTML de estado de la operación. 
+    \end{enumerate}\\
+    \textbf{Postcondición}        & Existirá una nueva instancia de entidad en la tabla correspondiente de la base de datos. \\
+    \textbf{Excepciones}          & 
+        \begin{enumerate}
+            \item EntidadExiste
+            \item Código HTML de error
+        \end{enumerate} \\
+    \textbf{Importancia}          & Alta \\
+    \bottomrule
+    \hline
+\end{longtable}
 
 
-caso de uso obtener elemento
+\newpage
+Este caso de uso es aplicable a todas las entidades del sistema. Únicamente cambiarían los datos suministrados para realizar la modificación de la instancia de la entidad respectiva y variaría el tipo de objeto generado, correspondiente al tipo de entidad modificado, así como los datos del archivo JSON devuelto al cliente.
 
-Caso de uso Filtrar extiende funcionalidades de obtener elemento:
+\begin{longtable}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+    \caption{CU-2 Modificación de una entidad.}\\
+    \hline
+    \textbf{CU-2}    & \textbf{Modificación de una instancia de una entidad}\\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{CU-2}    & \textbf{Modificación de una instancia de una entidad}\\
+    \hline
+    \endhead
+    \hline
+    \multicolumn{2}{c}{Sigue en la página siguiente.}
+    \endfoot
+    \hline
+    \endlastfoot
+    
+    \textbf{Versión}              & 1.0    \\
+    \textbf{Autor}                & Oscar Valverde Escobar \\
+    \textbf{Requisitos asociados} & RF-1.2, RF-2.2, RF-3.2, RF-6.2, RF-7.2\\
+    \textbf{Descripción}          & Operaciones realizadas para modificar una instancia de entidad de manera persistente en la base de datos de la aplicación.\\
+    \textbf{Precondición}         & 
+    \begin{itemize}
+        \item El sistema tiene que estar conectado a la red WiFi y tener el servidor API REST funcionando. 
+        \item La instancia de la entidad tiene que existir en la base de datos. 
+        \item Se dispone de todos los datos necesarios para obtener y modificar la entidad.
+        \item Si contiene referencias a otras entidades, tienen que existir dichas instancias de las entidades en la base de datos.
+    \end{itemize}\\
+    \textbf{Acciones}             &
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item Suministrar al \textit{endpoint} de la API REST los datos necesarios para recuperar y modificar la entidad correspondiente.
+        \item Verificar que dichos datos son válidos.
+        \item Comunicar la petición de la API REST a la capa de servicios para que resuelva como realizar la modificación de la instancia de la entidad.
+        \item Comunicar la petición de la capa de servicios al manejador de la base de datos para que resuelva como realizar la recuperación y modificación de la instancia de la entidad.
+        \item Realizar la obtención de la instancia de la entidad de la base de datos y generar su objeto correspondiente.
+        \item Realizar la modificación del objeto generado.
+        \item Realizar el grabado en la base de datos del objeto modificado.
+        \item Devolución del objeto modificado por el manejador de la base de datos a la capa de servicios.
+        \item Devolución del objeto modificado por la capa de servicios a la API REST.
+        \item Devolución  al cliente  desde la API REST de un archivo JSON con los atributos del objeto modificado por la capa de servicios junto con un código HTML de estado de la operación. 
+    \end{enumerate}\\
+    \textbf{Postcondición}        & 
+        \begin{itemize}
+            \item Existirá el mismo número de instancias de entidad en la tabla correspondiente de la base de datos. 
+            \item Los datos de la instancia especificada de la entidad habrán sido modificados en la tabla correspondiente de la base de datos.
+        \end{itemize}\\
+    \textbf{Excepciones}          & 
+        \begin{enumerate}
+            \item EntidadNoExiste
+            \item Código HTML de error
+        \end{enumerate} \\
+    \textbf{Importancia}          & Alta \\
+    \hline
+\end{longtable}
 
-Casos de usuaos que extienden de filtra espècificacndo el filtro
+
+\newpage
+Este caso de uso es aplicable a todas las entidades del sistema. Únicamente cambiarían los datos suministrados para realizar la eliminación de la instancia de la entidad respectiva y variaría el tipo de objeto generado, correspondiente al tipo de entidad eliminado, así como los datos del archivo JSON devuelto al cliente.
+
+\begin{longtable}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+    \caption{CU-3 Eliminación de una entidad.}\\
+    \hline
+    \textbf{CU-3}    & \textbf{Eliminación de una instancia de una entidad}\\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{CU-3}    & \textbf{Eliminación de una instancia de una entidad}\\
+    \hline
+    \endhead
+    \hline
+    \multicolumn{2}{c}{Sigue en la página siguiente.}
+    \endfoot
+    \hline
+    \endlastfoot
+    
+    \textbf{Versión}              & 1.0    \\
+    \textbf{Autor}                & Oscar Valverde Escobar \\
+    \textbf{Requisitos asociados} & RF-1.3, RF-2.3, RF-4.2\\
+    \textbf{Descripción}          & Operaciones realizadas para dar de baja una instancia de una entidad de manera persistente en la base de datos de la aplicación.\\
+    \textbf{Precondición}         & 
+        \begin{itemize}
+            \item El sistema tiene que estar conectado a la red WiFi y tener el servidor API REST funcionando. 
+            \item La instancia de la entidad tiene que existir en la base de datos. 
+            \item Se dispone de todos los datos necesarios para dar de baja la entidad.
+            \item Si contiene referencias a otras entidades, tienen que existir dichas instancias de las entidades en la base de datos.
+        \end{itemize}\\
+    \textbf{Acciones}             &
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item Suministrar al \textit{endpoint} de la API REST los datos necesarios eliminar la entidad correspondiente.
+        \item Verificar que dichos datos son válidos.
+        \item Comunicar la petición de la API REST a la capa de servicios para que resuelva como realizar la eliminación de la instancia de la  entidad.
+        \item Comunicar la petición de la capa de servicios al manejador de la base de datos para que resuelva como realizar la eliminación de la instancia de la  entidad.
+        \item Realizar la obtención de la instancia de la entidad de la base de datos y generar su objeto correspondiente.
+        \item Dar de baja la instancia de la entidad en la base de datos asignando al objeto generado la fecha en la que se realizo esta operación.
+        \item Realizar el grabado en la base de datos del objeto modificado.
+        \item Devolución del objeto modificado por el manejador de la base de datos a la capa de servicios.
+        \item Devolución del objeto modificado por la capa de servicios a la API REST.
+        \item Devolución  al cliente  desde la API REST de un archivo JSON con los atributos del objeto dado de baja por la capa de servicios junto con un código HTML de estado de la operación. 
+    \end{enumerate}\\
+    \textbf{Postcondición}        & 
+        \begin{itemize}
+            \item Existirá el mismo número de instancias de entidad en la tabla correspondiente de la base de datos. 
+            \item Los datos de fecha de baja de la instancia especificada de la entidad habrán sido modificados en la tabla correspondiente de la base de datos.
+        \end{itemize}\\
+    \textbf{Excepciones}          & 
+        \begin{enumerate}
+            \item EntidadNoExiste
+            \item Código HTML de error
+        \end{enumerate} \\
+    \textbf{Importancia}          & Alta \\
+    \hline
+\end{longtable}
 
 
-%TODO
+\newpage
+Este caso de uso es aplicable a todas las entidades del sistema. Únicamente cambiarían los datos suministrados para realizar la modificación de la instancia de la entidad respectiva y variaría el tipo de objeto generado, correspondiente al tipo de entidad modificado, así como los datos del archivo JSON devuelto al cliente.
 
-% Caso de Uso 1 -> Consultar Experimentos.
-\begin{table}[p]
-	\centering
-	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
-		\toprule
-		\textbf{CU-1}    & \textbf{Ejemplo de caso de uso}\\
-		\toprule
-		\textbf{Versión}              & 1.0    \\
-		\textbf{Autor}                & Alumno \\
-		\textbf{Requisitos asociados} & RF-xx, RF-xx \\
-		\textbf{Descripción}          & La descripción del CU \\
-		\textbf{Precondición}         & Precondiciones (podría haber más de una) \\
-		\textbf{Acciones}             &
-		\begin{enumerate}
-			\def\labelenumi{\arabic{enumi}.}
-			\tightlist
-			\item Pasos del CU
-			\item Pasos del CU (añadir tantos como sean necesarios)
-		\end{enumerate}\\
-		\textbf{Postcondición}        & Postcondiciones (podría haber más de una) \\
-		\textbf{Excepciones}          & Excepciones \\
-		\textbf{Importancia}          & Alta o Media o Baja... \\
-		\bottomrule
-	\end{tabularx}
-	\caption{CU-1 Nombre del caso de uso.}
-\end{table}
+\begin{longtable}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+    \caption{CU-4 Obtención de una entidad.}\\
+    \hline
+    \textbf{CU-4}    & \textbf{Obtención de una entidad}\\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{CU-4}    & \textbf{Obtención de una entidad}\\
+    \hline
+    \endhead
+        \hline
+        \multicolumn{2}{c}{Sigue en la página siguiente.}
+        \endfoot
+        \hline
+        \endlastfoot
+        
+    \textbf{Versión}              & 1.0    \\
+    \textbf{Autor}                & Oscar Valverde Escobar \\
+    \textbf{Requisitos asociados} & RF-1.4, RF-2.4, RF-3.3, RF-4.3, RF-5.2, RF-6.3, RF-7.3\\
+    \textbf{Descripción}          & Operaciones realizadas para obtener una entidad de la base de datos de la aplicación.\\
+    \textbf{Precondición}         & 
+        \begin{itemize}
+            \item El sistema tiene que estar conectado a la red WiFi y tener el servidor API REST funcionando. 
+            \item La instancia de la entidad existe en la base de datos. 
+            \item Se dispone de todos los datos necesarios para eliminar la entidad.
+            \item Si contiene referencias a otras entidades, tienen que existir dichas entidades en la base de datos.
+        \end{itemize}\\
+    \textbf{Acciones}             &
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item Suministrar al \textit{endpoint} de la API REST los datos necesarios para obtener la instancia de la entidad correspondiente .
+        \item Verificar que dichos datos son válidos.
+        \item Comunicar la petición de la API REST a la capa de servicios para que resuelva como realizar la obtención de la instancia de la entidad.
+        \item Comunicar la petición de la capa de servicios al manejador de la base de datos para que resuelva como realizar la recuperación de la instancia.
+        \item Realizar la recuperación de la instancia de la entidad en la base de datos.
+        \item Devolución del objeto recuperado por el manejador de la base de datos a la capa de servicios.
+        \item Devolución del objeto recuperado por la capa de servicios a la API REST.
+        \item Devolución  al cliente  desde la API REST de un archivo JSON con los atributos del objeto obtenido por la capa de servicios junto con un código HTML de estado de la operación. 
+    \end{enumerate}\\
+    \textbf{Postcondición}        & 
+    \begin{itemize}
+            \item Existirá el mismo número de instancias de entidad en la tabla correspondiente de la base de datos. 
+            \item Los datos de la instancia especificada de la entidad no habrán variado en la tabla correspondiente de la base de datos.
+            \item Se habrá devuelto un archivo JSON con los datos del objeto correspondiente
+    \end{itemize}\\
+    \textbf{Excepciones}          & 
+        \begin{enumerate}
+        \item EntidadNoExiste
+            \item Código HTML de error
+        \end{enumerate} \\
+    \textbf{Importancia}          & Alta \\
+    \hline
+\end{longtable}
 
-De este caso de uso hay 4 variantes que cambian por el tipo de datos
+\newpage
+Este caso de uso es aplicable a todas las entidades del sistema. Únicamente cambiarían los datos suministrados para realizar la modificación de la instancia de la entidad respectiva y variaría el tipo de objeto generado, correspondiente al tipo de entidad modificado, así como los datos del archivo JSON devuelto al cliente. Este caso de uso es una extensión de la funcionalidad del caso de uso 4, permitiendo recuperar varias instancias de una entidad, en lugar de una única instancia, filtrando las instancias a recuperar por alguno de sus atributos.
+
+\begin{longtable}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+    \caption{CU-5 Obtención de varias instancias de una entidad filtrando por atributos.}\\
+    \hline
+    \textbf{CU-5}    & \textbf{Obtención de varias instancias de una entidad filtrando por atributos}\\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{CU-5}    & \textbf{Obtención de varias instancias de una entidad filtrando por atributos}\\
+    \hline
+    \endhead
+        \hline
+        \multicolumn{2}{c}{Sigue en la página siguiente.}
+        \endfoot
+        \hline
+        \endlastfoot
+        
+    \textbf{Versión}              & 1.0    \\
+    \textbf{Autor}                & Oscar Valverde Escobar \\
+    \textbf{Requisitos asociados} & RF-1.4.1, RF-1.4.2, RF-1.4.3, RF-1.4.4, RF-1.4.5, RF-2.4.1, RF-2.4.2, RF-4.3.1, RF-4.3.2, RF-4.3.3, RF-5.2.1, RF-5.2.2, RF-5.2.3, RF-5.2.4, RF-6.3.1, RF-6.3.2, RF-6.3.3, RF-7.3.1, RF-7.3.2, RF-7.3.3\\
+    \textbf{Descripción}          & Operaciones realizadas para obtener una entidad de la base de datos de la aplicación.\\
+    \textbf{Precondición}         & 
+        \begin{itemize}
+            \item El sistema tiene que estar conectado a la red WiFi y tener el servidor API REST funcionando. 
+            \item Existe en la base de datos instancias de las entidades que cumplen las cumplen los filtros establecidos. 
+            \item Se dispone de todos los datos necesarios para obtener las entidades.
+            \item Si contiene referencias a otras entidades, tienen que existir dichas entidades en la base de datos.
+        \end{itemize}\\
+    \textbf{Acciones}             &
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item Suministrar al \textit{endpoint} de la API REST los datos necesarios para obtener las instancias de la entidad correspondiente (entidad a recuperar y filtros a aplicar).
+        \item Verificar que dichos datos son válidos.
+        \item Comunicar la petición de la API REST a la capa de servicios para que resuelva como realizar la obtención de las instancias de la entidad correspondiente a recuperar aplicando los filtros establecidos.
+        \item Comunicar la petición de la capa de servicios al manejador de la base de datos para que resuelva como realizar la recuperación de las instancias de la entidad correspondiente aplicando los filtros establecidos.
+        \item Realizar la recuperación de las instancias de la entidad correspondiente en la base de datos filtros establecidos.
+        \item Devolución de la lista de objetos recuperados por el manejador de la base de datos a la capa de servicios.
+        \item Devolución de la lista de objetos recuperados por la capa de servicios a la API REST.
+        \item Devolución  al cliente  desde la API REST de un archivo JSON con los atributos de la lista de objetos obtenidos por la capa de servicios junto con un código HTML de estado de la operación. 
+    \end{enumerate}\\
+    \textbf{Postcondición}        &
+    \begin{itemize}
+            \item Existirá el mismo número de instancias de entidad en la tabla correspondiente de la base de datos. 
+            \item Los datos de la instancia especificada de la entidad no habrán variado en la tabla correspondiente de la base de datos.
+            \item Se habrá devuelto un archivo JSON con los datos del objeto correspondiente
+    \end{itemize}\\
+    \textbf{Excepciones}          & 
+        \begin{enumerate}
+        \item EntidadNoExiste
+            \item Código HTML de error
+        \end{enumerate} \\
+    \textbf{Importancia}          & Media \\
+    \hline
+\end{longtable}
+
+
+\begin{longtable}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+    \caption{CU-6 Lectura y registro de un sensor electrónico}\\
+    \hline
+    \textbf{CU-6}    & \textbf{Lectura y registro de un sensor electrónico}\\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{CU-6}    & \textbf{Lectura y registro de un sensor electrónico}\\
+    \hline
+    \endhead
+        \hline
+        \multicolumn{2}{c}{Sigue en la página siguiente.}
+        \endfoot
+        \hline
+        \endlastfoot
+    \textbf{Versión}              & 1.0    \\
+    \textbf{Autor}                & Oscar Valverde Escobar \\
+    \textbf{Requisitos asociados} & RF-1.4, RF-5.1, RF-8\\
+    \textbf{Descripción}          & Operaciones realizadas para obtener un sensor de la base de datos, leer su valor real .\\
+    \textbf{Precondición}         & 
+        \begin{itemize}
+            \item El sistema tiene que tener los sensores conectados correctamente.
+            \item El sistema tiene que estar encendido
+            \item Existe en la base de datos instancias de los sensores conectado con todos sus datos. 
+            \item Se dispone de todos los datos necesarios para obtener el sensor.
+            \item El almacenamiento del sistema no está lleno.
+        \end{itemize}\\
+    \textbf{Acciones}             &
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item Se solicita al sistema obtener los datos de un sensor.
+        \item Se realiza la lectura de dicho sensor
+        \item Se genera un registro del valor leído asociado al sensor 
+        \item Se almacena de manera persistente el registro generado
+    \end{enumerate}\\
+    \textbf{Postcondición}        &
+    \begin{itemize}
+            \item Existira una instancia nueva en la tabla de registros de sensores con los valores recogidos.
+    \end{itemize}\\
+    \textbf{Excepciones}          & 
+        \begin{enumerate}
+        \item SensorNoExiste
+        \end{enumerate} \\
+    \textbf{Importancia}          & Alta \\
+    \hline
+\end{longtable}
+
+\begin{longtable}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+    \caption{CU-7 Introducir las credenciales de la red WiFi}\\
+    \hline
+    \textbf{CU-7}    & \textbf{Introducir las credenciales de la red WiFi}\\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{CU-7}    & \textbf{Introducir las credenciales de la red WiFi}\\
+    \hline
+    \endhead
+        \hline
+        \multicolumn{2}{c}{Sigue en la página siguiente.}
+        \endfoot
+        \hline
+        \endlastfoot
+    \textbf{Versión}              & 1.0    \\
+    \textbf{Autor}                & Oscar Valverde Escobar \\
+    \textbf{Requisitos asociados} & RF-9\\
+    \textbf{Descripción}          & Operaciones realizadas para conectar el sistema a una red WiFi.\\
+    \textbf{Precondición}         & 
+        \begin{itemize}
+            \item El sistema tiene que estar dentro del alcance de la red WiFi.
+            \item El sistema tiene que estar encendido
+            \item La pantalla táctil tiene que funcionar
+            \item La app gráfica tiene que estar lanzada
+        \end{itemize}\\
+    \textbf{Acciones}             &
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item Mediante la pantalla tactil se accede a la configuración del wifi.
+        \item Se escribe el nombre de la red WiFi
+        \item Se escribe la contraseña de la red WiFi
+        \item Se pulsa en aceptar
+        \item Se guardan los datos de la red wifi y pide reiniciar
+        \item Se reinicia el sistema
+    \end{enumerate}\\
+    \textbf{Postcondición}        &
+    \begin{itemize}
+            \item Al encender el sistema indicará que está conectado a la red WiFi
+    \end{itemize}\\
+    \textbf{Excepciones}          & 
+        \begin{enumerate}
+        \item Red no accesible
+        \end{enumerate} \\
+    \textbf{Importancia}          & Alta \\
+    \hline
+\end{longtable}
+
+\begin{longtable}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+    \caption{CU-8 Graficar los datos de lo sensores desde una aplicación móvil}\\
+    \hline
+    \textbf{CU-8}    & \textbf{Graficar los datos de lo sensores desde una aplicación móvil}\\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{CU-8}    & \textbf{Graficar los datos de lo sensores desde una aplicación móvil}\\
+    \hline
+    \endhead
+        \hline
+        \multicolumn{2}{c}{Sigue en la página siguiente.}
+        \endfoot
+        \hline
+        \endlastfoot
+    \textbf{Versión}              & 1.0    \\
+    \textbf{Autor}                & Oscar Valverde Escobar \\
+    \textbf{Requisitos asociados} & RF-10\\
+    \textbf{Descripción}          & Operaciones realizadas para obtener un sensor de la base de datos, leer su valor real y almacenarlo de manera persistente.\\
+    \textbf{Precondición}         & 
+        \begin{itemize}
+            \item El sistema tiene que estar conectado a la misma red WiFi que el dispositivo movil.
+            \item El sistema tiene que estar encendido
+            \item el Servidor API REST tiene que estar funcionando
+        \end{itemize}\\
+    \textbf{Acciones}             &
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item La App móvil utiliza un \textit{endpoint} de la API REST para solicitarle los datos de los sensores a graficar.
+        \item El sistema recupera todos los registros de datos solicitados.
+        \item El sistema procesa los registros de datos por intervalos para calcular su valor medio en dichos intervalos.
+        \item El sistema empaqueta en una lista de valores medios y otra lista de intervalos temporales.
+        \item El servidor API REST convierte el objeto generado con las listas en un archivo JSON y se lo envía a la App movil
+        \item La app móvil recibe el archivo con las listas de datos
+        \item La app movil grafica las listas de datos recibidas.
+    \end{enumerate}\\
+    \textbf{Postcondición}        &
+    \begin{itemize}
+            \item El número y valor de las instancias en la base de datos debe ser el mismo tras el procesado de valores medios.
+            \item Se tiene que haber mostrado una gráfica en el móvil con los datos recibidos
+    \end{itemize}\\
+    \textbf{Excepciones}          & 
+        \begin{enumerate}
+        \item Red no accesible
+        \end{enumerate} \\
+    \textbf{Importancia}          & media \\
+    \hline
+\end{longtable}

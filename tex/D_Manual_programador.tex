@@ -30,20 +30,22 @@ Para desarrollar el código de Green In House se han utilizando las librerías S
 
     \subsection{Adafruit - CircuitPython: Librería de sensores y actuadores en Python}
     Green In House utiliza la librería CircuitPyhon de Adafruit \cite{wiki:adafruit_circuit_Python} para interactuar con los sensores electrónicos del sistema y leer de manera cómoda y sencillas sus valores. Green In House está preparada para comunicarse con los siguientes tipos de sensores:
-       \subsubsection{MCP3008: Conversor de 8 señales analógicas a digital (ADC)}
+       \subsubsection{MCP3008: Conversor analógico a digital (ADC)}
         El MCP3008 \cite{wiki:mcp3008} es un conversor analógico-digital (ADC) de 10 bits y 8 canales. Esto significa que puede tomar hasta 8 señales analógicas diferentes y convertirlas en valores digitales.
         La resolución de 10 bits del MCP3008 indica que puede representar la señal analógica en valores digitales de 0 a 1023. Esto proporciona una precisión suficiente para muchas aplicaciones, incluyendo la lectura de la mayoría de los sensores analógicos.
         Uno de los aspectos más atractivos del MCP3008 es que se comunica con la Raspberry Pi (o cualquier otro microcontrolador) a través del protocolo de interfaz periférica serial (SPI). Esto hace que sea relativamente sencillo de conectar y programar, y más sencillo aun si se utiliza una librería que implementa ya la comunicación con dicho módulo como hace CircuitPython de Adafruit. \cite{doc:mcp3008}
-        
         %TODO explicar patillaje y meter foto
+        
         \subsubsection{DHT11: Sensor de humedad y temperatura ambiente}
         El DHT11 \cite{wiki:dht11} es un sensor de temperatura y humedad que permite realizar lecturas de dichos parámetros mediante un microcontrolador, como Raspberry Pi. Este módulo es de bajo costo y de fácil uso, por lo es  una opción muy popular para proyectos de monitoreo ambiental. Además la librería CircuitPython de Adafruit \cite{doc:mcp3008} cuenta con módulos ya programados para trabajar de manera muy sencilla con este sensor.
         El DHT11 es capaz de medir temperaturas entre 0 y 50 grados Celsius con una precisión de ±2 grados, y humedad relativa entre 20 y 80\% con una precisión de ±5\%.
         El módulo DHT11 utiliza un sensor capacitivo para la medición de la humedad y un termistor para la medición de la temperatura. Este sensor entrega una señal digital que puede ser leída directamente por la Raspberry Pi sin necesidad de convertirla mediantes un ADC.
         %TODO explicar patillaje y meter foto
+        
         \subsubsection{FC28: Sensor de humedad de tierra de la maceta}
         El módulo FC28 es un sensor de humedad del suelo muy utilizado en proyectos relacionados con la jardinería automatizada y el monitoreo del suelo. Este dispositivo tiene la capacidad de medir la cantidad de agua presente en el suelo, permitiendo tener un conocimiento preciso de las condiciones de humedad de la tierra en la que está sembrada la planta. Este sensor entrega una señal analógica, por lo que se necesita convertirla mediante ADC a una señal digital para que pueda ser leida por la Raspberry Pi.
         %TODO explicar patillaje y meter foto
+        
         \subsubsection{LDR: Sensor de luminosidad ambiente}
         Un LDR \textit{(Light Dependant Resistor)}, o fotoresistor es un dispositivo que varía su resistencia en función de la cantidad de luz que incide sobre él. Sin embargo, es importante tener en cuenta que un LDR no mide directamente los lúmenes, la cuál es una unidad de flujo luminoso. Un LDR mide la intensidad de luz de una manera no lineal y no opera en una frecuencia en particular. 
         Para obtener una estimación de la luz en términos de lúmenes, se ha seguido el siguiente proceso:    
@@ -61,6 +63,7 @@ Para desarrollar el código de Green In House se han utilizando las librerías S
         \end{enumerate}        
         Es importante tener en cuenta que este método proporciona una medida aproximada y tiene sus limitaciones. Los LDR son sensibles a diferentes longitudes de onda de luz de diferentes maneras, por lo que diferentes tipos de luz (como la luz del sol, la luz fluorescente, etc.) darán diferentes lecturas.   
         %TODO explicar patillaje y meter foto
+        
         \subsubsection{BH1750: Sensor de luminosidad ambiente.}  
         El módulo BH1750 es un sensor de luz ambiental de alta precisión muy utilizado en aplicaciones donde se requiere medir la intensidad de luz del entorno. Sirve para convertir la intensidad de luz que recibe en una señal digital que puede ser leída por un microcontrolador como Raspberry Pi.
         Este módulo tiene una alta precisión y resolución, pudiendo medir la intensidad de la luz en un rango desde 1 a 65535 lux. 
@@ -101,6 +104,8 @@ El directorio de despliegue en el que se almacenará toda la aplicación de Gree
             \item Elegir la versión de sistema operativo que deseamos instalar. En mi caso he elegido Raspbian.
             \item Elegir el dispositivo de almacenamiento en el que instalarlo. En mi caso una tarjeta micro SD de 32 Gb.
             \item Una vez terminado el proceso de instalación, se introduce la tarjeta micro SD en la Raspberry, se le proporciona alimentación y la Raspberry comenzará a funcionar. 
+            \item La primera vez que arranque Raspbian nos pedirá configurar el país al que pertenecemos, el lenguaje que queremos utilizar y la zona horaria en la que vivimos.
+            \item A continuación nos pide introducir un nombre de usuario y la co
         \end{itemize}
         En la figura \ref{fig:escritorio_raspbian} se muestra como se visualiza el escritorio de Raspbian en mi Raspberry.
         \imagen{escritorio_raspbian}{captura de pantalla del escritorio de Raspbian}{.6}
@@ -108,6 +113,12 @@ El directorio de despliegue en el que se almacenará toda la aplicación de Gree
     \subsection{Necesidad de instalar un adaptador WiFi USB}  
     El modelo de Raspberry que utilicé para desarrollar Green In House es una Raspberry Pi 2b, el cuál no cuenta con conexión WiFi, por lo que fue necesario utilizar un adaptador WiFi conectado por USB. Como adaptador WiFi USB utilicé el modelo 8812BU el cuál dispone de conectividad a redes WiFi AC de alta velocidad. La instalación de este adaptador no está automatizada mediante un \textit{script} ya que no es estrictamente necesario realizar en todos los modelos de Raspberry Pi, además necesita reiniciar el sistema varias veces a lo largo de la instalación, por lo que no es posible ejecutarlo en un único \textit{script} de manera seguida. Debido a ello, su instalación manual queda reflejada a continuación. Es necesario contar con acceso a internet en la Raspberry para poder descargar el fichero, por lo que inicialmente será necesario conectarla por cable Ethernet:
     \begin{itemize}
+        \item Los siguientes comandos sirven actualizar el sistema operativo a la última versión:
+            \begin{itemize}
+                \item \texttt{sudo apt-get update}
+                \item \texttt{sudo apt-get install -f}
+                \item \texttt{sudo apt-get dist-upgrade}
+            \end{itemize}
         \item Ejecución del siguiente comando para realizar la actualización de las \textit{headers} del sistema y de lo módulos necesarios:
             \begin{itemize}
                 \item \texttt{sudo apt install -y linux-headers raspberrypi-kernel-headers build-essential bc dkms git}
@@ -117,14 +128,15 @@ El directorio de despliegue en el que se almacenará toda la aplicación de Gree
             \begin{itemize}
                 \item \texttt{git clone https://github.com/ove1001/88x2bu-20210702}
             \end{itemize}
-        \item Ejecutar el script de instalación alojado en el interior del repositorio descargado:
+        \item Entrar en el directorio del repositorio descargado y ejecutar el script de instalación:
             \begin{itemize}
+                \item \texttt{cd 88x2bu-20210702}
                 \item \texttt{sudo ./install-driver.sh}
             \end{itemize}
         \item Reiniciar el sistema.
         \item Comprobar que el adaptador WiFi USB se reconoce correctamente:
             \begin{itemize}
-                \item \texttt{lsub}
+                \item \texttt{lsusb}
             \end{itemize}
         \item Editar el fichero de sistema que almacena las interfaces Ethernet: 
             \begin{itemize}
@@ -141,8 +153,23 @@ El directorio de despliegue en el que se almacenará toda la aplicación de Gree
     Tras este proceso el adaptador WiFi estará instalado y configurado para poder conectarse a una red WiFi mediante una dirección IP estática. Debido a algún tipo de bug en la interfaz gráfica, es posible que no se muestren las redes WiFi de alrededor, pero el adaptador WiFi funcionará correctamente. Para introducir las credenciales de la red WiFi se utilizará la App desarrollada en la pantalla táctil.
 
     \subsection{Instalación de Green In House en Raspberry Pi}
-    Una vez instalado el sistema operativo Raspbian, lo que hay que hacer a continuación es encender la Raspberry Pi y descargar el código del proyecto del repositorio oficial de Green In House \cite{GreenInHouse:repo:Maceta}. 
-    Una vez descargado el código fuente, dentro de la carpeta \texttt{scripts} se encuentran varios \textit{scripts} programados para realizar todas las tareas necesarias. Para realizar la instalación de Green In House únicamente es necesario ejecutar como superusuario el script \texttt{GIH-install.sh }. Este \textit{script} tarda bastante en ejecutarse y requiere que la Raspberry tenga conexión a internet para descargar sus dependencias. Al terminar de ejecutar el \textit{script}, reiniciar el sistema para que tome efecto la nuevo configuración. Al encender de nuevo la Raspberry pi, se arrancarán de manera automática todos los servicios de Green In House. 
+    Una vez instalado el sistema operativo Raspbian, lo que hay que hacer a continuación es encender la Raspberry Pi y descargar el código del proyecto del repositorio oficial de Green In House \cite{GreenInHouse:repo:Maceta}. Para ello se puede emplear el siguiente comando:
+
+    \begin{itemize}
+        \item Descarag del repositorio de Green In House utilizando Git.
+        \\ git clone https://github.com/ove1001/GreenInHouse\_PlantPot
+    \end{itemize}
+    
+    Una vez descargado el código fuente, dentro de la carpeta \texttt{scripts} se encuentran varios \textit{scripts} programados para realizar todas las tareas necesarias. Para realizar la instalación de Green In House únicamente es necesario realizar la siguiente acción:
+
+    \begin{itemize}
+        \item Entrar al cirectorio scripts del repositorio descargado
+        \\ cd GreenInHouse\_PlantPot/scripts/
+        \item Ejecutar como superusuario el script \texttt{GIH-install.sh }
+        \\ sudo ./GIH-install.sh
+    \end{itemize}
+    
+    Este \textit{script} tarda bastante en ejecutarse y requiere que la Raspberry tenga conexión a internet para descargar sus dependencias. Es posible que durante su ejecución pida la confirmación del usuario para instalar alguna librería, cuando eso suceda, escribir \textit{yes} para conceder el permiso. Al terminar de ejecutar el \textit{script}, reiniciar el sistema para que tome efecto la nuevo configuración. Al encender de nuevo la Raspberry pi, se arrancarán de manera automática todos los servicios de Green In House. 
     
     Para poder hacer uso del servidor de la API REST será necesario tener conectado Green In House a una red Lan por Ethernet o por WiFi. Para introducir las credencias de la WiFi se puede utilizar la aplicación gráfica desarrollada para la pantalla táctil.
 
@@ -236,22 +263,25 @@ El directorio de despliegue en el que se almacenará toda la aplicación de Gree
     \subsection{Configuración de SSH para desarrollo remoto en Raspberry Pi utilizando VSCode}
     A la hora de realizar el proyecto, la manera más cómoda de trabajar que he encontrado, ha sido desarrollar en remoto desde mi ordenador portátil utilizando una conexión SSH \cite{wiki:ssh} y el IDE de programación VSCode \cite{wiki:vscode}. Esto me ha permitido desplegar el directorio de trabajo de mi Raspberry Pi en el VSCode de mi ordenador, como si fuera parte de mi sistema local. Este apartado es solo para facilitar el desarrollo, no es necesario realizarle para ejecutar el programa de Green In House en la Raspberry Pi. 
     La configuración de este apartado requiere hacerse de manera interactiva, ya que hay que generar las claves privadas y públicas dentro de la Raspberry Pi, y esto requiere suministrar una clave de cifrado propia del desarrollador. Este sistema de conexión remota segura no puede automatizarse debido a esto, ya que si se queda \textit{hardcodeada} la clave de comunicación dentro del propio código de la aplicación, puede suponer un gran riesgo de seguridad. Por ello, este apartado es necesario realizarle a mano, aunque durante la instalación Green In House habilita todos los puertos de comunicación para asegurar poder comunicarse correctamente con todos los sensores (SSH, I2C, SPI, SERIAL, RGPIO). Para realizar la configuración de SSH y VSCode se ha seguido una guía de internet \cite{wiki:ssh_configuracion}, pero se deja reflejado en este apartado los pasos a seguir.
-        \subsection{Configuración de SSH en Raspberry Pi}
+        \subsubsection{Configuración de SSH en Raspberry Pi}
         A continuación se detalla como se configuran las claves de acceso por SSH en la Raspberry Pi
         \begin{itemize}
+            \item Crear el directorio \$HOME/.ssh ejecutando el siguiente comando:
+            \\ \texttt{mkdir -p \$HOME/.ssh}
             \item \textbf{Generar par de llaves SSH}
-            \\ \texttt{ssh-keygen -t ed25519 -f ~/.ssh/GIH}
+            \\ \texttt{ssh-keygen -t ed25519 -f \$HOME/.ssh/GIH}
             \item Introducir nuestra frase clave utilizada para generar el par de claves privada-publica
             \item Volver a introducir la misma frase clave.
             \item \textbf{Añadir la llave privada a SSH Agent}
-            \\ \texttt{ssh-add ~/.ssh/GIH}
+            \\ \texttt{ssh-add \$HOME/.ssh/GIH}
             \item Introducir nuestra frase clave utilizada para generar el par de claves privada-publica
             \item \textbf{Copiar la llave pública a RPi}
             \item En el siguiente comando sustituir green-in-house por el nombre de usuario que se haya configurado en Raspbian para el usuario principal con el que arranca el sistema operativo por defecto.
-            \\ \texttt{ssh-copy-id -i ~/.ssh/GIH.pub green-in-house@GreenInHouse}
+            \\ \texttt{ssh-copy-id -i \$HOME/.ssh/GIH.pub green-in-house@GreenInHouse}
             \item Introducir la clave del usuario especificado en el comando anterior
+            \item Reiniciar el sistema
         \end{itemize}
-        \subsection{Configuración de VSCode en ordenador}
+        \subsubsection{Configuración de VSCode en ordenador}
         A continuación se detalla como se configura en VSCode el acceso por SSH a la Raspberry Pi.
         \begin{itemize}
             \item Abrir VSCode.
@@ -262,9 +292,11 @@ El directorio de despliegue en el que se almacenará toda la aplicación de Gree
             \item \textbf{Configurar la conexión SSH}
             \item Pinchar en el icono de la tele con un circulo (señalado en la imagen \ref{fig:SSH_VSCode1}) para acceder a las conexiones SSH y pulsar sobre el + (señalado en la imagen \ref{fig:SSH_VSCode1})).
             \\ \imagen{SSH_VSCode1}{captura de pantalla 1 de VSCode configurando acceso por SSH.}{.4}
-            \item En el cuadro que aparecerá escribir el usuario de la raspberry @ seguido del hostname o la dirección IP como en la imagen \ref{fig:SSH_VSCode2}. En mi caso es:
+            \item En el cuadro que aparecerá escribir el usuario de la raspberry @ seguido del hostname o la dirección IP como en la imagen \ref{fig:SSH_VSCode2}. En el caso de Green In House es:
             \\ green-in-house@GreenInHouse
             \\ \imagen{SSH_VSCode2}{captura de pantalla 2 de VSCode configurando acceso por SSH.}{.7}
+            \item Si experimentamos problemas intentando acceder por SSH utilizando usuario de la raspberry @ seguido del hostname, probar a acceder mediante usuario de la raspberry @ dirección IP. En el caso de Green In House es:
+            \\ green-in-house@192.168.1.240
             \item En el cuadro que aparecerá seleccionar el directorio en el que se almacenará la configuración SSH como en la imagen \ref{fig:SSH_VSCode3}. Utilizar el directorio de nuestro usuario actual del ordenador. En mi caso es:
             \item \texttt{C:/Users/UX581/.ssh/config}
             \\ \imagen{SSH_VSCode3}{captura de pantalla 3 de VSCode configurando acceso por SSH.}{.7}
@@ -303,9 +335,7 @@ El directorio de despliegue en el que se almacenará toda la aplicación de Gree
         \imagen{Android_Studio2}{captura de pantalla 2 de Android Studio.}{.9}
         \item Una vez hecho el paso anterior, aparecerá en el navegador de Android Studio la aplicación Flutter como se muestra en la imagen \ref{fig:Android_Studio3} .
         \imagen{Android_Studio3}{captura de pantalla 3 de Android Studio.}{.5}
-        \item Para que la aplicación Flutter se pueda ejecutar, es necesario instalar sus dependencias. Para ello hay que pulsar sobre el botón Tools, y pichar en Flutter Pub Get como se muestra en la imegn imagen \ref{fig:Android_Studio2} .
-        \imagen{Android_Studio3}{captura de pantalla 3 de Android Studio.}{.5}
-        \item Una vez hecho el paso anterior, aparecerá en el navegador de Android Studio la aplicación Flutter como se muestra en la imagen \ref{fig:Android_Studio4}. Para limpiar las dependencias pulsar sobre Flutter Clean.
+        \item Para que la aplicación Flutter se pueda ejecutar, es necesario instalar sus dependencias. Para ello hay que pulsar sobre el botón Tools, y pichar en Flutter Pub Get como se muestra en la imegn imagen \ref{fig:Android_Studio4}. Para limpiar las dependencias pulsar sobre Flutter Clean.
         \imagen{Android_Studio4}{captura de pantalla 4 de Android Studio.}{.5}
         \item Una vez instalas las dependencias, arriba a la derecha aparecerá un botón de play y un cuadro donde seleccionar el dispositivo a desplegar la App como se aprecia en la imagen imagen \ref{fig:Android_Studio5}. Si se quiere, también se puede generar un dispositivo virtual, pero esa explicación queda fuera del alcance de este manual.
         \imagen{Android_Studio5}{captura de pantalla 5 de Android Studio.}{.9}
@@ -313,8 +343,10 @@ El directorio de despliegue en el que se almacenará toda la aplicación de Gree
 
         
 \section{Pruebas del sistema}
-No ha sido posible crear un sistema automatizado de pruebas para verificar la integridad del código, por lo que todas las pruebas de funcionamiento has sido realizadas a mano. Principalmente las pruebas que han sido realizadas son pruebas de integración, las cuales permiten validar el funcionamiento correcto de los módulos por separado, al comprobar que su funcionamiento en conjunto es correcto. 
-Lo más óptimo habría sido diseñar un plan de pruebas automatizado de pruebas unitarias y otro de pruebas de integración, pero por motivos de falta de tiempo no ha sido posible realizar dichos planes de pruebas. Esto se ha incluido como una de las propuestas de líneas futuras.
-Todas las pruebas se han realizado tanto utilizando los servicios del propio backend por terminal, como haciendo uso de los \textit{endpoints} de la API REST, ya que esto es lo realmente interesante, debido a que será la forma habitual de operar de los usuarios. También se han realizado prueba de correcto funcionamiento de los scripts de Green In House.
+
+No ha sido posible crear un sistema automatizado de pruebas para verificar la integridad del código, por lo que todas las pruebas de funcionamiento has sido realizadas a mano. Principalmente las pruebas que han sido realizadas son pruebas de integración, las cuales permiten validar el funcionamiento correcto de los módulos por separado, al comprobar que su funcionamiento en conjunto es correcto. Lo más óptimo habría sido diseñar un plan de pruebas automatizado de pruebas unitarias y otro de pruebas de integración, pero por motivos de falta de tiempo no ha sido posible realizar dichos planes de pruebas. Esto se ha incluido como una de las propuestas de líneas futuras.
+
+
+Todas las pruebas se han realizado tanto utilizando los servicios del propio backend por terminal, como haciendo uso de los \textit{endpoints} de la API REST, ya que esto es lo realmente interesante, debido a que será la forma habitual de operar de los usuarios. También se han realizado prueba de correcto funcionamiento de los scripts de Green In House. Las pruebas que se han realizado son de creación, obtención, modificación y borrado de todas y cada una de las entidades que se utilizan en el sistema. También se ha probado que todos los filtros de obtención de datos funcionan correctamente.
 %TODO
 
