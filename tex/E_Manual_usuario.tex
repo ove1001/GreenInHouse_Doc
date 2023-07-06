@@ -43,3 +43,15 @@ Tras conectar GreenInHouse a la red WiFi, ya podemos utilizar la app móvil de G
 Para cambiar el número de dias a mostrar en la gráfica, utilizar los botones - y + de al lado del valor de dias mostrados. Desplazando el gráfico hacia los lados podemos ver los gráficos de los diferentes sensores del sistema agrupados por tipo de medición y lugar de ubicación del sensor como se puede ver en la imagen \ref{fig:app_android2}.
 \imagen{app_android2}{Gráfica de aplicación Android de GreenInHouse}{.35}
 
+Otra forma más avanzada de hacer uso de Greenn In House es utilizando directamente su servidor API REST haciendo consultas a sus \textit{endpoints} tal como se muestra en las siguientes imágenes \ref{fig:api_rest_5} y \ref{fig:api_rest_6}.
+\imagen{api_rest_5}{endpoints de la API REST.}{1}
+\imagen{api_rest_6}{endpoints de la API REST.}{1}
+
+Este sistema es el que utiliza la aplicación móvil Android para obtener los datos de Gren In House. Esta manera de uso estaría más enfocada hacia usuarios que sean desarrolladores software y quieran realizar su propia aplicación de interacción con Green In House y personalizarla completamente a su gusto. El control que se tiene de Green In House desde su servidor API REST es total. Por ejemplo, permite crear nuevos sensores de los modelos utilizados en Green In House y especificar en que pin de la Raspberry va a estar conectado. Esto permite al usuario aumentar el número de sensores del sistema. También puede crear nuevas plantas, modificar los valores de los consejos para las plantas, recoger los datos de los sensores especificando los filtros que desee, etc., las posibilidades se amplían muchísimo tal como se muestra en el ejemplo de la siguiente imagen \ref{fig:api_rest_3}.
+\imagen{api_rest_3}{endpoints de la API REST.}{1}
+
+Todas estas funcionalidades se irán añadiendo poco a poco a la aplicación móvil oficial, pero hasta que esto suceda, el usuario puede experimentar por su cuenta todo lo que quiera. Para hacer uso de este sistema, lo único que tiene que hacer es acceder a través de un equipo conectado a la red WiFi a un navegador y diregirse a una de estas dos direcciones:
+\begin{itemize}
+    \item http://greeninhouse:5000/api/v1/ui/
+    \item http://192.168.1.240:5000/api/v1/ui/
+\end{itemize}
